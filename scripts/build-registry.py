@@ -10,7 +10,6 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 SKILLS_ROOT = ROOT / "skills"
 REGISTRY = ROOT / "REGISTRY.md"
-
 STATUS = {"draft", "active", "deprecated", "archived"}
 INVOCATION = {"user", "model"}
 SEMVER = re.compile(r"^\d+\.\d+\.\d+(?:-[0-9A-Za-z.-]+)?(?:\+[0-9A-Za-z.-]+)?$")
@@ -29,15 +28,13 @@ def parse_scalar(raw: str):
 
 
 def parse_frontmatter(path: Path) -> dict:
-    text = path.read_text(encoding="utf-8")
-    lines = text.splitlines()
+    lines = path.read_text(encoding="utf-8").splitlines()
     if not lines or lines[0].strip() != "---":
         raise ValueError(f"{path}: missing opening frontmatter delimiter")
     try:
         end = lines[1:].index("---") + 1
     except ValueError:
         raise ValueError(f"{path}: missing closing frontmatter delimiter")
-
     data: dict[str, object] = {}
     current_list = None
     for line in lines[1:end]:
@@ -59,7 +56,6 @@ def parse_frontmatter(path: Path) -> dict:
         value = parse_scalar(raw)
         data[key] = value
         current_list = key if key == "aliases" and value == [] else None
-
     required = {"name", "version", "status", "invocation", "description"}
     missing = required - set(data)
     if missing:
@@ -105,8 +101,7 @@ def discover() -> list[dict]:
             if key in aliases:
                 raise ValueError(f"duplicate alias: {alias}")
             aliases.add(key)
-        rel = path.relative_to(ROOT).as_posix()
-        skills.append({"name": name,"version": data["version"],"status": data["status"],"invocation": data["invocation"],"path": rel,"description": data["description"],"aliases": data["aliases"]})
+        skills.append({"name": name,"version": data["version"],"status": data["status"],"invocation": data["invocation"],"path": path.relative_to(ROOT).as_posix(),"bucket": path.parent.parent.name,"description": data["description"],"aliases": data["aliases"]})
     return skills
 
 
@@ -114,7 +109,7 @@ def q(value: str) -> str:
     return json.dumps(str(value), ensure_ascii=False)
 
 
-def render(skills: list[dict]) -> str:
+def render_registry(skills: list[dict]) -> str:
     lines = ["# Skill Registry","","> GENERATED FILE — do not edit manually. Source: `skills/*/*/SKILL.md` frontmatter.","","```yaml",'registry_version: "0.2"',"skills:" if skills else "skills: []"]
     for s in skills:
         lines += [f"  - name: {q(s['name'])}",f"    version: {q(s['version'])}",f"    status: {q(s['status'])}",f"    invocation: {q(s['invocation'])}",f"    path: {q(s['path'])}",f"    description: {q(s['description'])}"]
@@ -127,9 +122,24 @@ def render(skills: list[dict]) -> str:
     return "\n".join(lines)
 
 
+def render_bucket(bucket: str, skills: list[dict]) -> str:
+    title = bucket.replace("-", " ").title()
+    lines = [f"# {title} Skills","","> GENERATED HUMAN INDEX — metadata comes from each `SKILL.md`; Router does not use this file.",""]
+    scoped = [s for s in skills if s["bucket"] == bucket and s["status"] == "active"]
+    for invocation, heading in (("user", "User-invoked"), ("model", "Model-invoked")):
+        lines += [f"## {heading}", ""]
+        group = [s for s in scoped if s["invocation"] == invocation]
+        if not group:
+            lines.append("_None._")
+        else:
+            for s in group:
+                lines.append(f"- `{s['name']}` — {s['description']}")
+        lines.append("")
+    return "\n".join(lines)
+
+
 def validate_constitution() -> None:
-    path = ROOT / "CONSTITUTION.md"
-    text = path.read_text(encoding="utf-8").rstrip("\n")
+    text = (ROOT / "CONSTITUTION.md").read_text(encoding="utf-8").rstrip("\n")
     if len(text) > 3500:
         raise ValueError(f"CONSTITUTION.md exceeds 3500 chars: {len(text)}")
     marker = "Skill："
@@ -142,20 +152,34 @@ def validate_constitution() -> None:
         raise ValueError("Implementation-Hard-Stop leaked into runtime Constitution")
 
 
+def expected_files(skills: list[dict]) -> dict[Path, str]:
+    outputs = {REGISTRY: render_registry(skills)}
+    buckets = sorted({p.parent.parent.name for p in SKILLS_ROOT.glob("*/*/SKILL.md")})
+    for bucket in buckets:
+        outputs[SKILLS_ROOT / bucket / "README.md"] = render_bucket(bucket, skills)
+    return outputs
+
+
 def main() -> int:
     ap = argparse.ArgumentParser()
     ap.add_argument("--check", action="store_true")
     args = ap.parse_args()
     try:
         validate_constitution()
-        expected = render(discover())
+        skills = discover()
+        outputs = expected_files(skills)
         if args.check:
-            actual = REGISTRY.read_text(encoding="utf-8")
-            if actual != expected:
-                print("REGISTRY.md is stale; run scripts/build-registry.py", file=sys.stderr)
+            stale = []
+            for path, expected in outputs.items():
+                if not path.exists() or path.read_text(encoding="utf-8") != expected:
+                    stale.append(path.relative_to(ROOT).as_posix())
+            if stale:
+                print("derived files are stale: " + ", ".join(stale), file=sys.stderr)
                 return 1
         else:
-            REGISTRY.write_text(expected, encoding="utf-8")
+            for path, expected in outputs.items():
+                path.parent.mkdir(parents=True, exist_ok=True)
+                path.write_text(expected, encoding="utf-8")
     except (OSError, ValueError) as exc:
         print(exc, file=sys.stderr)
         return 1

@@ -1,11 +1,11 @@
 # Productivity Skills
 
-> Human navigation only. Generated/validated against `SKILL.md` metadata during Phase 2.
+> GENERATED HUMAN INDEX — metadata comes from each `SKILL.md`; Router does not use this file.
 
 ## User-invoked
 
-_No implemented Skills yet in Phase 1._
+- `handoff` — Create a concise project handoff that references canonical artifacts and captures current state, evidence, unresolved items, and the exact next action.
 
 ## Model-invoked
 
-_No implemented Skills yet in Phase 1._
+_None._

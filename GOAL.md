@@ -13,8 +13,8 @@ Implement the frozen v0.5 architecture without expanding scope.
 ## Current checkpoint
 
 Phase 0: COMPLETE — frozen + implementation authorized.
-Phase 1: IN PROGRESS — bootstrap repository foundation.
-Phase 2: PENDING — five initial Skills.
+Phase 1: COMPLETE — structural baseline validated.
+Phase 2: IN PROGRESS — five initial Skills + derived index.
 Phase 3: PENDING — Custom Instructions migration/deployment + smoke tests.
 Phase 4: PENDING — real engineering E2E.
 Phase 5: PENDING — first-10-task observation window.
