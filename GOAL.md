@@ -1,7 +1,7 @@
 # GOAL — Implement ChatGPT Context Constitution + Git-Backed Skills v0.5
 
 **Status:** IN PROGRESS
-**Branch:** `bootstrap/v0.5-phase1`
+**Branch:** `main`
 **Frozen PRD:** `PRD-ChatGPT-Context-Constitution-and-Git-Backed-Skill-Architecture-v0.5-frozen.md`
 **Frozen PRD SHA-256:** `923ab0ab856d9cbbe81899c2bf895c4df7d12287d70254060f082f8fbdde864a`
 **Authorization:** User explicitly froze v0.5 and authorized implementation on 2026-09-08.
