@@ -1,51 +1,52 @@
 # Custom Instructions Migration Audit — 2026-09-08
 
-**Status:** BLOCKED — unresolved items remain
-**Target:** Global Constitution v1.5 deployment
-**Frozen architecture:** PRD v0.5
+**Status:** COMPLETE — no unresolved durable rules remain  
+**Source snapshot:** `reviews/custom-instructions-source-2026-09-08.txt`  
+**Source SHA-256:** `2719958fedcac662724d086a00dfbec1de6804e4c5778f24e11dd3772ecc54ce`  
+**Target:** Global Constitution v1.5.1  
+**Frozen architecture:** PRD v0.5 + Implementation Amendment A1
 
-## Source status
+## Source verification
 
-The prior Custom Instructions were supplied by the user earlier in the design work and are recoverable at the rule level from that supplied baseline. The assistant does not have a product API that can independently read/export the current live Custom Instructions UI, so exact live-text parity must be confirmed before overwrite.
+The user supplied the exact currently saved Custom Instructions text on 2026-09-08. That text is archived verbatim in the source snapshot above, so the prior “live UI text unknown” blocker is closed.
 
-This audit therefore distinguishes rule migration from final UI parity verification.
-
-## Audit
+## Migration audit
 
 | ID | Old rule / intent | Classification | Canonical destination | Action | Status |
 |---|---|---|---|---|---|
-| CI-001 | Default Chinese; technical English allowed; complex answers explain why/mechanism/how/boundaries/trade-offs; Fact/Estimate/Inference/Judgment/Unknown; challenge assumptions | global_constitution | `CONSTITUTION.md` | retain/compact | migrated |
+| CI-001 | Default Chinese; technical English allowed; explain why/mechanism/how/boundaries/trade-offs; Fact/Estimate/Inference/Judgment/Unknown; challenge assumptions | global_constitution | `CONSTITUTION.md` | retain/compact | migrated |
 | CI-002 | “直接做 / 继续 / 按你的建议 / /goal / Autonomous Mode”; Advisory vs Execution | global_constitution | `CONSTITUTION.md` | retain with engineering-domain gate | migrated |
-| CI-003 | YAGNI / Minimal Sufficient Architecture / Minimal Sufficient Testing / strict scope | global_constitution + reusable reference | `CONSTITUTION.md`, `shared/minimal-sufficient-testing.md` | retain + reference | migrated |
-| CI-004 | Narrow Hard Stop semantics | global_constitution | `CONSTITUTION.md` Runtime-Hard-Stop inventory | normalize terminology | migrated |
+| CI-003 | YAGNI / Minimal Sufficient Architecture / Minimal Sufficient Testing / strict scope / traceable Git workflow | global_constitution + reusable references | `CONSTITUTION.md`, `shared/minimal-sufficient-testing.md`, `shared/git-workflow.md` | retain + reference | migrated |
+| CI-004 | Hard Stop semantics | global_constitution | `CONSTITUTION.md` Runtime-Hard-Stop inventory | normalize terminology | migrated |
 | CI-005 | GitHub Text MCP v3 read/audit; Github MCP write/branch/commit/PR/Actions; CodexPro local engineering/test | global_constitution | `CONSTITUTION.md` | retain | migrated |
-| CI-006 | “输出PRD” means downloadable review-first `.md` with standard engineering sections; PRD generation != implementation authorization | reusable_skill | `skills/engineering/to-spec/SKILL.md` | move from global detail to Skill HOW | migrated |
-| CI-007 | Commercial/technical decisions should answer “who is better under what conditions”; use option comparison, red/blue team, failure mode, scenario, decision matrix when useful | global_constitution | unresolved: compact Constitution line vs explicit retirement | current Constitution only partially covers alternatives/trade-offs | unresolved |
-| CI-008 | Proactively judge durable mechanisms/models/decision frameworks/lessons/knowledge gaps for persistence to `stanleyrprose/personal-knowledge`; obey that repo's GOAL/MAINTENANCE protocol; do not save ordinary chat/one-off facts/secrets | global_constitution | unresolved: compact Constitution line vs explicit retirement | missing from v1.5 | unresolved |
-| CI-009 | Project-specific rules/state should not live globally | project_specific migration principle | project Git | no project-specific residue identified in recovered baseline | migrated |
+| CI-006 | “输出PRD” means downloadable review-first `.md`; PRD generation != implementation authorization | global intent + reusable Skill HOW | `CONSTITUTION.md` + `skills/engineering/to-spec/SKILL.md` | compact global semantic; move detailed HOW to Skill | migrated |
+| CI-007 | Commercial/technical decisions answer “who is better under what conditions”; option comparison/red-blue/failure-mode/scenario/decision-matrix when useful | global_constitution | `CONSTITUTION.md` v1.5.1 | retain as one compact global sentence | migrated |
+| CI-008 | Consider durable mechanisms/models/frameworks/lessons for `stanleyrprose/personal-knowledge`; obey latest GOAL/MAINTENANCE; exclude ordinary chat/one-off facts/secrets/sensitive material | global_constitution | `CONSTITUTION.md` v1.5.1 | retain as one compact global sentence | migrated |
+| CI-009 | Project-specific rules/state should not live globally | project migration principle | project Git | no project-specific residue identified | migrated |
+| CI-010 | Overall goal: reduce repeated communication, improve autonomy, optimize for final goal rather than isolated step | global_constitution | distributed across execution/completion semantics | intent preserved; no duplicate standalone sentence required | migrated |
 
-## Unresolved items
+## One-rule-one-home verification
 
-### CI-007 — Decision-quality preference
+- No project-specific business/engineering rule remains in the target Constitution.
+- Decision-quality preference remains Global Constitution behavior; no new Skill created.
+- PKS capture remains Global Constitution behavior; no new Skill created.
+- Detailed PRD workflow lives in `to-spec/SKILL.md`, not duplicated globally.
+- Detailed testing/Git workflow lives in shared references where needed; the Constitution keeps only high-level invariants.
+- Runtime-Hard-Stop remains owned by the Constitution; no duplicate shared hard-stop file exists.
 
-Current Constitution says to explain alternatives/trade-offs and inspect assumptions, but does not preserve the explicit conditional-decision/red-blue/scenario/decision-matrix preference.
+## Target budget
 
-Recommended resolution: add one compact global sentence; do not create a new Skill.
+- Global Constitution v1.5.1: **2594 Unicode chars**.
+- Router/bootstrap from `Skill：`: **760 Unicode chars**.
+- Constraints after Amendment A1: Constitution ≤3500; Router/bootstrap is measured but no longer a hard limit.
+- Result: **PASS**.
 
-### CI-008 — PKS capture
+## Phase 3.5 result
 
-This is a durable cross-project behavior, not project state and not one of the five frozen workflow Skills.
+Migration audit: **PASS**.  
+Unresolved items: **0**.  
+Project-specific residue in target Constitution: **none identified**.
 
-Recommended resolution: preserve it as one compact Constitution pointer that names `stanleyrprose/personal-knowledge` and requires reading that repo's current maintenance protocol before writes. Do not create a new PKS Skill in v0.5.
-
-## UI parity gate
-
-Before replacing the live Custom Instructions:
-
-1. obtain/inspect the actual current UI text or user-provided export;
-2. compare it with this recovered baseline;
-3. classify any additional durable rule;
-4. leave no `unresolved` item;
-5. only then deploy Profile S/L and run activation/state-anchor/project-discovery smoke tests.
+The remaining Phase 3 requirement is deployment of the exact approved `CONSTITUTION.md` text into the user's Custom Instructions UI followed by activation/state-anchor/project-discovery smoke tests.
 
 `UI saved != activation success`.

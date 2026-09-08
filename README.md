@@ -35,6 +35,8 @@ Routing is prompt-based and inherently non-deterministic. False positives, false
 
 v0.5 was frozen and implementation-authorized on 2026-09-08.
 
+Current Constitution release: **v1.5.1 migration target**.
+
 Frozen PRD SHA-256:
 
 `923ab0ab856d9cbbe81899c2bf895c4df7d12287d70254060f082f8fbdde864a`
@@ -42,3 +44,7 @@ Frozen PRD SHA-256:
 ## Maintenance rule
 
 **One rule → one canonical home.** Pointers and short summaries are allowed; duplicated executable rule bodies are not.
+
+## Implementation amendment
+
+A1 (2026-09-08) explicitly retains decision-quality and PKS-capture behavior in `CONSTITUTION.md`, and makes the Router/bootstrap 800-character sub-budget non-blocking while retaining the 3500-character Constitution budget. See `docs/implementation-amendment-a1-2026-09-08.md`.

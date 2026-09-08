@@ -1,6 +1,6 @@
 # GOAL — Implement ChatGPT Context Constitution + Git-Backed Skills v0.5
 
-**Status:** BLOCKED AT PHASE 3 MIGRATION GATE
+**Status:** IN PROGRESS
 **Branch:** `bootstrap/v0.5-phase1`
 **Frozen PRD:** `PRD-ChatGPT-Context-Constitution-and-Git-Backed-Skill-Architecture-v0.5-frozen.md`
 **Frozen PRD SHA-256:** `923ab0ab856d9cbbe81899c2bf895c4df7d12287d70254060f082f8fbdde864a`
@@ -14,22 +14,10 @@ Implement the frozen v0.5 architecture without expanding scope.
 
 Phase 0: COMPLETE — frozen + implementation authorized.
 Phase 1: COMPLETE — structural baseline validated.
-Phase 2: COMPLETE — five initial Skills + derived Registry + regression test; CI PASS.
-Phase 3: BLOCKED — Custom Instructions migration audit found unresolved long-term global rules.
+Phase 2: COMPLETE — five initial Skills + derived index validated.
+Phase 3: IN PROGRESS — migration audit COMPLETE; Amendment A1 recorded; v1.5.1 target ready; UI deployment + smoke tests pending.
 Phase 4: PENDING — real engineering E2E.
 Phase 5: PENDING — first-10-task observation window.
-
-## Phase 3 Implementation-Hard-Stop
-
-The old Custom Instructions baseline contains durable global behavior that the current v1.5 Constitution does not fully preserve:
-
-1. PKS / long-term knowledge capture: proactively judge whether durable mechanisms/models/lessons should be persisted to `stanleyrprose/personal-knowledge`, using that repo's maintenance protocol.
-2. Decision-quality preference: commercial/technical decisions should answer “who is better under what conditions”, with red/blue-team, scenario/failure-mode/decision-matrix framing when useful.
-3. The assistant cannot independently read/export the live Custom Instructions UI, so exact deployed-old-text parity must be confirmed from the user's UI/export before overwrite.
-
-Per frozen PRD §28 and Phase 3.5, deployment must not silently drop these rules or guess the live UI state.
-
-See `reviews/custom-instructions-migration-2026-09-08.md`.
 
 ## Frozen invariants
 
@@ -42,7 +30,9 @@ See `reviews/custom-instructions-migration-2026-09-08.md`.
 - Global Execution semantics do not imply `implement` outside software/repo engineering context.
 - No DB, RAG, deterministic router service, daemon, or new MCP.
 - Runtime-Hard-Stop and Implementation-Hard-Stop remain isolated.
+- CI-007 decision-quality and CI-008 PKS-capture remain in `CONSTITUTION.md`.
+- Router/bootstrap size is observable but not a hard CI gate; Constitution total ≤3500 remains the budget gate.
 
-## Next decision required
+## Closure target
 
-Choose whether to preserve the two missing durable rules by a compact Constitution revision (recommended) or explicitly retire them. After that, confirm the actual old Custom Instructions text/UI before Phase 3 deployment.
+`bootstrap → skills → validate → PR → CI → Phase 3 deployment gate → E2E → observation handoff`

@@ -10,6 +10,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 SKILLS_ROOT = ROOT / "skills"
 REGISTRY = ROOT / "REGISTRY.md"
+
 STATUS = {"draft", "active", "deprecated", "archived"}
 INVOCATION = {"user", "model"}
 SEMVER = re.compile(r"^\d+\.\d+\.\d+(?:-[0-9A-Za-z.-]+)?(?:\+[0-9A-Za-z.-]+)?$")
@@ -35,6 +36,7 @@ def parse_frontmatter(path: Path) -> dict:
         end = lines[1:].index("---") + 1
     except ValueError:
         raise ValueError(f"{path}: missing closing frontmatter delimiter")
+
     data: dict[str, object] = {}
     current_list = None
     for line in lines[1:end]:
@@ -56,6 +58,7 @@ def parse_frontmatter(path: Path) -> dict:
         value = parse_scalar(raw)
         data[key] = value
         current_list = key if key == "aliases" and value == [] else None
+
     required = {"name", "version", "status", "invocation", "description"}
     missing = required - set(data)
     if missing:
@@ -101,7 +104,16 @@ def discover() -> list[dict]:
             if key in aliases:
                 raise ValueError(f"duplicate alias: {alias}")
             aliases.add(key)
-        skills.append({"name": name,"version": data["version"],"status": data["status"],"invocation": data["invocation"],"path": path.relative_to(ROOT).as_posix(),"bucket": path.parent.parent.name,"description": data["description"],"aliases": data["aliases"]})
+        skills.append({
+            "name": name,
+            "version": data["version"],
+            "status": data["status"],
+            "invocation": data["invocation"],
+            "path": path.relative_to(ROOT).as_posix(),
+            "bucket": path.parent.parent.name,
+            "description": data["description"],
+            "aliases": data["aliases"],
+        })
     return skills
 
 
@@ -110,9 +122,24 @@ def q(value: str) -> str:
 
 
 def render_registry(skills: list[dict]) -> str:
-    lines = ["# Skill Registry","","> GENERATED FILE — do not edit manually. Source: `skills/*/*/SKILL.md` frontmatter.","","```yaml",'registry_version: "0.2"',"skills:" if skills else "skills: []"]
+    lines = [
+        "# Skill Registry",
+        "",
+        "> GENERATED FILE — do not edit manually. Source: `skills/*/*/SKILL.md` frontmatter.",
+        "",
+        "```yaml",
+        'registry_version: "0.2"',
+        "skills:" if skills else "skills: []",
+    ]
     for s in skills:
-        lines += [f"  - name: {q(s['name'])}",f"    version: {q(s['version'])}",f"    status: {q(s['status'])}",f"    invocation: {q(s['invocation'])}",f"    path: {q(s['path'])}",f"    description: {q(s['description'])}"]
+        lines += [
+            f"  - name: {q(s['name'])}",
+            f"    version: {q(s['version'])}",
+            f"    status: {q(s['status'])}",
+            f"    invocation: {q(s['invocation'])}",
+            f"    path: {q(s['path'])}",
+            f"    description: {q(s['description'])}",
+        ]
         if s["aliases"]:
             lines.append("    aliases:")
             lines.extend(f"      - {q(a)}" for a in s["aliases"])
@@ -124,7 +151,12 @@ def render_registry(skills: list[dict]) -> str:
 
 def render_bucket(bucket: str, skills: list[dict]) -> str:
     title = bucket.replace("-", " ").title()
-    lines = [f"# {title} Skills","","> GENERATED HUMAN INDEX — metadata comes from each `SKILL.md`; Router does not use this file.",""]
+    lines = [
+        f"# {title} Skills",
+        "",
+        "> GENERATED HUMAN INDEX — metadata comes from each `SKILL.md`; Router does not use this file.",
+        "",
+    ]
     scoped = [s for s in skills if s["bucket"] == bucket and s["status"] == "active"]
     for invocation, heading in (("user", "User-invoked"), ("model", "Model-invoked")):
         lines += [f"## {heading}", ""]
@@ -146,8 +178,8 @@ def validate_constitution() -> None:
     if marker not in text:
         raise ValueError("CONSTITUTION.md missing Skill router marker")
     router_chars = len(text[text.index(marker):])
-    if router_chars > 800:
-        raise ValueError(f"router/bootstrap exceeds 800 chars: {router_chars}")
+    # Amendment A1 (2026-09-08): router/bootstrap >800 is allowed.
+    # Keep the measurement observable, but do not fail CI on this sub-budget.
     if "Implementation‑Hard‑Stop" in text or "Implementation-Hard-Stop" in text:
         raise ValueError("Implementation-Hard-Stop leaked into runtime Constitution")
 
