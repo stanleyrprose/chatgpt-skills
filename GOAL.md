@@ -15,8 +15,8 @@ Implement the frozen v0.5 architecture without expanding scope.
 Phase 0: COMPLETE — frozen + implementation authorized.
 Phase 1: COMPLETE — structural baseline validated.
 Phase 2: COMPLETE — five initial Skills + derived index validated.
-Phase 3: IN PROGRESS — migration audit COMPLETE; Amendment A1 recorded; v1.5.2 lossless target validated; branch CI PASS; exact UI deployment + activation smoke tests pending.
-Phase 4: PENDING — real engineering E2E.
+Phase 3: COMPLETE — v1.5.2 lossless migration deployed by user; activation/state-anchor/Project Discovery smoke PASS.
+Phase 4: IN PROGRESS — real engineering E2E candidate discovery/selection.
 Phase 5: PENDING — first-10-task observation window.
 
 ## Frozen invariants
@@ -40,12 +40,16 @@ Phase 5: PENDING — first-10-task observation window.
 ## Phase 3 gate evidence
 
 - Migration audit: PASS, unresolved=0.
-- CI-007/CI-008: present in `CONSTITUTION.md`.
+- Lossless source baseline: user-supplied current Custom Instructions archived and migrated.
+- CI-007/CI-008/CI-011: explicit in `CONSTITUTION.md`.
 - Constitution v1.5.2 length: 3326 Unicode chars.
-- Router/bootstrap: non-blocking metric per Amendment A1.
-- Local Registry validator: PASS.
-- Regression test: PASS.
-- GitHub PR #1 head `91c2152`: two `validate` checks PASS.
-- Derived deployment artifact: `dist/custom-instructions-v1.5.2.txt` (must match `CONSTITUTION.md`).
+- `dist/custom-instructions-v1.5.2.txt` == canonical `CONSTITUTION.md` by build validation.
+- Constitution/code-bearing commit `515dd6c`: PR #1 `validate` checks PASS.
+- UI deployment: user explicitly confirmed v1.5.2 was saved on 2026-09-08. No product API is available here to independently read back UI bytes; activation evidence is therefore behavioral + user confirmation, not UI introspection.
+- Activation smoke: PASS — continuation semantics, Chinese default, direct connected-tool execution, no redundant re-confirmation.
+- State-anchor smoke: PASS — `implement@0.1.0` Primary → `code-review@0.1.0` Secondary → pop to Primary.
+- Project Discovery smoke: PASS — branch reads followed AGENTS → GOAL → frozen baseline → Constitution/Registry/Skill; no stale-memory substitution.
 
-Remaining gate: save the exact artifact into ChatGPT Custom Instructions UI, then run Constitution activation / state-anchor / Project Discovery smoke tests.
+## Phase 4 entry condition
+
+Use a real, non-toy engineering repository with existing Git history and a meaningful CI/test/verification path. Do not mutate the target repository merely to manufacture an E2E; choose an actual authorized engineering task or a safe read/review path that exercises Constitution → Skill → Project Rules → Project State → Tool/Evidence.
