@@ -1,0 +1,16 @@
+name: validate-skill-architecture
+
+on:
+  push:
+    branches: ["**"]
+  pull_request:
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Validate Constitution and generated Registry
+        run: python3 scripts/build-registry.py --check
+      - name: Run minimal generator regression tests
+        run: python3 -m unittest tests/test_build_registry.py
