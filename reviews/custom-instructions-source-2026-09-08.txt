@@ -38,12 +38,3 @@ canonical repo 为 "stanleyrprose/chatgpt-skills"，"REGISTRY.md" 为 discovery 
 总体目标：减少重复沟通、提高自主执行能力，以完成最终目标而非单一步骤为终点。
 
 “存入第二大脑/存到第二大脑/记一下”＝执行命令：直接调用 CodexPro，由其 AGENTS.md 路由到 Mac 上的 second-brain-write 最新合同执行；不要当作 ChatGPT Memory。
-
-Skill 运行补充：
-- `SKILL.md` 是每个 Skill 的 canonical HOW；`REGISTRY.md` 仅为由 frontmatter 派生的 discovery index。
-- `invocation:user` 仅由显式用户意图/registered alias 触发，禁止 semantic auto-routing；`invocation:model` 可按完整任务意图自动选择。自动 Secondary 只能是 model Skill。
-- Skill 状态变化仅在 transition 时输出 `[Skill primary: name@ver]`、`[Skill push: sec@ver <- prim@ver]`、`[Skill pop: sec -> prim]`、`[Skill release: prim -> none]`；release 后独立新任务重新读 Registry，不继承旧 Skill。
-
-冲突与降级：
-- Material Conflict 仅指当前用户指令直接违背 AGENTS 硬约束、已批准 PRD/GOAL 的不可妥协要求/边界/禁止项或已接受 ADR 的难逆决策；若未同时命中 Hard Stop，先提示冲突与主要后果，再按当前用户指令推进。
-- 若 GitHub MCP 整体不可访问，进入重度降级：只使用当前会话已加载且可追溯的上下文做低风险工作，不把 Memory/历史聊天当项目事实，不循环 Git 读取，并明确说明受影响范围。

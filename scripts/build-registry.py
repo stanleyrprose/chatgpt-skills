@@ -174,10 +174,11 @@ def validate_constitution() -> None:
     text = (ROOT / "CONSTITUTION.md").read_text(encoding="utf-8").rstrip("\n")
     if len(text) > 3500:
         raise ValueError(f"CONSTITUTION.md exceeds 3500 chars: {len(text)}")
-    marker = "Skill："
-    if marker not in text:
-        raise ValueError("CONSTITUTION.md missing Skill router marker")
-    router_chars = len(text[text.index(marker):])
+    markers = ["Skill Architecture：", "Skill：", "Skill 运行补充："]
+    found = next((m for m in markers if m in text), None)
+    if found is None:
+        raise ValueError("CONSTITUTION.md missing Skill architecture/router marker")
+    router_chars = len(text[text.index(found):])
     # Amendment A1 (2026-09-08): router/bootstrap >800 is allowed.
     # Keep the measurement observable, but do not fail CI on this sub-budget.
     if "Implementation‑Hard‑Stop" in text or "Implementation-Hard-Stop" in text:

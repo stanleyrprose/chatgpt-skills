@@ -1,52 +1,47 @@
 # Custom Instructions Migration Audit — 2026-09-08
 
-**Status:** COMPLETE — no unresolved durable rules remain  
+**Status:** COMPLETE — lossless migration verified; no unresolved durable rules remain  
 **Source snapshot:** `reviews/custom-instructions-source-2026-09-08.txt`  
-**Source SHA-256:** `2719958fedcac662724d086a00dfbec1de6804e4c5778f24e11dd3772ecc54ce`  
-**Target:** Global Constitution v1.5.1  
+**Source SHA-256:** `6f8c259cd78f5e5a1540b122160e95c0b22502da97fe66aa20151e6f536823d5`  
+**Target:** Global Constitution v1.5.2  
+**Target SHA-256:** `b1fa9638126264abbefdc231eac8de5e1dd8f6873b3fda3a7d90a85e6eedcc24`  
 **Frozen architecture:** PRD v0.5 + Implementation Amendment A1
 
-## Source verification
+## Migration rule
 
-The user supplied the exact currently saved Custom Instructions text on 2026-09-08. That text is archived verbatim in the source snapshot above, so the prior “live UI text unknown” blocker is closed.
+The user-supplied current Custom Instructions text is the migration source of truth. v1.5.2 preserves its behavior semantics first; deduplication/compression is allowed only when behavior is unchanged. Required Skill Architecture mechanics are appended without replacing legacy behavior.
 
-## Migration audit
+## Audit
 
-| ID | Old rule / intent | Classification | Canonical destination | Action | Status |
-|---|---|---|---|---|---|
-| CI-001 | Default Chinese; technical English allowed; explain why/mechanism/how/boundaries/trade-offs; Fact/Estimate/Inference/Judgment/Unknown; challenge assumptions | global_constitution | `CONSTITUTION.md` | retain/compact | migrated |
-| CI-002 | “直接做 / 继续 / 按你的建议 / /goal / Autonomous Mode”; Advisory vs Execution | global_constitution | `CONSTITUTION.md` | retain with engineering-domain gate | migrated |
-| CI-003 | YAGNI / Minimal Sufficient Architecture / Minimal Sufficient Testing / strict scope / traceable Git workflow | global_constitution + reusable references | `CONSTITUTION.md`, `shared/minimal-sufficient-testing.md`, `shared/git-workflow.md` | retain + reference | migrated |
-| CI-004 | Hard Stop semantics | global_constitution | `CONSTITUTION.md` Runtime-Hard-Stop inventory | normalize terminology | migrated |
-| CI-005 | GitHub Text MCP v3 read/audit; Github MCP write/branch/commit/PR/Actions; CodexPro local engineering/test | global_constitution | `CONSTITUTION.md` | retain | migrated |
-| CI-006 | “输出PRD” means downloadable review-first `.md`; PRD generation != implementation authorization | global intent + reusable Skill HOW | `CONSTITUTION.md` + `skills/engineering/to-spec/SKILL.md` | compact global semantic; move detailed HOW to Skill | migrated |
-| CI-007 | Commercial/technical decisions answer “who is better under what conditions”; option comparison/red-blue/failure-mode/scenario/decision-matrix when useful | global_constitution | `CONSTITUTION.md` v1.5.1 | retain as one compact global sentence | migrated |
-| CI-008 | Consider durable mechanisms/models/frameworks/lessons for `stanleyrprose/personal-knowledge`; obey latest GOAL/MAINTENANCE; exclude ordinary chat/one-off facts/secrets/sensitive material | global_constitution | `CONSTITUTION.md` v1.5.1 | retain as one compact global sentence | migrated |
-| CI-009 | Project-specific rules/state should not live globally | project migration principle | project Git | no project-specific residue identified | migrated |
-| CI-010 | Overall goal: reduce repeated communication, improve autonomy, optimize for final goal rather than isolated step | global_constitution | distributed across execution/completion semantics | intent preserved; no duplicate standalone sentence required | migrated |
+| ID | Durable behavior | Canonical destination | Status |
+|---|---|---|---|
+| CI-001 | Chinese default; technical terms allowed; first Chinese explanation when needed; structured deep answers; Fact/Estimate/Inference/Judgment/Unknown; challenge assumptions incl. incentives/boundaries | `CONSTITUTION.md` | migrated losslessly |
+| CI-002 | “直接做 / 继续 / 按你的建议 / /goal / Autonomous Mode”; Advisory vs Execution; Execution must not degrade to steps-only | `CONSTITUTION.md` | migrated losslessly |
+| CI-003 | YAGNI/MSA/MST; strict scope; traceable/recoverable/handoff; branch/atomic commit/checkpoint/PR/CI | `CONSTITUTION.md` + shared refs | migrated losslessly |
+| CI-004 | Narrow Hard Stop; ordinary technical choices are not Hard Stop | `CONSTITUTION.md` | migrated losslessly |
+| CI-005 | GitHub Text MCP v3 read; Github MCP write; Mac mini access prefers CodexPro; tools should execute rather than fall back to manual instructions | `CONSTITUTION.md` | migrated losslessly |
+| CI-006 | “输出PRD” = downloadable review-first `.md`; generation != implementation authorization | `CONSTITUTION.md` + `to-spec/SKILL.md` | migrated |
+| CI-007 | Conditional commercial/technical comparison; red-blue/failure-mode/scenario/decision-matrix | `CONSTITUTION.md` | migrated losslessly |
+| CI-008 | PKS capture to `stanleyrprose/personal-knowledge` with GOAL/MAINTENANCE guardrails | `CONSTITUTION.md` | migrated losslessly |
+| CI-009 | Project-specific rules/state stay in project Git; Memory/chat are non-authoritative aids | `CONSTITUTION.md` / project Git | migrated |
+| CI-010 | Optimize for final goal; reduce repeated communication; improve autonomous execution | `CONSTITUTION.md` | migrated losslessly |
+| CI-011 | “存入第二大脑/存到第二大脑/记一下” = invoke CodexPro → Mac `second-brain-write`; never treat as ChatGPT Memory | `CONSTITUTION.md` | migrated losslessly |
+| CI-012 | New v0.5 Skill mechanics: user/model invocation, state anchors, Material Conflict, global Git degradation | `CONSTITUTION.md` + Skill repo | appended architecture mechanics |
 
-## One-rule-one-home verification
+## Verification
 
-- No project-specific business/engineering rule remains in the target Constitution.
-- Decision-quality preference remains Global Constitution behavior; no new Skill created.
-- PKS capture remains Global Constitution behavior; no new Skill created.
-- Detailed PRD workflow lives in `to-spec/SKILL.md`, not duplicated globally.
-- Detailed testing/Git workflow lives in shared references where needed; the Constitution keeps only high-level invariants.
-- Runtime-Hard-Stop remains owned by the Constitution; no duplicate shared hard-stop file exists.
-
-## Target budget
-
-- Global Constitution v1.5.1: **2594 Unicode chars**.
-- Router/bootstrap from `Skill：`: **760 Unicode chars**.
-- Constraints after Amendment A1: Constitution ≤3500; Router/bootstrap is measured but no longer a hard limit.
-- Result: **PASS**.
+- Source baseline is archived verbatim.
+- CI-007 and CI-008 remain explicit Constitution rules.
+- CI-011 remains explicit Constitution execution semantics.
+- No new Skill was created for CI-007/CI-008/CI-011.
+- Four-layer architecture unchanged.
+- Constitution length: **3326 Unicode chars** (≤3500 PASS).
+- Router/bootstrap size is observable but non-blocking per Amendment A1.
+- `dist/custom-instructions-v1.5.2.txt` must exactly match `CONSTITUTION.md`.
 
 ## Phase 3.5 result
 
 Migration audit: **PASS**.  
-Unresolved items: **0**.  
-Project-specific residue in target Constitution: **none identified**.
+Unresolved durable rules: **0**.
 
-The remaining Phase 3 requirement is deployment of the exact approved `CONSTITUTION.md` text into the user's Custom Instructions UI followed by activation/state-anchor/project-discovery smoke tests.
-
-`UI saved != activation success`.
+Remaining Phase 3 requirement: deploy exact v1.5.2 text into the ChatGPT Custom Instructions UI, then run activation / state-anchor / Project Discovery smoke tests.

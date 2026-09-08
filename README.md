@@ -35,7 +35,7 @@ Routing is prompt-based and inherently non-deterministic. False positives, false
 
 v0.5 was frozen and implementation-authorized on 2026-09-08.
 
-Current Constitution release: **v1.5.1 migration target**.
+Current Constitution release: **v1.5.2 lossless migration target**.
 
 Frozen PRD SHA-256:
 
