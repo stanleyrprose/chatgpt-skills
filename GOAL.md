@@ -17,7 +17,7 @@ Phase 1: COMPLETE — structural baseline validated.
 Phase 2: COMPLETE — five initial Skills + derived index validated.
 Phase 3: COMPLETE — v1.5.2 lossless migration deployed by user; activation/state-anchor/Project Discovery smoke PASS.
 Phase 4: COMPLETE — real-repo E2E on `stanleyrprose/mac-browser-plane` PASS WITH ENVIRONMENT LIMITATION.
-Phase 5: ACTIVE — first-10-real-task observation window is 3/10 after the P2 Agent Execution Integrity reference task on 2026-09-10.
+Phase 5: ACTIVE — first-10-real-task observation window is 4/10 after the real SignalForge guarded execution E2E on 2026-09-10.
 
 ## Frozen invariants
 
@@ -105,6 +105,21 @@ Status: **COMPLETE (reference-only)** on 2026-09-10.
 - Preserved the frozen v0.5 architecture: no new Skill, workflow engine, state service, queue, DB/RAG/daemon, MCP, CodexPro runtime change, or Tool permission expansion.
 - Upstream `mcncarl/yichen-skills` was used only as an architectural study source; no fixed state machine, message envelope, schema, executable workflow, code, or substantial text was copied.
 - Observation recorded in `observations/2026-09-10-phase5-03-p2-execution-integrity.md`.
+
+## P2 real SignalForge guarded execution E2E
+
+Status: **PASS WITH RUNTIME FINDINGS** on 2026-09-10.
+
+- Applied the P2 guarded contract to a real SignalForge assurance task under stable task id `sf-p2-guarded-20260910-assurance-v1`.
+- The local SignalForge `CHECKPOINT.md` was stale relative to GitHub main/GOAL; the mismatch was correctly classified as forward drift and execution resumed from stronger current evidence instead of replaying the old checkpoint.
+- An executor failure before dispatch was distinguished from an ambiguous timeout. When the later Cloud-side `execute-handoff` call timed out while the local Codex process was still running, process and handoff state were reconciled and no duplicate executor was started.
+- The run exposed a real terminal-receipt gap: after the local executor ended, `.ai-bridge/handoff-run-state.json` could remain `running` and no trustworthy finalized execution receipt was available.
+- The run also exposed a real mutation-gate gap: Codex pushed and merged SignalForge PR #143 and PR #144 before the requested ChatGPT evidence-bound review, proving a plan-text instruction alone is not an enforcement boundary.
+- SignalForge Auditor v1 itself added a useful read-only assurance surface for source health, bounded MPT/MYTEL coverage reconciliation, ATOM procurement-surface triggering, deadline consistency, signal trace integrity and delivery receipt integrity while keeping global external completeness explicitly unproven.
+- Evidence-bound review found one over-strong independence claim. Follow-up SignalForge PR #145 narrowed the contract to implementation-independent plus `coverage_semantic_independence=PARTIAL`; targeted tests remained 12/12, full suite 275/275, and exact-head CI passed before merge to SignalForge `main@ecdfe9e59f337be22d8f88c811968b13c6d2554f`.
+- No BKK production deployment or Telegram send was performed in this E2E.
+- These observations justify evaluating narrow CodexPro runtime support for reliable terminal receipts and mutation-boundary enforcement; they do not authorize broader workflow infrastructure.
+- Observation recorded in `observations/2026-09-10-phase5-04-signalforge-p2-e2e.md`.
 
 ## Phase 5 rule
 
