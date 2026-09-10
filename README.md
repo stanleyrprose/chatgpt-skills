@@ -31,6 +31,12 @@ Routing is prompt-based and inherently non-deterministic. False positives, false
 - `GOAL.md` — current implementation checkpoint.
 - Project-specific rules/state stay in each project repository.
 
+## Shared reference contracts
+
+`shared/` contains plain references only; they are not Skills and do not grant Tool/MCP capability or authorization.
+
+- `shared/research-routing-evidence-contract.md` — smallest-adequate research routing, claim-level evidence promotion, fallback, time semantics, and capability/authorization/persistence separation.
+
 ## Frozen baseline
 
 v0.5 was frozen and implementation-authorized on 2026-09-08.

@@ -17,7 +17,7 @@ Phase 1: COMPLETE — structural baseline validated.
 Phase 2: COMPLETE — five initial Skills + derived index validated.
 Phase 3: COMPLETE — v1.5.2 lossless migration deployed by user; activation/state-anchor/Project Discovery smoke PASS.
 Phase 4: COMPLETE — real-repo E2E on `stanleyrprose/mac-browser-plane` PASS WITH ENVIRONMENT LIMITATION.
-Phase 5: ACTIVE — first-10-real-task observation window starts after Phase 4; count begins at 0/10 and must not be synthetically manufactured.
+Phase 5: ACTIVE — first-10-real-task observation window is 1/10 after the P1 research-routing/evidence reference task on 2026-09-10.
 
 ## Frozen invariants
 
@@ -70,6 +70,16 @@ E2E path exercised:
 - Handoff completeness contract checked statically; `handoff` itself was not auto-invoked because it is user-invoked.
 
 Result: **PASS WITH ENVIRONMENT LIMITATION**.
+
+## P1 research-routing/evidence reference
+
+Status: **COMPLETE (reference-only)** on 2026-09-10.
+
+- Added `shared/research-routing-evidence-contract.md` as the canonical plain reference for smallest-adequate research routing and claim-level evidence semantics.
+- Preserved the frozen v0.5 runtime architecture: no sixth Skill, no deterministic router, no DB/RAG/daemon, no new MCP, and no Tool permission expansion.
+- The contract separates Route Plan, capability, authorization, discovery, original-source inspection, claim qualification, fallback, time semantics, and persistence.
+- Upstream `mcncarl/yichen-skills` was used only as an architectural study source; no upstream code/schema/executable workflow/substantial text was copied because its license restricts redistribution/commercial use.
+- Phase 5 real-task observation recorded in `observations/2026-09-10-phase5-01-p1-research-contract.md`.
 
 ## Phase 5 rule
 
