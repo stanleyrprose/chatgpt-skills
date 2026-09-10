@@ -36,6 +36,7 @@ Routing is prompt-based and inherently non-deterministic. False positives, false
 `shared/` contains plain references only; they are not Skills and do not grant Tool/MCP capability or authorization.
 
 - `shared/research-routing-evidence-contract.md` — smallest-adequate research routing, claim-level evidence promotion, fallback, time semantics, and capability/authorization/persistence separation.
+- `shared/agent-execution-integrity-contract.md` — task identity, reconciled checkpoints, duplicate-safe side effects, baseline-bound execution, evidence-bound review, bounded repair, and recovery semantics for long or cross-Agent work.
 
 ## Frozen baseline
 
