@@ -17,7 +17,7 @@ Phase 1: COMPLETE — structural baseline validated.
 Phase 2: COMPLETE — five initial Skills + derived index validated.
 Phase 3: COMPLETE — v1.5.2 lossless migration deployed by user; activation/state-anchor/Project Discovery smoke PASS.
 Phase 4: COMPLETE — real-repo E2E on `stanleyrprose/mac-browser-plane` PASS WITH ENVIRONMENT LIMITATION.
-Phase 5: ACTIVE — first-10-real-task observation window is 1/10 after the P1 research-routing/evidence reference task on 2026-09-10.
+Phase 5: ACTIVE — first-10-real-task observation window is 2/10 after the Myanmar 5G competition/strategy research E2E on 2026-09-10.
 
 ## Frozen invariants
 
@@ -80,6 +80,18 @@ Status: **COMPLETE (reference-only)** on 2026-09-10.
 - The contract separates Route Plan, capability, authorization, discovery, original-source inspection, claim qualification, fallback, time semantics, and persistence.
 - Upstream `mcncarl/yichen-skills` was used only as an architectural study source; no upstream code/schema/executable workflow/substantial text was copied because its license restricts redistribution/commercial use.
 - Phase 5 real-task observation recorded in `observations/2026-09-10-phase5-01-p1-research-contract.md`.
+
+## P1 real research E2E
+
+Status: **PASS (no contract change required)** on 2026-09-10.
+
+- Real task: forecast Myanmar 5G market competition and derive MPT strategy under that forecast, with `as_of=2026-09-10`.
+- Correctly escalated to `deep_research` because the decision required current competitive structure, historical/technical context, forward scenarios, and strategy implications.
+- Claim-level evidence semantics prevented operator self-claims about market leadership from being promoted into an uncontested fact.
+- Public research confirmed the national early-2027 5G target, 2.6 GHz/n41 direction, TDD synchronization requirements, operator readiness signals, macro power constraints, and MPT partnership/support changes.
+- Two material uncertainties remained explicit rather than guessed: latest regulator-grade market-share ranking and final per-operator 2.6 GHz bandwidth allocation.
+- No database, persisted claim ledger, extra search service, new Skill, or runtime change was needed.
+- Observation recorded in `observations/2026-09-10-phase5-02-myanmar-5g-research-e2e.md`.
 
 ## Phase 5 rule
 
