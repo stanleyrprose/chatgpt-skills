@@ -17,7 +17,7 @@ Phase 1: COMPLETE — structural baseline validated.
 Phase 2: COMPLETE — five initial Skills + derived index validated.
 Phase 3: COMPLETE — v1.5.2 lossless migration deployed by user; activation/state-anchor/Project Discovery smoke PASS.
 Phase 4: COMPLETE — real-repo E2E on `stanleyrprose/mac-browser-plane` PASS WITH ENVIRONMENT LIMITATION.
-Phase 5: ACTIVE — first-10-real-task observation window is 2/10 after the Myanmar 5G competition/strategy research E2E on 2026-09-10.
+Phase 5: ACTIVE — first-10-real-task observation window is 3/10 after the P2 Agent Execution Integrity reference task on 2026-09-10.
 
 ## Frozen invariants
 
@@ -92,6 +92,19 @@ Status: **PASS (no contract change required)** on 2026-09-10.
 - Two material uncertainties remained explicit rather than guessed: latest regulator-grade market-share ranking and final per-operator 2.6 GHz bandwidth allocation.
 - No database, persisted claim ledger, extra search service, new Skill, or runtime change was needed.
 - Observation recorded in `observations/2026-09-10-phase5-02-myanmar-5g-research-e2e.md`.
+
+## P2 Agent Execution Integrity reference
+
+Status: **COMPLETE (reference-only)** on 2026-09-10.
+
+- Added `shared/agent-execution-integrity-contract.md` as the canonical plain reference for long/cross-Agent execution integrity.
+- Defined three activation levels (`none`, `tracked`, `guarded`) so protocol overhead is paid only when interruption, stale state, cross-Agent handoff, or duplicate side effects materially matter.
+- Defined task identity, reconciled checkpoints, drift classification, operation receipts, plan-to-baseline binding, evidence-bound review, cross-Agent handoff identity, bounded repair by reconciliation points, recovery, and terminal-state semantics.
+- Replaced any strong exactly-once claim with duplicate-safe / effectively-once semantics: ambiguous side effects must be reconciled against actual target state before retry.
+- Code review found and fixed two low-risk design issues before PR: operation identity now includes desired postcondition, and bounded repair no longer conflicts with authorized Autonomous Mode.
+- Preserved the frozen v0.5 architecture: no new Skill, workflow engine, state service, queue, DB/RAG/daemon, MCP, CodexPro runtime change, or Tool permission expansion.
+- Upstream `mcncarl/yichen-skills` was used only as an architectural study source; no fixed state machine, message envelope, schema, executable workflow, code, or substantial text was copied.
+- Observation recorded in `observations/2026-09-10-phase5-03-p2-execution-integrity.md`.
 
 ## Phase 5 rule
 
