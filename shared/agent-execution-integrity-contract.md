@@ -144,6 +144,7 @@ operation_id: "stable-per-semantic-side-effect"
 task_id: "same-task-id"
 kind: "deploy|migration|restart|send|create|delete|config_change|other"
 target: "bounded target identity"
+desired_postcondition: "observable intended effect"
 precondition_ref: "state expected before execution"
 status: "planned|attempted|applied|verified|failed|unknown"
 result_ref: null
@@ -153,13 +154,15 @@ observed_at: "ISO-8601"
 
 Critical rules:
 
+- Operation identity is bound to the semantic action **and** its target/desired postcondition. A materially different intended postcondition is a new operation, even on the same target.
 - The same semantic side effect keeps the same `operation_id` across retries. Never create a fresh ID just to bypass an ambiguous previous attempt.
 - Before executing, verify the precondition when practical.
 - `attempted` means the command/action was issued; it does not prove the effect.
-- `applied` means evidence indicates the effect occurred; it is not yet equivalent to healthy/successful.
-- `verified` means the intended postcondition was checked.
+- `applied` means evidence indicates the intended effect occurred; it is not yet equivalent to healthy/successful.
+- `verified` means the desired postcondition was checked.
+- `failed` is appropriate only when the attempt is known to have failed **and** the resulting target state is sufficiently reconciled to rule out an ambiguous material side effect. Otherwise use `unknown`.
 - A timeout/disconnect after dispatch normally becomes `unknown`, not automatically `failed`.
-- For `unknown`, inspect the real target state first. Retry only when evidence shows the effect did not occur or the operation is safely idempotent.
+- For `unknown`, inspect the real target state first. Retry only when evidence shows the intended effect did not occur or the operation is safely idempotent.
 - Read-only discovery may usually be repeated; side effects may not be replayed merely because a Tool response was lost.
 
 This is why the contract uses **effectively-once** rather than claiming mathematically guaranteed exactly-once semantics.
@@ -228,17 +231,18 @@ Optional `handoff_id` is useful when the transport itself can duplicate or deliv
 
 A response that clearly belongs to another task, checkpoint, baseline, or result must not advance execution. When identity is uncertain, re-read authoritative state rather than guessing from conversational order.
 
-## 9. Bounded repair
+## 9. Bounded repair without fighting Autonomous Mode
 
-Repair loops must remain bounded because repeated model-to-writer cycles can drift from the original scope.
+Repair loops must be bounded by **reconciliation points**, because repeated model-to-writer cycles can drift from the original scope.
 
 - `tracked` tasks need no universal repair-count rule; use normal project workflow.
-- `guarded` cross-Agent execution defaults to **one automatic repair cycle** after a confirmed material review finding, unless the project/task explicitly sets another bounded budget.
-- Optional polish does not consume a guarded automatic repair cycle unless the user/project explicitly includes it in scope.
-- After the repair budget is exhausted and a material defect remains, write a fresh checkpoint and return `blocked` rather than silently continuing indefinitely.
-- The user/project may authorize continuation; if scope and authority remain the same, the existing task may resume from a fresh reconciled checkpoint. A new `task_id` is required only when the top-level goal/scope/authority materially changes.
+- In `guarded` cross-Agent execution, after one review-driven automatic repair cycle, require a fresh checkpoint + actual-state reconciliation + renewed review binding before another review-driven repair.
+- This checkpoint is not automatically a user-confirmation gate. If the task is already in an authorized Autonomous Mode, state is aligned, and no Hard Stop/material conflict exists, execution may continue after reconciliation.
+- Optional polish does not trigger a guarded repair cycle unless the user/project explicitly includes it in scope.
+- If the same material defect repeats after reconciliation, operation state remains ambiguous, scope is drifting, or authority becomes unclear, return `blocked` rather than chaining repairs indefinitely.
+- The user/project may resume a blocked task once the blocker is resolved. A new `task_id` is required only when the top-level goal/scope/authority materially changes.
 
-This deliberately avoids a rigid universal state machine.
+This deliberately avoids both an unbounded repair loop and a rigid universal iteration state machine.
 
 ## 10. Recovery algorithm
 
@@ -261,7 +265,7 @@ If no previous task metadata exists, recover from project facts first and create
 ## 11. Completion and terminal state
 
 - `done`: all declared completion conditions are satisfied by current evidence.
-- `blocked`: progress needs missing authority, user action, unresolved ambiguity, unavailable evidence/capability, or a deliberately exhausted repair budget. A blocked task may resume after the blocker is resolved and state is reconciled.
+- `blocked`: progress needs missing authority, user action, unresolved ambiguity, unavailable evidence/capability, repeated repair failure, or another condition that prevents trustworthy continuation. A blocked task may resume after the blocker is resolved and state is reconciled.
 - `aborted`: work intentionally stopped; no further side effects should occur unless explicitly resumed/re-authorized.
 - `superseded`: a materially changed goal/scope/authority has replaced this task; create/use the newer task identity.
 
@@ -314,10 +318,11 @@ Those require separate evidence and should not be smuggled into P2 as assumed in
 2. **Feature work:** multi-file repo change likely to continue tomorrow → `tracked`; preserve task ID + latest Git/checkpoint + next action.
 3. **Deploy timeout:** deploy command loses connection after dispatch → operation becomes `unknown`; inspect production version/health before any retry.
 4. **Duplicate send risk:** external message action times out → keep the same operation ID and inspect send/result state if possible; do not resend solely because the Tool response was missing.
-5. **Stale plan:** branch advanced incompatibly after PLAN → amend/re-plan; do not force the old plan.
-6. **Stale review:** REVIEW covered commit B, then commit C changes reviewed code → B's verdict cannot approve C without reviewing the relevant delta.
-7. **Repair loop:** reviewer finds a material defect, one guarded auto-repair is applied, defect remains → checkpoint + `blocked`, not an unbounded third/fourth loop.
-8. **Continuation:** user says “继续” after interruption → recover Git/GOAL/runtime and operation state first; chat memory is auxiliary.
+5. **Second legitimate target change:** same service receives a different desired configuration → new operation identity because the desired postcondition changed.
+6. **Stale plan:** branch advanced incompatibly after PLAN → amend/re-plan; do not force the old plan.
+7. **Stale review:** REVIEW covered commit B, then commit C changes reviewed code → B's verdict cannot approve C without reviewing the relevant delta.
+8. **Repair loop:** reviewer finds a defect and one automatic repair is applied → checkpoint/reconcile before another review-driven repair; repeated same defect or ambiguity becomes `blocked`.
+9. **Continuation:** user says “继续” after interruption → recover Git/GOAL/runtime and operation state first; chat memory is auxiliary.
 
 ## 16. Provenance and license boundary
 
