@@ -17,7 +17,7 @@ Phase 1: COMPLETE — structural baseline validated.
 Phase 2: COMPLETE — five initial Skills + derived index validated.
 Phase 3: COMPLETE — v1.5.2 lossless migration deployed by user; activation/state-anchor/Project Discovery smoke PASS.
 Phase 4: COMPLETE — real-repo E2E on `stanleyrprose/mac-browser-plane` PASS WITH ENVIRONMENT LIMITATION.
-Phase 5: ACTIVE — first-10-real-task observation window is 5/10 after the evidence-driven P2 CodexPro runtime integrity fix on 2026-09-11.
+Phase 5: ACTIVE — first-10-real-task observation window is 6/10 after the real SignalForge Production Assurance v1 task on 2026-09-11.
 
 ## Frozen invariants
 
@@ -135,6 +135,20 @@ Status: **IMPLEMENTATION COMPLETE / UPSTREAM INTEGRATION PENDING** on 2026-09-11
 - The user's fork initially had Actions enabled but no registered workflow; a repository Actions disable/enable refresh registered the existing CI workflow without changing source or upstream settings, after which the CI-only PR ran and was closed without merge.
 - No npm publish, upstream merge, or local production hot-patch was performed. P2 returns to observation-only/frozen status unless a future real task supplies new evidence.
 - Observation recorded in `observations/2026-09-11-phase5-05-p2-runtime-fix.md`.
+
+## SignalForge Production Assurance v1 real task
+
+Status: **PASS WITH EXPLICIT COMPLETENESS LIMITS** on 2026-09-11.
+
+- Recovered current SignalForge state from GitHub/GOAL and the live Bangkok runtime rather than chat history; exact production application release was `bd86efcaa5699f1aa5082459cd57882b8ffe4e73`.
+- Read-only production evidence returned `27/27 GREEN / backlog0 / 209 canonical / 45 raw signals / 21 known historical noise / 24 effective signals / 9 current opportunities / 4 immediate Telegram receipts / immediate pending0`.
+- Only 7/27 sources have proven effective yield so far (4 actionable + 3 signal-only); remaining observation windows are too short to justify pruning before the existing 30-day gate.
+- Network Auditor returned `PASS / findings0` while preserving `external_completeness=NOT_PROVEN`: MPT S13 bounded recent reconciliation PASS/missing0, MYTEL S41 15 official vs 15 canonical/missing0, ATOM official sitemap `NO_TRIGGER`.
+- The preceding 24h showed 1330 source runs, 1581 evidence fetches, 2995 parsed items, 34 changed records and zero business signals. One S35 read timeout had already recovered to GREEN with no backlog.
+- The naturally scheduled 08:30 Yangon Business Digest completed `0/SUCCESS`, sent provider message `8`, persisted the second daily success receipt, and a post-send dry-run returned `deduplicated=true / pending0`; no manual Telegram send was invoked by the audit.
+- Current decision focus was `industry:1022` closing 2026-09-11 16:00, `energy:235` and `mofa:59800` closing 2026-09-18, with `doms:12735` deliberately kept REVIEW/deadline UNKNOWN rather than guessed.
+- SignalForge report PR #152 passed exact-head CI and merged as `6ef5118bbf2b80547ce85662c765f9b81e84b5d6`; no runtime, database, source-acquisition, parser, qualification or delivery policy change was made.
+- Observation recorded in `observations/2026-09-11-phase5-06-signalforge-production-assurance.md`.
 
 ## Phase 5 rule
 
