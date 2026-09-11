@@ -17,7 +17,7 @@ Phase 1: COMPLETE — structural baseline validated.
 Phase 2: COMPLETE — five initial Skills + derived index validated.
 Phase 3: COMPLETE — v1.5.2 lossless migration deployed by user; activation/state-anchor/Project Discovery smoke PASS.
 Phase 4: COMPLETE — real-repo E2E on `stanleyrprose/mac-browser-plane` PASS WITH ENVIRONMENT LIMITATION.
-Phase 5: ACTIVE — first-10-real-task observation window is 4/10 after the real SignalForge guarded execution E2E on 2026-09-10.
+Phase 5: ACTIVE — first-10-real-task observation window is 5/10 after the evidence-driven P2 CodexPro runtime integrity fix on 2026-09-11.
 
 ## Frozen invariants
 
@@ -118,8 +118,23 @@ Status: **PASS WITH RUNTIME FINDINGS** on 2026-09-10.
 - SignalForge Auditor v1 itself added a useful read-only assurance surface for source health, bounded MPT/MYTEL coverage reconciliation, ATOM procurement-surface triggering, deadline consistency, signal trace integrity and delivery receipt integrity while keeping global external completeness explicitly unproven.
 - Evidence-bound review found one over-strong independence claim. Follow-up SignalForge PR #145 narrowed the contract to implementation-independent plus `coverage_semantic_independence=PARTIAL`; targeted tests remained 12/12, full suite 275/275, and exact-head CI passed before merge to SignalForge `main@ecdfe9e59f337be22d8f88c811968b13c6d2554f`.
 - No BKK production deployment or Telegram send was performed in this E2E.
-- These observations justify evaluating narrow CodexPro runtime support for reliable terminal receipts and mutation-boundary enforcement; they do not authorize broader workflow infrastructure.
+- These observations justified a narrow CodexPro runtime evaluation rather than broader workflow infrastructure.
 - Observation recorded in `observations/2026-09-10-phase5-04-signalforge-p2-e2e.md`.
+
+## P2.1 evidence-driven CodexPro runtime fix
+
+Status: **IMPLEMENTATION COMPLETE / UPSTREAM INTEGRATION PENDING** on 2026-09-11.
+
+- Implemented only the two concrete runtime gaps demonstrated by the SignalForge E2E: reliable handoff lifecycle/terminal receipts and a handoff-scoped accidental remote-mutation gate.
+- Final fork result: `stanleyrprose/codexpro@77b56d4512a5aa8cc081db67aa7cb94ce140f0da`; canonical upstream review remains `rebel0789/codexpro` PR #130 and was intentionally not self-merged.
+- Signal lifecycle now uses non-terminal `interrupting` while child termination is in progress; terminal `interrupted` is written only after actual child exit. Stale in-flight receipts derive `orphaned` only when both parent and child are gone.
+- Non-completed terminal process states carry `execution_outcome=unknown` and `reconcile_required=true`, preserving duplicate-safe retry semantics.
+- Default handoff execution blocks standard remote Git/GitHub mutation paths and strips common GitHub token environment variables; explicit `--allow-remote-mutations` restores those paths. This is intentionally an accidental-side-effect guard, not a security sandbox.
+- Code review caught and fixed two material lifecycle defects: a live child must prevent orphan classification, and Node `child.killed` cannot be used as proof of process exit; stubborn child termination now escalates based on actual exit/signal state.
+- Verification PASS on macOS (`build`, targeted handoff smoke, MCP/full smoke, stress, `git diff --check`) and on exact head via the repository's Ubuntu + Windows GitHub Actions matrix, run `34510223428`.
+- The user's fork initially had Actions enabled but no registered workflow; a repository Actions disable/enable refresh registered the existing CI workflow without changing source or upstream settings, after which the CI-only PR ran and was closed without merge.
+- No npm publish, upstream merge, or local production hot-patch was performed. P2 returns to observation-only/frozen status unless a future real task supplies new evidence.
+- Observation recorded in `observations/2026-09-11-phase5-05-p2-runtime-fix.md`.
 
 ## Phase 5 rule
 
