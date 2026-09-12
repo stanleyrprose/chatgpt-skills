@@ -12,5 +12,7 @@ jobs:
       - uses: actions/checkout@v4
       - name: Validate Constitution and generated Registry
         run: python3 scripts/build-registry.py --check
-      - name: Run minimal generator regression tests
-        run: python3 -m unittest tests/test_build_registry.py
+      - name: Run Skill CI Quality Gate
+        run: python3 scripts/skill_quality_gate.py
+      - name: Run minimal regression tests
+        run: python3 -m unittest discover -s tests -p "test_*.py"

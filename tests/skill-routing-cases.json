@@ -1,0 +1,39 @@
+{
+  "model_semantic": [
+    {
+      "id": "diagnose-regression-root-cause",
+      "prompt": "Investigate the technical regression, narrow the evidence, and identify the root cause before proposing a fix.",
+      "expected": "diagnose"
+    },
+    {
+      "id": "diagnose-performance-anomaly",
+      "prompt": "An unexplained performance anomaly is causing failures; find the technical defect and root cause.",
+      "expected": "diagnose"
+    },
+    {
+      "id": "code-review-spec-fidelity",
+      "prompt": "Review the implementation against the specification and engineering standards; assess fidelity separately.",
+      "expected": "code-review"
+    },
+    {
+      "id": "code-review-engineering-standards",
+      "prompt": "Do a code review of this implementation for specification fidelity and engineering standards.",
+      "expected": "code-review"
+    },
+    {
+      "id": "negative-implementation-workflow",
+      "prompt": "Execute the authorized repository change through Git and CI, then verify closure.",
+      "expected": null
+    },
+    {
+      "id": "negative-handoff-workflow",
+      "prompt": "Create a concise project handoff with unresolved items and the exact next action.",
+      "expected": null
+    },
+    {
+      "id": "negative-single-keyword",
+      "prompt": "Investigate this error.",
+      "expected": null
+    }
+  ]
+}
