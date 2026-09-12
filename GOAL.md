@@ -17,7 +17,7 @@ Phase 1: COMPLETE — structural baseline validated.
 Phase 2: COMPLETE — five initial Skills + derived index validated.
 Phase 3: COMPLETE — v1.5.2 lossless migration deployed by user; activation/state-anchor/Project Discovery smoke PASS.
 Phase 4: COMPLETE — real-repo E2E on `stanleyrprose/mac-browser-plane` PASS WITH ENVIRONMENT LIMITATION.
-Phase 5: ACTIVE — first-10-real-task observation window is 6/10 after the real SignalForge Production Assurance v1 task on 2026-09-11.
+Phase 5: ACTIVE — first-10-real-task observation window is 7/10 after the Skill CI Quality Gate implementation task on 2026-09-12.
 
 ## Frozen invariants
 
@@ -149,6 +149,18 @@ Status: **PASS WITH EXPLICIT COMPLETENESS LIMITS** on 2026-09-11.
 - Current decision focus was `industry:1022` closing 2026-09-11 16:00, `energy:235` and `mofa:59800` closing 2026-09-18, with `doms:12735` deliberately kept REVIEW/deadline UNKNOWN rather than guessed.
 - SignalForge report PR #152 passed exact-head CI and merged as `6ef5118bbf2b80547ce85662c765f9b81e84b5d6`; no runtime, database, source-acquisition, parser, qualification or delivery policy change was made.
 - Observation recorded in `observations/2026-09-11-phase5-06-signalforge-production-assurance.md`.
+
+## Skill CI Quality Gate
+
+Status: **IMPLEMENTED / REMOTE CI PASS** on 2026-09-12.
+
+- Added `scripts/skill_quality_gate.py` as a stdlib-only CI validator; no third-party dependency, runtime service, router daemon, DB, RAG, or MCP was introduced.
+- Gate responsibilities are deliberately split by invocation mode: active `invocation:user` Skills get exact registered-trigger ownership checks only; active `invocation:model` Skills get deterministic description-routing evals with positive-case coverage plus negative/single-keyword cases.
+- Static security scanning covers all discovered Skills regardless of status and blocks high-risk execution/credential/exfiltration patterns; this remains a pattern-based gate, not a complete security proof.
+- Code review found and fixed two gate-integrity issues before closure: non-active Skills are now scanned, and every active model Skill must have at least one positive routing case.
+- Local validation PASS: Registry/Constitution check, Quality Gate, Python compile, `git diff --check`, and 8/8 focused unittests.
+- PR #10 remote `validate` checks PASS on runs `34704087220` and `34704098371` for implementation commit `82368d5`.
+- Observation recorded in `observations/2026-09-12-phase5-07-skill-ci-quality-gate.md`.
 
 ## Phase 5 rule
 
