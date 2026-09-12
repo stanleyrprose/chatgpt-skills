@@ -38,6 +38,16 @@ Routing is prompt-based and inherently non-deterministic. False positives, false
 - `shared/research-routing-evidence-contract.md` — smallest-adequate research routing, claim-level evidence promotion, fallback, time semantics, and capability/authorization/persistence separation.
 - `shared/agent-execution-integrity-contract.md` — task identity, reconciled checkpoints, duplicate-safe side effects, baseline-bound execution, evidence-bound review, bounded repair, and recovery semantics for long or cross-Agent work.
 
+## Validation
+
+CI is intentionally dependency-light and validates the authored Skill sources before accepting changes:
+
+- `python3 scripts/build-registry.py --check` validates Constitution/frontmatter rules and derived Registry/README drift.
+- `python3 scripts/skill_quality_gate.py` adds Skill metadata lint, blocking static security checks, exact registered-trigger checks for `invocation: user`, and deterministic description-routing evals for `invocation: model`.
+- `python3 -m unittest discover -s tests -p "test_*.py"` runs the focused regression suite.
+
+The model-routing eval is a CI sanity check over model-facing descriptions, not a deterministic runtime router. A clean static security scan is necessary but not sufficient; human review still owns ambiguous or novel patterns.
+
 ## Frozen baseline
 
 v0.5 was frozen and implementation-authorized on 2026-09-08.
