@@ -17,7 +17,7 @@ Phase 1: COMPLETE — structural baseline validated.
 Phase 2: COMPLETE — five initial Skills + derived index validated.
 Phase 3: COMPLETE — v1.5.2 lossless migration deployed by user; activation/state-anchor/Project Discovery smoke PASS.
 Phase 4: COMPLETE — real-repo E2E on `stanleyrprose/mac-browser-plane` PASS WITH ENVIRONMENT LIMITATION.
-Phase 5: ACTIVE — first-10-real-task observation window is 9/10 after the MCP capability identity/scoping audit task on 2026-09-13.
+Phase 5: COMPLETE — 10/10 genuine tasks observed; final review on 2026-09-13 found no evidence requiring a v0.5 Skill-architecture expansion.
 
 ## Frozen invariants
 
@@ -187,6 +187,41 @@ Status: **PASS / CROSS-REPO CODE MERGED / PRODUCTION UNCHANGED** on 2026-09-13.
 - No Mac runtime reinstall, Bangkok deployment, production DB mutation, source refresh or Telegram send was performed.
 - Observation recorded in `observations/2026-09-13-phase5-09-mcp-capability-scoping.md`.
 
+## AWR structured quota UI contract
+
+Status: **PASS / CODE MERGED / PRODUCTION UNCHANGED** on 2026-09-13.
+
+- Recovered current AWR state first and confirmed the requested Codex/SuperGrok quota rings were already implemented; the task did not rebuild completed UI.
+- Found a real semantic-boundary defect: React treated any quota label containing `hour` as `5H`, so future hourly windows could be silently mislabeled.
+- Added backward-compatible backend API quota semantics (`five_hour`, `weekly`, `monthly`, `other`) and made React filter/order/render from semantic kind; known old payload forms remain supported without broad substring guessing.
+- Code review tightened fallback parsing so `24 hour`, `Hourly`, `Twenty Five Hour`, and `Biweekly` stay `other`; Codex 5H+Weekly and SuperGrok Weekly remain unchanged.
+- Validation PASS: focused backend tests 2/2, frontend `npm run lint`, frontend `npm run build`, and `git diff --check`; PR #9 exact-head `unified-deliberation` run `34754261407` passed.
+- Agent War Room PR #9 squash-merged as `7d45bc70ae0ea3a1d7e6bbce03735ff40ba9c024`.
+- No CopilotKit/AG-UI/new UI runtime, auth change, credential mutation, DB/schema change, provider inference, or production deployment was introduced.
+- Observation recorded in `observations/2026-09-13-phase5-10-awr-structured-ui-contract.md`.
+
+## Phase 5 final observation review
+
+Status: **COMPLETE — KEEP v0.5 FROZEN ARCHITECTURE** on 2026-09-13.
+
+Evidence across the 10 genuine tasks supports the existing architecture rather than an expansion:
+
+- **Routing:** explicit user-invoked vs model-invoked separation held across real engineering/research work. No repeated routing failure justifies a deterministic router service, sixth Skill, DB/RAG layer, or daemon.
+- **Research/evidence:** the plain shared research contract was sufficient for a real Myanmar 5G strategy task; uncertainty and claim qualification were handled without a persisted claim system.
+- **Execution integrity:** real long-task failures were correctly solved at the executor/runtime boundary (CodexPro lifecycle receipts and mutation guard), not by adding orchestration infrastructure to the Skill layer.
+- **Production assurance:** SignalForge tasks repeatedly benefited from explicit evidence, provenance, completeness limits, and deterministic-vs-reasoning boundaries; these are reusable principles, not evidence for another Skill.
+- **Quality control:** the Skill CI Quality Gate provided useful deterministic metadata/routing/security checks while preserving model routing at runtime.
+- **Capability/security boundaries:** Browser MCP/SignalForge audits showed strong existing identity/scoping and exposed one concrete byte-budget gap; the right fix was a narrow invariant at both trust boundaries, not MCP namespacing or a multi-server router.
+- **UI semantics:** AWR showed that structured meaning should live in the backend/API contract and rendering in React; the right fix was one semantic field, not a generative-UI framework.
+- **Minimalism:** multiple tasks explicitly avoided tempting but unsupported architecture additions. In each case, a smaller local contract/test/invariant fixed the demonstrated problem.
+
+Decision:
+
+1. Keep the five-Skill v0.5 architecture frozen: user-invoked `implement`, `to-spec`, `handoff`; model-invoked `diagnose`, `code-review`.
+2. Keep shared references as plain documents; do not promote P1/P2 or structured-UI ideas into new Skills/services without new recurring evidence.
+3. End the mandatory first-10-task observation window. Future observations become **event-triggered only** under `OBSERVATION_TEMPLATE.md` when there is a routing anomaly, user correction, doc/code desync, tool degradation, security boundary finding, or similarly material evidence.
+4. Future-work ideas remain conditional, not authorized: true model-based semantic routing eval only if deterministic metadata eval proves insufficient; MCP namespacing only if a real multi-server aggregation collision appears; broader structured UI schemas only when another concrete UI semantic-drift bug appears.
+
 ## Phase 5 rule
 
-Phase 5 is operational observation, not a build-time excuse to fabricate tasks. The next 10 genuine tasks that naturally use this architecture should be recorded per `OBSERVATION_TEMPLATE.md`; after task 10, perform the observation review and decide whether any Future Work is evidence-justified.
+Phase 5 is complete after 10 genuine tasks and the evidence review above. Do not manufacture further observation tasks. Record new observations only when a real event satisfies `OBSERVATION_TEMPLATE.md`; any architecture change still requires independent evidence and authorization.
