@@ -17,7 +17,7 @@ Phase 1: COMPLETE — structural baseline validated.
 Phase 2: COMPLETE — five initial Skills + derived index validated.
 Phase 3: COMPLETE — v1.5.2 lossless migration deployed by user; activation/state-anchor/Project Discovery smoke PASS.
 Phase 4: COMPLETE — real-repo E2E on `stanleyrprose/mac-browser-plane` PASS WITH ENVIRONMENT LIMITATION.
-Phase 5: ACTIVE — first-10-real-task observation window is 7/10 after the Skill CI Quality Gate implementation task on 2026-09-12.
+Phase 5: ACTIVE — first-10-real-task observation window is 8/10 after the SignalForge provenance audit task on 2026-09-13.
 
 ## Frozen invariants
 
@@ -161,6 +161,17 @@ Status: **IMPLEMENTED / REMOTE CI PASS** on 2026-09-12.
 - Local validation PASS: Registry/Constitution check, Quality Gate, Python compile, `git diff --check`, and 8/8 focused unittests.
 - PR #10 remote `validate` checks PASS on runs `34704087220` and `34704098371` for implementation commit `82368d5`.
 - Observation recorded in `observations/2026-09-12-phase5-07-skill-ci-quality-gate.md`.
+
+## SignalForge deterministic-boundary / provenance audit
+
+Status: **PASS / CODE MERGED / PRODUCTION UNCHANGED** on 2026-09-13.
+
+- Recovered current SignalForge Git/GOAL state rather than relying on chat history; audit found no LLM scoring fallback in the core Signal/qualification/priority/Signal Quality path.
+- Implemented only two read-model auditability gaps: unchanged Signal Quality v1 now exposes evidence `0–85` plus context `0–15` subtotals, and relevance categories expose whether they came from item text, source-policy name, or explicit source fallback.
+- Model-invoked `code-review` caught one provenance-label ambiguity before closure; the fix distinguished item-text keyword evidence from source-policy-name keyword evidence without changing category decisions.
+- SignalForge targeted tests passed 20/20, full suite 325/325, PR #168 exact-head verify run `34733280734` passed, and PR #168 squash-merged as `29c5280ca4e28f9fd502b60845f5f0f7b0a1d624`.
+- No Bangkok deployment, production DB mutation, source refresh, Telegram send, score/band/priority change, Signal creation rule, schema, acquisition or topology change was performed.
+- Observation recorded in `observations/2026-09-13-phase5-08-signalforge-provenance-audit.md`.
 
 ## Phase 5 rule
 
