@@ -17,7 +17,7 @@ Phase 1: COMPLETE — structural baseline validated.
 Phase 2: COMPLETE — five initial Skills + derived index validated.
 Phase 3: COMPLETE — v1.5.2 lossless migration deployed by user; activation/state-anchor/Project Discovery smoke PASS.
 Phase 4: COMPLETE — real-repo E2E on `stanleyrprose/mac-browser-plane` PASS WITH ENVIRONMENT LIMITATION.
-Phase 5: ACTIVE — first-10-real-task observation window is 8/10 after the SignalForge provenance audit task on 2026-09-13.
+Phase 5: ACTIVE — first-10-real-task observation window is 9/10 after the MCP capability identity/scoping audit task on 2026-09-13.
 
 ## Frozen invariants
 
@@ -172,6 +172,20 @@ Status: **PASS / CODE MERGED / PRODUCTION UNCHANGED** on 2026-09-13.
 - SignalForge targeted tests passed 20/20, full suite 325/325, PR #168 exact-head verify run `34733280734` passed, and PR #168 squash-merged as `29c5280ca4e28f9fd502b60845f5f0f7b0a1d624`.
 - No Bangkok deployment, production DB mutation, source refresh, Telegram send, score/band/priority change, Signal creation rule, schema, acquisition or topology change was performed.
 - Observation recorded in `observations/2026-09-13-phase5-08-signalforge-provenance-audit.md`.
+
+## MCP capability identity / scoping audit
+
+Status: **PASS / CROSS-REPO CODE MERGED / PRODUCTION UNCHANGED** on 2026-09-13.
+
+- Confirmed the CodexPro Browser bridge is a single fixed `mac-browser-mcp` stdio server with an exact ten-tool allowlist, not a multi-MCP aggregator; cross-server plain-name collision is therefore not a current failure mode.
+- Confirmed SignalForge Provider already fail-closes provider/source/capability/tool/target-role/URL/SHA/TTL/run-limit identity and keeps C3 ambiguous replay gated by explicit `retry_safe`; the C3 evidence-only contract remains disabled and current production PIC usage is C0-scoped.
+- Found and fixed one real cross-boundary invariant gap: actual Provider result bytes are now checked against the original per-request `max_bytes` both before Mac submit and independently before Bangkok acceptance.
+- Corrected stale current CodexPro bridge documentation to the ten-tool + narrow SignalForge pull-SSH authority model; no capability was added or widened.
+- Validation PASS: Mac targeted 16/16, full 74/74, live stdio discovery 10/10; SignalForge targeted 31/31, full 326/326; `git diff --check` PASS in both repos.
+- Mac PR #45 exact-head tests PASS on runs `34749514994` and `34749534187`; SignalForge PR #169 exact-head verify PASS on run `34749539874`. GitHub merge APIs returned transient 5xx, so the exact tested heads were fast-forwarded to main and GitHub recorded both PRs as merged.
+- Final repository heads: `mac-browser-plane@2d101f82f510c2c0bd7f8a3c05c297927803f095`; `signalforge@85681b3575e139c8ed2dd93550e2d00ee5087ccf`.
+- No Mac runtime reinstall, Bangkok deployment, production DB mutation, source refresh or Telegram send was performed.
+- Observation recorded in `observations/2026-09-13-phase5-09-mcp-capability-scoping.md`.
 
 ## Phase 5 rule
 
