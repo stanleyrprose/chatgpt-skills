@@ -222,6 +222,18 @@ Decision:
 3. End the mandatory first-10-task observation window. Future observations become **event-triggered only** under `OBSERVATION_TEMPLATE.md` when there is a routing anomaly, user correction, doc/code desync, tool degradation, security boundary finding, or similarly material evidence.
 4. Future-work ideas remain conditional, not authorized: true model-based semantic routing eval only if deterministic metadata eval proves insufficient; MCP namespacing only if a real multi-server aggregation collision appears; broader structured UI schemas only when another concrete UI semantic-drift bug appears.
 
+## Post-Phase-5 Skill discipline hardening
+
+Status: **PASS WITH REMOTE CI ENVIRONMENT LIMITATION** on 2026-09-20.
+
+- Studied `addyosmani/agent-skills` for transferable Skill-quality mechanisms and adopted only the narrow anti-rationalization / red-flag / verification pattern; no lifecycle-router, Persona framework, human-gate chain, new Skill, service, DB/RAG layer, daemon, MCP, or Tool permission change was introduced.
+- All five active Skills were bumped from `0.1.0` to `0.1.1` and now carry explicit `Rationalization Traps`, `Red Flags`, and `Verification` sections while preserving the frozen v0.5 invocation mapping and Primary/Secondary model.
+- `scripts/skill_quality_gate.py` now requires those three sections on every active Skill and requires at least two actionable list items per section; focused regression coverage was added.
+- Independent review caught and fixed one real gate-integrity defect before closure: the initial Markdown-section regex was over-escaped and would not have matched normal headings.
+- Exact local equivalents of the GitHub workflow passed on the PR branch: `build-registry.py --check` PASS, Skill CI Quality Gate PASS, and focused unittests 10/10 PASS.
+- PR #14 remote `validate` jobs did not start because GitHub reported an account billing/spending-limit condition ("recent account payments have failed or spending limit needs to be increased"). This is recorded as an external CI environment limitation, not a code/test failure; no billing or spending setting was changed.
+- True LLM behavioral eval remains deferred: the current deterministic gate now checks routing plus discipline-contract structure without adding token cost, non-deterministic model execution, or CI runtime dependencies.
+
 ## Phase 5 rule
 
 Phase 5 is complete after 10 genuine tasks and the evidence review above. Do not manufacture further observation tasks. Record new observations only when a real event satisfies `OBSERVATION_TEMPLATE.md`; any architecture change still requires independent evidence and authorization.
