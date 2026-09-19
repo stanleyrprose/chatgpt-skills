@@ -143,14 +143,14 @@ def active_skills(skills: list[dict], invocation: str | None = None) -> list[dic
 
 def markdown_section_body(text: str, heading: str) -> str | None:
     match = re.search(
-        rf"(?ms)^{re.escape(heading)}\\s*\\n(.*?)(?=^##\\s+|\\Z)",
+        rf"(?ms)^{re.escape(heading)}\s*\n(.*?)(?=^##\s+|\Z)",
         text,
     )
     return match.group(1).strip() if match else None
 
 
 def markdown_list_item_count(text: str) -> int:
-    return len(re.findall(r"(?m)^\\s*(?:[-*]|\\d+\\.)\\s+", text))
+    return len(re.findall(r"(?m)^\s*(?:[-*]|\d+\.)\s+", text))
 
 
 def lint_skills(skills: list[dict]) -> list[str]:
