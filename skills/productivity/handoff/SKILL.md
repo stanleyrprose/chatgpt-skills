@@ -1,6 +1,6 @@
 ---
 name: handoff
-version: 0.1.0
+version: 0.1.1
 status: active
 invocation: user
 description: "Create a concise project handoff that references canonical artifacts and captures current state, evidence, unresolved items, and the exact next action."
@@ -43,3 +43,26 @@ If a field is not applicable, write `N/A + reason`.
 A handoff is complete only when every required field is present or explicitly `N/A + reason`.
 
 Do not copy full PRDs, AGENTS files, or Skill bodies into the handoff.
+
+## Rationalization Traps
+
+- “Copying the PRD into the handoff makes it safer.” Point to canonical artifacts; duplication creates stale competing truth.
+- “An unresolved field can be omitted because the next agent will discover it.” Record it explicitly or write N/A + reason.
+- “Tests probably still pass from the last run.” Handoff evidence must reflect the current branch/commit and known verification state.
+- “The suggested next Skill is obvious, so I can invoke it.” A handoff may suggest the next Skill but never auto-invokes it.
+
+## Red Flags
+
+- Repo, branch, commit, or CI references are stale or missing.
+- The exact next action is vague enough that a new agent must reconstruct intent.
+- Known unresolved items or stop conditions are omitted.
+- Verification claims are present without corresponding evidence.
+- Long canonical documents are copied into the handoff instead of referenced.
+
+## Verification
+
+- [ ] Every required field is present or explicitly N/A + reason.
+- [ ] Repo/branch/commit/CI references describe the current known state.
+- [ ] Tests and verification claims are evidence-backed rather than inferred from memory.
+- [ ] Unresolved items, applicable stop conditions, and the exact next action are explicit.
+- [ ] Canonical artifacts are referenced without duplicating their full bodies.

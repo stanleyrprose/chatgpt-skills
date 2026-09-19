@@ -1,6 +1,6 @@
 ---
 name: to-spec
-version: 0.1.0
+version: 0.1.1
 status: active
 invocation: user
 description: "Turn the current discussion and authoritative project context into a review-first engineering PRD/spec without granting implementation authorization."
@@ -52,3 +52,25 @@ The user explicitly asks to turn the current discussion/project state into a PRD
 PRD/spec generation is not implementation authorization.
 
 When implementation is not explicitly authorized, the document must make that status visible rather than implying approval.
+
+## Rationalization Traps
+
+- “The document looks incomplete if I leave a gap.” Preserve genuine gaps as Decision / TBD / Unknown instead of inventing project facts.
+- “More sections make the PRD more complete.” Include only sections that materially help implementation, review, validation, or handoff.
+- “Writing the spec means implementation is approved.” Spec generation and implementation authorization are separate decisions.
+- “Copying all source context makes the spec self-contained.” Reference canonical sources where duplication would create a second truth source.
+
+## Red Flags
+
+- Current project state is inferred from memory when an authoritative Git source is available.
+- Unresolved choices are silently converted into requirements.
+- The document implies implementation authorization that the user did not grant.
+- Canonical AGENTS/GOAL/ADR content is duplicated rather than referenced without a concrete reason.
+- Future milestones or unrelated refactors enter the current scope.
+
+## Verification
+
+- [ ] Project facts that matter to the spec are grounded in current authoritative sources.
+- [ ] Genuine unresolved choices are labeled Decision / TBD / Unknown with impact.
+- [ ] Goals, non-goals, scope, verification, and rollback boundaries are explicit where relevant.
+- [ ] Implementation authorization status is visible, and the final deliverable is a review-first downloadable Markdown artifact.

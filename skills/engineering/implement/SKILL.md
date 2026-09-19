@@ -1,6 +1,6 @@
 ---
 name: implement
-version: 0.1.0
+version: 0.1.1
 status: active
 invocation: user
 description: "Execute an authorized software/repository engineering change through minimal validation, Git, CI, verification, and closure."
@@ -57,6 +57,28 @@ Use Minimal Sufficient Testing, not mandatory TDD:
 - direct regressions.
 
 A real bug fix should add one minimal stable regression test/reproducer when practical.
+
+## Rationalization Traps
+
+- “This change is tiny, so validation can wait.” Small scope reduces validation scope; it does not remove the need for the smallest relevant proof.
+- “CI is blocking me, so I can relax the check.” Fix the change or evidence an environment limitation; do not weaken tests, constraints, or acceptance criteria to get green.
+- “I am already in this file, so I may as well clean it up.” Record unrelated cleanup separately; do not expand the authorized scope.
+- “The code is written, so the task is done.” Completion requires the relevant Git/CI/runtime evidence, not only edited files.
+
+## Red Flags
+
+- Multi-file or risky edits begin before current authoritative project state is inspected.
+- A large unverified diff accumulates instead of small reversible increments.
+- Tests, assertions, quality gates, or constraints are weakened to make the change pass.
+- A remote side effect with an ambiguous outcome is retried before reconciling actual target state.
+- Completion is claimed while required CI/runtime evidence is missing or failing.
+
+## Verification
+
+- [ ] Requested behavior is implemented without unrelated scope expansion.
+- [ ] The smallest relevant validation passes, or an environment limitation is explicitly evidenced.
+- [ ] A real bug has a minimal stable regression proof when practical.
+- [ ] Required Git/CI/runtime state is checked before closure.
 
 ## Completion
 

@@ -56,6 +56,64 @@ class SkillQualityGateTest(unittest.TestCase):
         ]
         self.assertEqual([], qg.evaluate_model_cases(skills, cases))
 
+    def test_lint_requires_discipline_sections_for_active_skill(self):
+        with tempfile.TemporaryDirectory() as td:
+            root = Path(td)
+            path = root / "skills" / "engineering" / "fixture" / "SKILL.md"
+            path.parent.mkdir(parents=True)
+            path.write_text(
+                "# Fixture\n\n## Verification\n- Proof one\n- Proof two\n",
+                encoding="utf-8",
+            )
+            skills = [
+                {
+                    "name": "fixture",
+                    "status": "active",
+                    "invocation": "model",
+                    "description": "Fixture",
+                    "aliases": [],
+                    "path": "skills/engineering/fixture/SKILL.md",
+                }
+            ]
+            old_root = qg.ROOT
+            try:
+                qg.ROOT = root
+                errors = qg.lint_skills(skills)
+            finally:
+                qg.ROOT = old_root
+            self.assertTrue(any("## Rationalization Traps" in error for error in errors))
+            self.assertTrue(any("## Red Flags" in error for error in errors))
+
+    def test_lint_accepts_minimal_discipline_sections(self):
+        with tempfile.TemporaryDirectory() as td:
+            root = Path(td)
+            path = root / "skills" / "engineering" / "fixture" / "SKILL.md"
+            path.parent.mkdir(parents=True)
+            path.write_text(
+                "# Fixture\n\n"
+                "## Verification\n- Proof one\n- Proof two\n\n"
+                "## Rationalization Traps\n- Trap one\n- Trap two\n\n"
+                "## Red Flags\n- Flag one\n- Flag two\n",
+                encoding="utf-8",
+            )
+            skills = [
+                {
+                    "name": "fixture",
+                    "status": "active",
+                    "invocation": "model",
+                    "description": "Fixture",
+                    "aliases": [],
+                    "path": "skills/engineering/fixture/SKILL.md",
+                }
+            ]
+            old_root = qg.ROOT
+            try:
+                qg.ROOT = root
+                errors = qg.lint_skills(skills)
+            finally:
+                qg.ROOT = old_root
+            self.assertEqual([], errors)
+
     def test_security_scan_blocks_remote_pipe_to_shell(self):
         with tempfile.TemporaryDirectory() as td:
             root = Path(td)

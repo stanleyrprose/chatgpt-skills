@@ -43,7 +43,7 @@ Routing is prompt-based and inherently non-deterministic. False positives, false
 CI is intentionally dependency-light and validates the authored Skill sources before accepting changes:
 
 - `python3 scripts/build-registry.py --check` validates Constitution/frontmatter rules and derived Registry/README drift.
-- `python3 scripts/skill_quality_gate.py` adds Skill metadata lint, blocking static security checks, exact registered-trigger checks for `invocation: user`, and deterministic description-routing evals for `invocation: model`.
+- `python3 scripts/skill_quality_gate.py` adds Skill metadata lint, requires explicit `Verification` / `Rationalization Traps` / `Red Flags` discipline sections for every active Skill, runs blocking static security checks, checks exact registered triggers for `invocation: user`, and runs deterministic description-routing evals for `invocation: model`.
 - `python3 -m unittest discover -s tests -p "test_*.py"` runs the focused regression suite.
 
 The model-routing eval is a CI sanity check over model-facing descriptions, not a deterministic runtime router. A clean static security scan is necessary but not sufficient; human review still owns ambiguous or novel patterns.
