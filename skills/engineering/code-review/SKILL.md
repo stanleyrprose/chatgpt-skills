@@ -1,6 +1,6 @@
 ---
 name: code-review
-version: 0.1.0
+version: 0.1.1
 status: active
 invocation: model
 description: "Use to review an implementation against both specification fidelity and engineering standards, keeping the two judgments separate."
@@ -48,3 +48,25 @@ Also state:
 - Engineering Standards: PASS / PASS WITH FINDINGS / FAIL
 
 When used as Secondary under `implement`, return findings to the Primary; do not independently expand scope or auto-fix unrelated issues.
+
+## Rationalization Traps
+
+- “The tests pass, so the review passes.” Tests are evidence of exercised behavior; they do not prove specification fidelity, scope discipline, or maintainability.
+- “It matches the spec, so engineering quality is acceptable.” Spec fidelity and engineering standards are independent axes.
+- “The code is clean, so a missing requirement is minor.” A clean implementation can still fail the approved goal.
+- “A thorough review should mention every style issue.” Report material findings; do not bury decision-relevant defects under nits.
+
+## Red Flags
+
+- Spec Fidelity and Engineering Standards are collapsed into one overall impression.
+- A finding has no concrete evidence or location.
+- Severity is asserted without explaining the consequence.
+- A speculative concern is presented as an observed defect.
+- Remediation expands into an unrelated rewrite instead of the smallest material fix.
+
+## Verification
+
+- [ ] Spec Fidelity and Engineering Standards are evaluated separately.
+- [ ] Every material finding includes severity, evidence/location, impact, and minimal remediation.
+- [ ] Passing tests are not treated as substitutes for missing requirements or scope checks.
+- [ ] The final PASS / PASS WITH FINDINGS / FAIL labels follow from the cited evidence.

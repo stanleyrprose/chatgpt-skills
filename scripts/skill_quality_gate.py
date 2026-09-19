@@ -37,6 +37,8 @@ MAX_FILE_BYTES = 1_000_000
 MODEL_MIN_OVERLAP = 2
 MODEL_MIN_MARGIN = 1
 SUPPRESS_MARKER = "skillscan:allow"
+DISCIPLINE_SECTIONS = ("## Verification", "## Rationalization Traps", "## Red Flags")
+MIN_DISCIPLINE_ITEMS = 2
 
 STOP_WORDS = {
     "a",
@@ -139,6 +141,18 @@ def active_skills(skills: list[dict], invocation: str | None = None) -> list[dic
     return selected
 
 
+def markdown_section_body(text: str, heading: str) -> str | None:
+    match = re.search(
+        rf"(?ms)^{re.escape(heading)}\s*\n(.*?)(?=^##\s+|\Z)",
+        text,
+    )
+    return match.group(1).strip() if match else None
+
+
+def markdown_list_item_count(text: str) -> int:
+    return len(re.findall(r"(?m)^\s*(?:[-*]|\d+\.)\s+", text))
+
+
 def lint_skills(skills: list[dict]) -> list[str]:
     errors: list[str] = []
     for skill in skills:
@@ -147,8 +161,22 @@ def lint_skills(skills: list[dict]) -> list[str]:
             errors.append(
                 f"{skill['path']}: directory name must match frontmatter name {skill['name']!r}"
             )
-        if skill["status"] == "active" and not path.is_file():
-            errors.append(f"{skill['path']}: active skill path does not exist")
+        if skill["status"] == "active":
+            if not path.is_file():
+                errors.append(f"{skill['path']}: active skill path does not exist")
+                continue
+            text = path.read_text(encoding="utf-8", errors="replace")
+            for heading in DISCIPLINE_SECTIONS:
+                section = markdown_section_body(text, heading)
+                if section is None:
+                    errors.append(f"{skill['path']}: active skill missing required section {heading}")
+                    continue
+                item_count = markdown_list_item_count(section)
+                if item_count < MIN_DISCIPLINE_ITEMS:
+                    errors.append(
+                        f"{skill['path']}: {heading} must contain at least "
+                        f"{MIN_DISCIPLINE_ITEMS} actionable list items; found {item_count}"
+                    )
     return errors
 
 
