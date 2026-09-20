@@ -4,9 +4,11 @@ This repository keeps repository releases separate from Constitution and individ
 
 ## Unreleased
 
-Candidate repository release: **v0.5.0**.
+No changes yet.
 
-Publication is intentionally blocked until the maintainer explicitly selects a reuse license and a corresponding `LICENSE` file is added.
+## v0.5.0 — 2026-09-20
+
+First public repository release of the frozen v0.5 architecture. Licensed under Apache-2.0.
 
 ### Added
 
@@ -38,7 +40,7 @@ Publication is intentionally blocked until the maintainer explicitly selects a r
 
 ### Current version surfaces
 
-- Repository release candidate: `v0.5.0`
+- Repository release: `v0.5.0`
 - Architecture baseline: `v0.5`
 - Constitution: `v1.5.2`
 - Active Skills: `0.1.1`

@@ -36,9 +36,9 @@ A repository release is publishable only when all applicable gates pass.
 
 ### G1 — Authorization and license
 
-- [ ] The maintainer explicitly selected the repository reuse license.
-- [ ] A matching `LICENSE` file is present.
-- [ ] README license status matches the selected license.
+- [x] The maintainer explicitly selected the repository reuse license: Apache-2.0 on 2026-09-20.
+- [x] A matching `LICENSE` file is present.
+- [x] README license status matches the selected license.
 
 **Hard gate:** public visibility alone is not treated as reuse authorization. Do not publish the first reusable release while the repository intentionally has no license.
 
@@ -78,10 +78,10 @@ Current intended first repository release:
 ```text
 tag: v0.5.0
 baseline: frozen v0.5 five-Skill architecture
-license: BLOCKED — explicit maintainer selection required
+license: Apache-2.0 — selected by maintainer on 2026-09-20
 ```
 
-Until the license gate is satisfied, do not create or publish the `v0.5.0` tag/release.
+The license gate is satisfied. Publish only after the remaining exact-SHA, CI, and metadata gates pass.
 
 ## 5. Publish procedure
 

@@ -37,9 +37,9 @@ Routing is prompt-based and inherently non-deterministic. False positives, false
 - `CONTRIBUTING.md` defines the minimal change workflow for this repository.
 - `SECURITY.md` defines security-reporting and validation boundaries.
 
-### License status
+### License
 
-This repository is public, but no explicit reuse license has been selected yet. Public visibility alone should not be treated as permission to reuse, redistribute, or relicence the contents.
+Licensed under the **Apache License 2.0**. See `LICENSE`.
 
 ## Shared reference contracts
 
@@ -63,13 +63,13 @@ The model-routing eval is a CI sanity check over model-facing descriptions, not 
 
 Repository releases, the Constitution, and individual Skills use independent version surfaces.
 
-- Repository release candidate: `v0.5.0`
+- Current repository release: `v0.5.0`
 - Current Constitution: `v1.5.2`
 - Active Skills: `0.1.1`
 
 See `CHANGELOG.md` and `docs/release-process.md`.
 
-No repository tag or GitHub Release has been published yet. The first release remains blocked on explicit license selection.
+Release `v0.5.0` is the first public repository snapshot of the frozen v0.5 architecture.
 
 ## Frozen baseline
 
