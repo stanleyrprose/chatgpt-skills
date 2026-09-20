@@ -314,6 +314,18 @@ Status: **IMPLEMENTED AS DETERMINISTIC SENSOR** on 2026-09-20.
 - Added focused regression tests and a GitHub Actions step summary. `PROMOTE` never authorizes architecture mutation; explicit authorization remains required.
 - No LLM-in-CI evaluator, sixth Skill, router service, DB/RAG layer, daemon, scheduler, MCP, or permission expansion was added.
 
+## Promotion Gate scheduled monitoring + Telegram
+
+Status: **IMPLEMENTED / TELEGRAM SECRETS PENDING** on 2026-09-20.
+
+- Added `.github/workflows/monitor-promotion-gate.yml` with a six-hour schedule plus manual dispatch.
+- Added `scripts/promotion-gate-monitor.py` to persist only semantic Gate changes under `state/promotion-gate/latest.json` and append transition history to `history.jsonl`; unchanged scheduled runs do not create repository commits.
+- Added `scripts/send-promotion-alert.py` to notify only new `CANDIDATE/PROMOTE` alert fingerprints and to persist a successful `last_sent_fingerprint` receipt so duplicate alerts are suppressed.
+- A missing Telegram configuration does not lose Gate state: the alert remains pending and later runs retry until a send receipt is persisted.
+- Telegram Bot API errors are sanitized so the request URL/token is not echoed; checkout credentials are not persisted and the GitHub token is exposed only to narrow push steps through a temporary authorization header.
+- Telegram delivery requires repository secrets `TELEGRAM_BOT_TOKEN` (for `@github_stan_bot`) and numeric `TELEGRAM_CHAT_ID`; no secrets are currently configured in this repository.
+- No LLM call, sixth Skill, router service, DB/RAG layer, daemon, new MCP, or permission expansion outside the dedicated workflow's `contents: write` state-persistence need was added.
+
 ## Phase 5 rule
 
 Phase 5 is complete after 10 genuine tasks and the evidence review above. Do not manufacture further observation tasks. Record new observations only when a real event satisfies `OBSERVATION_TEMPLATE.md`; any architecture change still requires independent evidence and authorization.

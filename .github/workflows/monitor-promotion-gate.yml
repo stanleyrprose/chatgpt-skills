@@ -1,0 +1,65 @@
+name: monitor-promotion-gate
+
+on:
+  schedule:
+    - cron: "17 */6 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: promotion-gate-monitor
+  cancel-in-progress: false
+
+jobs:
+  monitor:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          persist-credentials: false
+
+      - name: Evaluate and persist Promotion Gate state
+        id: monitor
+        run: python3 scripts/promotion-gate-monitor.py
+
+      - name: Persist semantic state to GitHub
+        env:
+          GH_PUSH_TOKEN: ${{ github.token }}
+        run: |
+          if git diff --quiet -- state/promotion-gate; then
+            echo "No semantic Promotion Gate state change to persist."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add state/promotion-gate
+          git commit -m "chore: update promotion gate state [skip ci]"
+          auth="$(printf 'x-access-token:%s' "$GH_PUSH_TOKEN" | base64)"
+          git -c http.extraheader="AUTHORIZATION: basic ${auth}" push "https://github.com/${GITHUB_REPOSITORY}.git" HEAD:main
+
+      - name: Send Telegram alert
+        if: steps.monitor.outputs.notify_required == 'true'
+        env:
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+        run: python3 scripts/send-promotion-alert.py
+
+      - name: Persist Telegram notification receipt
+        if: steps.monitor.outputs.notify_required == 'true'
+        env:
+          GH_PUSH_TOKEN: ${{ github.token }}
+        run: |
+          if git diff --quiet -- state/promotion-gate/latest.json; then
+            echo "No Telegram notification receipt to persist."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add state/promotion-gate/latest.json
+          git commit -m "chore: record promotion gate notification [skip ci]"
+          auth="$(printf 'x-access-token:%s' "$GH_PUSH_TOKEN" | base64)"
+          git -c http.extraheader="AUTHORIZATION: basic ${auth}" push "https://github.com/${GITHUB_REPOSITORY}.git" HEAD:main
+
