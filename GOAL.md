@@ -290,6 +290,17 @@ Status: **LICENSE SELECTED / RELEASE CANDIDATE PREPARED** on 2026-09-20.
 - The release candidate changes no Skill body, invocation mode, Constitution behavior, Tool/MCP permission, runtime service, router, DB/RAG layer, or daemon.
 - Tag and GitHub Release creation occur only after this exact candidate is merged to `main` and exact-head CI passes.
 
+## v0.5.0 published release
+
+Status: **PUBLISHED / VERIFIED** on 2026-09-20.
+
+- Repository license: Apache-2.0, explicitly selected by the maintainer; GitHub license detection reports `Apache-2.0`.
+- Release tag: annotated `v0.5.0`; remote peeled commit is `cc3509d420aaaf3744353021f30f518cfb22c108`.
+- GitHub Release `v0.5.0 — Frozen v0.5 Skill Architecture` was published as a normal release (not draft, not prerelease).
+- Exact release commit main CI run `35500475472` PASSed before tag creation.
+- Post-publication verification at the tag PASSed: Registry check, Skill Quality Gate, and focused unittests 15/15.
+- The tag is immutable by release policy; later corrections must fix forward with a new patch release rather than retargeting `v0.5.0`.
+
 ## Phase 5 rule
 
 Phase 5 is complete after 10 genuine tasks and the evidence review above. Do not manufacture further observation tasks. Record new observations only when a real event satisfies `OBSERVATION_TEMPLATE.md`; any architecture change still requires independent evidence and authorization.
