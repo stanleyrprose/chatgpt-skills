@@ -234,7 +234,9 @@ Deterministic and CI-safe:
 - required discipline sections;
 - static security checks.
 
-### Tier 2 — Routing
+### Tier 2 — Deterministic semantics
+
+#### 2A — Routing
 
 Deterministic sanity checks:
 
@@ -242,7 +244,13 @@ Deterministic sanity checks:
 - model-description positive cases;
 - negative and low-information cases.
 
-These tests validate metadata quality. They do **not** turn runtime routing into a deterministic router.
+These checks validate routing metadata. They do **not** turn runtime routing into a deterministic router.
+
+#### 2B — Skill contract regression
+
+Each active Skill has a small deterministic fixture that protects already-approved workflow invariants, such as evidence-before-fix, authorization boundaries, independent review axes, or exact handoff requirements.
+
+Contract fixtures intentionally test **presence of required workflow semantics**, not whether an LLM will obey them at runtime. A wording change that removes or materially rewrites a protected invariant should therefore require a conscious fixture review.
 
 ### Tier 3 — Behavioral
 

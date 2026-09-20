@@ -1,0 +1,166 @@
+{
+  "skill_contracts": {
+    "implement": [
+      {
+        "id": "authority-and-state",
+        "any_of": [
+          "current project state using Lazy Discovery"
+        ]
+      },
+      {
+        "id": "smallest-reversible-change",
+        "any_of": [
+          "smallest reversible implementation"
+        ]
+      },
+      {
+        "id": "authorized-scope",
+        "any_of": [
+          "Implement only the authorized scope"
+        ]
+      },
+      {
+        "id": "minimal-validation",
+        "any_of": [
+          "Run the smallest relevant validation"
+        ]
+      },
+      {
+        "id": "git-ci-closure",
+        "any_of": [
+          "Commit atomically, push, verify CI/runtime evidence"
+        ]
+      }
+    ],
+    "diagnose": [
+      {
+        "id": "observed-failure",
+        "any_of": [
+          "State the observed failure precisely"
+        ]
+      },
+      {
+        "id": "evidence-before-change",
+        "any_of": [
+          "Reproduce or identify the strongest available evidence"
+        ]
+      },
+      {
+        "id": "falsifiable-hypotheses",
+        "any_of": [
+          "falsifiable hypotheses"
+        ]
+      },
+      {
+        "id": "root-cause-not-symptom",
+        "any_of": [
+          "distinguish root cause from symptoms",
+          "root cause explains the observed behavior"
+        ]
+      },
+      {
+        "id": "regression-proof",
+        "any_of": [
+          "minimal regression proof/test",
+          "minimal regression proof"
+        ]
+      }
+    ],
+    "code-review": [
+      {
+        "id": "spec-fidelity-axis",
+        "any_of": [
+          "Spec Fidelity"
+        ]
+      },
+      {
+        "id": "engineering-standards-axis",
+        "any_of": [
+          "Engineering Standards"
+        ]
+      },
+      {
+        "id": "axes-remain-separate",
+        "any_of": [
+          "Keep the two conclusions separate",
+          "evaluated separately"
+        ]
+      },
+      {
+        "id": "material-findings",
+        "any_of": [
+          "Report only material findings"
+        ]
+      },
+      {
+        "id": "evidence-and-remediation",
+        "any_of": [
+          "evidence/location"
+        ],
+        "all_of": [
+          "severity",
+          "minimal remediation"
+        ]
+      }
+    ],
+    "to-spec": [
+      {
+        "id": "authoritative-project-facts",
+        "any_of": [
+          "authoritative Git sources"
+        ]
+      },
+      {
+        "id": "unresolved-choices",
+        "any_of": [
+          "Decision / TBD / Unknown"
+        ]
+      },
+      {
+        "id": "review-first-artifact",
+        "any_of": [
+          "review-first downloadable"
+        ]
+      },
+      {
+        "id": "authorization-boundary",
+        "any_of": [
+          "PRD/spec generation is not implementation authorization"
+        ]
+      }
+    ],
+    "handoff": [
+      {
+        "id": "canonical-reference",
+        "any_of": [
+          "Reference canonical artifacts"
+        ]
+      },
+      {
+        "id": "verification-state",
+        "any_of": [
+          "tests / CI / verification"
+        ]
+      },
+      {
+        "id": "exact-next-action",
+        "any_of": [
+          "exact next action"
+        ]
+      },
+      {
+        "id": "explicit-na",
+        "any_of": [
+          "N/A + reason"
+        ]
+      },
+      {
+        "id": "no-auto-invoke",
+        "any_of": [
+          "suggestion only, never auto-invoke",
+          "never auto-invokes it"
+        ]
+      }
+    ]
+  }
+}

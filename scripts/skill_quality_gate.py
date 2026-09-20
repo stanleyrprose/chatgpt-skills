@@ -10,6 +10,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 MODEL_CASES = ROOT / "tests" / "skill-routing-cases.json"
+CONTRACT_CASES = ROOT / "tests" / "skill-contract-cases.json"
 BUILD_REGISTRY = ROOT / "scripts" / "build-registry.py"
 
 SCAN_EXTS = {
@@ -295,6 +296,94 @@ def evaluate_model_cases(skills: list[dict], cases: list[dict]) -> list[str]:
     return errors
 
 
+
+def load_skill_contracts(path: Path = CONTRACT_CASES) -> dict[str, list[dict]]:
+    payload = json.loads(path.read_text(encoding="utf-8"))
+    contracts = payload.get("skill_contracts")
+    if not isinstance(contracts, dict) or not contracts:
+        raise ValueError(f"{path.relative_to(ROOT)}: skill_contracts must be a non-empty object")
+    return contracts
+
+
+def _normalized_contract_text(value: str) -> str:
+    return " ".join(value.casefold().split())
+
+
+def evaluate_skill_contracts(
+    skills: list[dict], contracts: dict[str, list[dict]]
+) -> list[str]:
+    errors: list[str] = []
+    active = {skill["name"]: skill for skill in active_skills(skills)}
+    contract_names = set(contracts)
+
+    missing = sorted(set(active) - contract_names)
+    if missing:
+        errors.append(
+            "active skills missing deterministic contract cases: " + ", ".join(missing)
+        )
+
+    stale = sorted(contract_names - set(active))
+    if stale:
+        errors.append(
+            "deterministic contract cases reference non-active/unknown skills: "
+            + ", ".join(stale)
+        )
+
+    for name, skill in active.items():
+        clauses = contracts.get(name)
+        if clauses is None:
+            continue
+        if not isinstance(clauses, list) or not clauses:
+            errors.append(f"{name}: contract clauses must be a non-empty list")
+            continue
+
+        text = (ROOT / skill["path"]).read_text(encoding="utf-8", errors="replace")
+        normalized = _normalized_contract_text(text)
+
+        for clause in clauses:
+            clause_id = str(clause.get("id", "<missing-id>"))
+            any_of = clause.get("any_of", [])
+            all_of = clause.get("all_of", [])
+
+            if not isinstance(any_of, list) or not all(
+                isinstance(item, str) and item.strip() for item in any_of
+            ):
+                errors.append(f"{name}/{clause_id}: any_of must be a list of non-empty strings")
+                continue
+            if not isinstance(all_of, list) or not all(
+                isinstance(item, str) and item.strip() for item in all_of
+            ):
+                errors.append(f"{name}/{clause_id}: all_of must be a list of non-empty strings")
+                continue
+            if not any_of and not all_of:
+                errors.append(f"{name}/{clause_id}: clause must define any_of or all_of")
+                continue
+
+            any_ok = True
+            if any_of:
+                any_ok = any(
+                    _normalized_contract_text(phrase) in normalized for phrase in any_of
+                )
+
+            missing_all = [
+                phrase
+                for phrase in all_of
+                if _normalized_contract_text(phrase) not in normalized
+            ]
+
+            if not any_ok or missing_all:
+                details: list[str] = []
+                if not any_ok:
+                    details.append("none of any_of matched")
+                if missing_all:
+                    details.append("missing all_of: " + ", ".join(repr(x) for x in missing_all))
+                errors.append(
+                    f"{name}/{clause_id}: deterministic contract regression — "
+                    + "; ".join(details)
+                )
+
+    return errors
+
 def iter_skill_files(skill_dir: Path):
     for path in sorted(skill_dir.rglob("*")):
         if not path.is_file():
@@ -347,6 +436,8 @@ def run() -> int:
         errors = lint_skills(skills)
         errors.extend(evaluate_user_exact_aliases(skills))
         errors.extend(evaluate_model_cases(skills, load_model_cases()))
+        contracts = load_skill_contracts()
+        errors.extend(evaluate_skill_contracts(skills, contracts))
         findings = security_scan(skills)
     except (OSError, ValueError, json.JSONDecodeError, RuntimeError) as exc:
         print(f"quality gate setup failed: {exc}", file=sys.stderr)
@@ -374,7 +465,8 @@ def run() -> int:
     print(
         "Skill CI Quality Gate PASS — "
         f"{len(skills)} skills linted; {user_count} user-invoked exact-trigger sets; "
-        f"{model_count} model-invoked descriptions; security scan clean."
+        f"{model_count} model-invoked descriptions; {len(contracts)} deterministic contract sets; "
+        "security scan clean."
     )
     return 0
 
