@@ -19,5 +19,7 @@ jobs:
         run: python3 scripts/build-registry.py --check
       - name: Run Skill CI Quality Gate
         run: python3 scripts/skill_quality_gate.py
+      - name: Report Skill Architecture Promotion Gate
+        run: python3 scripts/evaluate-promotion-gate.py
       - name: Run minimal regression tests
         run: python3 -m unittest discover -s tests -p "test_*.py"

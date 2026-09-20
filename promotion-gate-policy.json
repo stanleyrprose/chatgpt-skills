@@ -1,0 +1,14 @@
+{
+  "version": 1,
+  "candidate": {
+    "same_invariant_independent_tasks": 2,
+    "total_behavior_violations": 3,
+    "minimum_independent_tasks_for_total": 2,
+    "single_high_severity": true
+  },
+  "promote": {
+    "same_invariant_independent_tasks": 2,
+    "require_reproducible": true,
+    "require_fixture_ready": true
+  }
+}

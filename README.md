@@ -55,6 +55,7 @@ CI is intentionally dependency-light and validates the authored Skill sources be
 
 - `python3 scripts/build-registry.py --check` validates Constitution/frontmatter rules and derived Registry/README drift.
 - `python3 scripts/skill_quality_gate.py` adds Skill metadata lint, required discipline sections, blocking static security checks, exact user-trigger isolation, deterministic model-description routing evals, and deterministic per-Skill contract regressions that protect approved workflow invariants.
+- `python3 scripts/evaluate-promotion-gate.py` reports `GREEN / WATCH / CANDIDATE / PROMOTE` from explicitly marked event-triggered observations; report states are non-blocking and do not authorize architecture changes.
 - `python3 -m unittest discover -s tests -p "test_*.py"` runs the focused regression suite.
 
 The model-routing eval is a CI sanity check over model-facing descriptions, not a deterministic runtime router. A clean static security scan is necessary but not sufficient; human review still owns ambiguous or novel patterns.

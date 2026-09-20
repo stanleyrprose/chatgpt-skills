@@ -21,6 +21,25 @@ task_boundary_judgement: "new_task|continuation|secondary_branch|N/A + rationale
 secondary_branch_validity: "valid|invalid|N/A + rationale"
 ```
 
+For observations relevant to future Skill-architecture promotion, add one flat metadata block after the observation YAML:
+
+```promotion-gate
+eligible: true
+state: open
+failure_layer: behavior
+skill: diagnose
+invariant_id: evidence-before-change
+task_id: stable-independent-task-id
+routing_status: pass
+contract_status: pass
+severity: normal
+reproducible: yes
+fixture_ready: no
+```
+
+Use `N/A` for `skill`, `invariant_id`, or `task_id` when they genuinely do not apply. Set `state: resolved` only after the demonstrated issue has been fixed and verified. Historical observations without this block are intentionally ignored by the Promotion Gate.
+
+
 Rules:
 - Never store a full conversation.
 - Never store credentials, private keys, secrets, or sensitive personal data.

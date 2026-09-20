@@ -301,6 +301,19 @@ Status: **PUBLISHED / VERIFIED** on 2026-09-20.
 - Post-publication verification at the tag PASSed: Registry check, Skill Quality Gate, and focused unittests 15/15.
 - The tag is immutable by release policy; later corrections must fix forward with a new patch release rather than retargeting `v0.5.0`.
 
+## Skill Architecture Promotion Gate
+
+Status: **IMPLEMENTED AS DETERMINISTIC SENSOR** on 2026-09-20.
+
+- Added `promotion-gate-policy.json` as the canonical machine-readable threshold policy and `scripts/evaluate-promotion-gate.py` as a stdlib-only evaluator.
+- Historical observations remain valid evidence but are not retroactively counted; only observation files with an explicit `promotion-gate` block enter the sensor.
+- Gate states are `GREEN / WATCH / CANDIDATE / PROMOTE`. All four are report states and exit successfully; malformed policy/metadata fails closed.
+- Qualified Tier-3 evidence requires an open `behavior` finding with both routing and canonical Skill contract marked PASS. Routing, Skill-contract, Tool/runtime, and context failures are reported back to their local layers instead of being misclassified as Tier-3 evidence.
+- Candidate evidence includes repeated same-invariant failure across independent tasks, aggregate qualified behavior violations across independent tasks, or a high-severity qualified behavior violation. `PROMOTE` additionally requires a repeated pattern with reproducible fixture-ready evidence.
+- `state: resolved` removes a verified-fixed finding from active promotion counts while preserving its Git history.
+- Added focused regression tests and a GitHub Actions step summary. `PROMOTE` never authorizes architecture mutation; explicit authorization remains required.
+- No LLM-in-CI evaluator, sixth Skill, router service, DB/RAG layer, daemon, scheduler, MCP, or permission expansion was added.
+
 ## Phase 5 rule
 
 Phase 5 is complete after 10 genuine tasks and the evidence review above. Do not manufacture further observation tasks. Record new observations only when a real event satisfies `OBSERVATION_TEMPLATE.md`; any architecture change still requires independent evidence and authorization.
