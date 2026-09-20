@@ -86,7 +86,7 @@ Better:
 
 ```text
 current measured coverage = 62%
-floor = must not fall below 62%
+guardrail = must not fall below 62%
 next deliberate target = 65%
 ```
 
@@ -119,7 +119,7 @@ new guardrail = improved proven boundary
 Rules:
 
 - do not tighten the guardrail based on a plan, aspiration, or one-off flaky result;
-- raise it only from reproducible or otherwise trustworthy evidence;
+- tighten it only from reproducible or otherwise trustworthy evidence;
 - do not weaken the guardrail merely to make CI green;
 - if the measurement itself changes materially, establish a new comparable baseline instead of pretending the old and new values are equivalent;
 - if external conditions make a previous guardrail temporarily invalid, record an explicit bounded exception rather than silently weakening the constraint.

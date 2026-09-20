@@ -251,7 +251,7 @@ Status: **IMPLEMENTED / CI RESTORED** on 2026-09-20.
 Status: **IMPLEMENTED (reference-only)** on 2026-09-20.
 
 - Added `shared/project-constraints-ratchet-contract.md` as a plain reference; it is not a Skill, CI service, policy engine, database, daemon, MCP, permission grant, or runtime.
-- The contract requires baseline-first floors, separates current floor from improvement target, raises floors only after verified improvement, and treats measurement changes/exceptions explicitly rather than silently weakening gates.
+- The contract requires baseline-first, direction-aware guardrails, separates the current guardrail from the improvement target, tightens guardrails only after verified improvement, and treats measurement changes/exceptions explicitly rather than silently weakening gates.
 - Constraint evidence is split into external, project, and suite classes; maturity is written → scripted → tool-backed, with most projects expected to stop at the lowest sufficient level.
 - Added anti-weakening review rules for threshold lowering, skipped tests/assertions, broad suppressions, denominator manipulation, missing-data relabeling, and stubs.
 - Added a small optional `CONSTRAINTS.md` template and a SignalForge-oriented example without inventing current production values.
