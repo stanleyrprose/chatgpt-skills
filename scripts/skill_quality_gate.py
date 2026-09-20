@@ -340,8 +340,18 @@ def evaluate_skill_contracts(
         text = (ROOT / skill["path"]).read_text(encoding="utf-8", errors="replace")
         normalized = _normalized_contract_text(text)
 
+        seen_clause_ids: set[str] = set()
         for clause in clauses:
-            clause_id = str(clause.get("id", "<missing-id>"))
+            raw_clause_id = clause.get("id")
+            if not isinstance(raw_clause_id, str) or not raw_clause_id.strip():
+                errors.append(f"{name}: every contract clause needs a non-empty id")
+                continue
+            clause_id = raw_clause_id.strip()
+            if clause_id in seen_clause_ids:
+                errors.append(f"{name}: duplicate contract clause id {clause_id!r}")
+                continue
+            seen_clause_ids.add(clause_id)
+
             any_of = clause.get("any_of", [])
             all_of = clause.get("all_of", [])
 
