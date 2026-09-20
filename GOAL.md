@@ -257,6 +257,17 @@ Status: **IMPLEMENTED (reference-only)** on 2026-09-20.
 - Added a small optional `CONSTRAINTS.md` template and a SignalForge-oriented example without inventing current production values.
 - Preserved the frozen five-Skill architecture and added no new runtime dependency or enforcement service.
 
+## P1 deterministic Skill contract evals
+
+Status: **IMPLEMENTED** on 2026-09-20.
+
+- Added `tests/skill-contract-cases.json` with one deterministic contract set for every active Skill.
+- Extended `scripts/skill_quality_gate.py` so every active Skill must have a contract fixture and every protected clause must remain present in the canonical `SKILL.md`; stale fixtures for non-active Skills also fail closed.
+- Contract clauses protect already-approved workflow invariants such as evidence-before-fix, falsifiable hypotheses, independent code-review axes, implementation-authorization boundaries, exact handoff requirements, and Git/CI closure semantics.
+- This is Tier 2 deterministic contract regression, not Tier 3 LLM behavioral eval: it detects semantic deletion/drift in Skill text but does not claim that a model will obey the Skill at runtime.
+- Added focused unit coverage for current contracts, missing active-Skill coverage, and clause regression detection.
+- No Skill body, invocation mode, Tool/MCP permission, runtime service, router, DB/RAG layer, or model-in-CI dependency was added.
+
 ## Phase 5 rule
 
 Phase 5 is complete after 10 genuine tasks and the evidence review above. Do not manufacture further observation tasks. Record new observations only when a real event satisfies `OBSERVATION_TEMPLATE.md`; any architecture change still requires independent evidence and authorization.

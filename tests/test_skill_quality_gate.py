@@ -114,6 +114,110 @@ class SkillQualityGateTest(unittest.TestCase):
                 qg.ROOT = old_root
             self.assertEqual([], errors)
 
+    def test_current_skill_contracts_pass(self):
+        build_registry = qg.load_build_registry()
+        skills = build_registry.discover()
+        self.assertEqual(
+            [],
+            qg.evaluate_skill_contracts(skills, qg.load_skill_contracts()),
+        )
+
+    def test_contract_eval_requires_every_active_skill(self):
+        with tempfile.TemporaryDirectory() as td:
+            root = Path(td)
+            path = root / "skills" / "engineering" / "fixture" / "SKILL.md"
+            path.parent.mkdir(parents=True)
+            path.write_text("# Fixture\n", encoding="utf-8")
+            skills = [
+                {
+                    "name": "fixture",
+                    "status": "active",
+                    "invocation": "model",
+                    "description": "Fixture",
+                    "aliases": [],
+                    "path": "skills/engineering/fixture/SKILL.md",
+                }
+            ]
+            old_root = qg.ROOT
+            try:
+                qg.ROOT = root
+                errors = qg.evaluate_skill_contracts(skills, {})
+            finally:
+                qg.ROOT = old_root
+            self.assertTrue(any("missing deterministic contract" in error for error in errors))
+
+    def test_contract_eval_rejects_stale_contract_skill(self):
+        errors = qg.evaluate_skill_contracts(
+            [],
+            {"stale-skill": [{"id": "x", "any_of": ["x"]}]},
+        )
+        self.assertTrue(any("non-active/unknown skills" in error for error in errors))
+
+    def test_contract_eval_requires_unique_non_empty_clause_ids(self):
+        with tempfile.TemporaryDirectory() as td:
+            root = Path(td)
+            path = root / "skills" / "engineering" / "fixture" / "SKILL.md"
+            path.parent.mkdir(parents=True)
+            path.write_text("# Fixture\n\nroot cause\n", encoding="utf-8")
+            skills = [
+                {
+                    "name": "fixture",
+                    "status": "active",
+                    "invocation": "model",
+                    "description": "Fixture",
+                    "aliases": [],
+                    "path": "skills/engineering/fixture/SKILL.md",
+                }
+            ]
+            contracts = {
+                "fixture": [
+                    {"id": "", "any_of": ["root cause"]},
+                    {"id": "dup", "any_of": ["root cause"]},
+                    {"id": "dup", "any_of": ["root cause"]},
+                ]
+            }
+            old_root = qg.ROOT
+            try:
+                qg.ROOT = root
+                errors = qg.evaluate_skill_contracts(skills, contracts)
+            finally:
+                qg.ROOT = old_root
+            self.assertTrue(any("non-empty id" in error for error in errors))
+            self.assertTrue(any("duplicate contract clause id" in error for error in errors))
+
+    def test_contract_eval_detects_missing_clause(self):
+        with tempfile.TemporaryDirectory() as td:
+            root = Path(td)
+            path = root / "skills" / "engineering" / "fixture" / "SKILL.md"
+            path.parent.mkdir(parents=True)
+            path.write_text("# Fixture\n\nEvidence exists.\n", encoding="utf-8")
+            skills = [
+                {
+                    "name": "fixture",
+                    "status": "active",
+                    "invocation": "model",
+                    "description": "Fixture",
+                    "aliases": [],
+                    "path": "skills/engineering/fixture/SKILL.md",
+                }
+            ]
+            contracts = {
+                "fixture": [
+                    {
+                        "id": "root-cause",
+                        "any_of": ["root cause"],
+                        "all_of": ["evidence"],
+                    }
+                ]
+            }
+            old_root = qg.ROOT
+            try:
+                qg.ROOT = root
+                errors = qg.evaluate_skill_contracts(skills, contracts)
+            finally:
+                qg.ROOT = old_root
+            self.assertTrue(any("fixture/root-cause" in error for error in errors))
+
     def test_security_scan_blocks_remote_pipe_to_shell(self):
         with tempfile.TemporaryDirectory() as td:
             root = Path(td)
