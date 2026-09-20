@@ -246,6 +246,17 @@ Status: **IMPLEMENTED / CI RESTORED** on 2026-09-20.
 - No `LICENSE` file was added. License selection is intentionally deferred because choosing one grants reuse rights and requires an explicit maintainer legal/permission decision.
 - Exact branch CI passed on runs `35487867705` and `35487884682`; after hardening the workflow to `actions/checkout@v6`, `contents: read`, and `persist-credentials: false`, exact-head run `35487922862` also PASSed.
 
+## P1 project constraints / ratchet reference
+
+Status: **IMPLEMENTED (reference-only)** on 2026-09-20.
+
+- Added `shared/project-constraints-ratchet-contract.md` as a plain reference; it is not a Skill, CI service, policy engine, database, daemon, MCP, permission grant, or runtime.
+- The contract requires baseline-first, direction-aware guardrails, separates the current guardrail from the improvement target, tightens guardrails only after verified improvement, and treats measurement changes/exceptions explicitly rather than silently weakening gates.
+- Constraint evidence is split into external, project, and suite classes; maturity is written → scripted → tool-backed, with most projects expected to stop at the lowest sufficient level.
+- Added anti-weakening review rules for threshold lowering, skipped tests/assertions, broad suppressions, denominator manipulation, missing-data relabeling, and stubs.
+- Added a small optional `CONSTRAINTS.md` template and a SignalForge-oriented example without inventing current production values.
+- Preserved the frozen five-Skill architecture and added no new runtime dependency or enforcement service.
+
 ## Phase 5 rule
 
 Phase 5 is complete after 10 genuine tasks and the evidence review above. Do not manufacture further observation tasks. Record new observations only when a real event satisfies `OBSERVATION_TEMPLATE.md`; any architecture change still requires independent evidence and authorization.
