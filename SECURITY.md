@@ -13,7 +13,7 @@ Do **not** include secrets, exploit payloads, private credentials, or sensitive 
 Preferred reporting path:
 
 1. Use GitHub private vulnerability reporting / Security Advisories if the repository exposes that option.
-2. If private reporting is not available, contact the repository maintainer privately through the maintainer's GitHub profile before sending sensitive details.
+2. If private reporting is not available, use a private contact channel explicitly listed on the maintainer's GitHub profile, if one is available, before sending sensitive details.
 
 A public issue is appropriate only for non-sensitive hardening suggestions that do not disclose an exploitable path.
 
