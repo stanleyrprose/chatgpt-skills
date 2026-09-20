@@ -37,7 +37,8 @@ jobs:
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add state/promotion-gate
           git commit -m "chore: update promotion gate state [skip ci]"
-          git push "https://x-access-token:${GH_PUSH_TOKEN}@github.com/${GITHUB_REPOSITORY}.git" HEAD:main
+          auth="$(printf 'x-access-token:%s' "$GH_PUSH_TOKEN" | base64)"
+          git -c http.extraheader="AUTHORIZATION: basic ${auth}" push "https://github.com/${GITHUB_REPOSITORY}.git" HEAD:main
 
       - name: Send Telegram alert
         if: steps.monitor.outputs.notify_required == 'true'
@@ -59,5 +60,6 @@ jobs:
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add state/promotion-gate/latest.json
           git commit -m "chore: record promotion gate notification [skip ci]"
-          git push "https://x-access-token:${GH_PUSH_TOKEN}@github.com/${GITHUB_REPOSITORY}.git" HEAD:main
+          auth="$(printf 'x-access-token:%s' "$GH_PUSH_TOKEN" | base64)"
+          git -c http.extraheader="AUTHORIZATION: basic ${auth}" push "https://github.com/${GITHUB_REPOSITORY}.git" HEAD:main
 
