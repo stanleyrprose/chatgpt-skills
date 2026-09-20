@@ -268,6 +268,17 @@ Status: **IMPLEMENTED** on 2026-09-20.
 - Added focused unit coverage for current contracts, missing active-Skill coverage, and clause regression detection.
 - No Skill body, invocation mode, Tool/MCP permission, runtime service, router, DB/RAG layer, or model-in-CI dependency was added.
 
+## v0.5.0 release readiness
+
+Status: **READY EXCEPT LICENSE / NOT PUBLISHED** on 2026-09-20.
+
+- Confirmed the public repository currently has no Git tags and no GitHub Releases.
+- Defined three independent version surfaces: repository release `v0.5.0`, Constitution `v1.5.2`, and per-Skill `0.1.1`; repository release numbering does not renumber the Constitution or Skills.
+- Added `CHANGELOG.md` with an Unreleased `v0.5.0` candidate summary.
+- Added `docs/release-process.md` with exact-SHA, CI, metadata, immutable-tag, and fix-forward gates.
+- The first release is intentionally blocked on explicit maintainer license selection; public visibility alone is not treated as permission to grant reuse rights.
+- No tag, GitHub Release, LICENSE, runtime behavior, Skill body, invocation mode, or Tool/MCP permission was changed.
+
 ## Phase 5 rule
 
 Phase 5 is complete after 10 genuine tasks and the evidence review above. Do not manufacture further observation tasks. Record new observations only when a real event satisfies `OBSERVATION_TEMPLATE.md`; any architecture change still requires independent evidence and authorization.
