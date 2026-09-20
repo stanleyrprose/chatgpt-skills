@@ -244,7 +244,7 @@ Status: **IMPLEMENTED / CI RESTORED** on 2026-09-20.
 - Added `CONTRIBUTING.md` and `SECURITY.md`, plus README pointers and explicit public-without-license status.
 - Public hardening does not add a new Skill, router, service, RAG/DB/daemon, MCP, permission expansion, or LLM-in-CI dependency.
 - No `LICENSE` file was added. License selection is intentionally deferred because choosing one grants reuse rights and requires an explicit maintainer legal/permission decision.
-- Exact branch CI passed on runs `35487867705` and `35487884682`.
+- Exact branch CI passed on runs `35487867705` and `35487884682`; after hardening the workflow to `actions/checkout@v6`, `contents: read`, and `persist-credentials: false`, exact-head run `35487922862` also PASSed.
 
 ## Phase 5 rule
 
