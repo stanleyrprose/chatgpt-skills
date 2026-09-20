@@ -234,6 +234,18 @@ Status: **PASS WITH REMOTE CI ENVIRONMENT LIMITATION** on 2026-09-20.
 - PR #14 remote `validate` jobs did not start because GitHub reported an account billing/spending-limit condition ("recent account payments have failed or spending limit needs to be increased"). This is recorded as an external CI environment limitation, not a code/test failure; no billing or spending setting was changed.
 - True LLM behavioral eval remains deferred: the current deterministic gate now checks routing plus discipline-contract structure without adding token cost, non-deterministic model execution, or CI runtime dependencies.
 
+## Public repository hardening
+
+Status: **IMPLEMENTED / CI RESTORED** on 2026-09-20.
+
+- Repository visibility was changed from private to public by explicit user instruction.
+- Re-ran previously blocked main workflow run `35456087276`; after the repository became public, the `validate` job started normally and passed in 8 seconds, confirming the earlier billing/spending-limit error was an external private-runner limitation rather than a code failure.
+- Added `docs/skill-anatomy.md` as the cross-Skill authoring contract while preserving each `SKILL.md` as the canonical per-Skill metadata/workflow source and keeping validators as machine enforcement.
+- Added `CONTRIBUTING.md` and `SECURITY.md`, plus README pointers and explicit public-without-license status.
+- Public hardening does not add a new Skill, router, service, RAG/DB/daemon, MCP, permission expansion, or LLM-in-CI dependency.
+- No `LICENSE` file was added. License selection is intentionally deferred because choosing one grants reuse rights and requires an explicit maintainer legal/permission decision.
+- Exact branch CI passed on runs `35487867705` and `35487884682`.
+
 ## Phase 5 rule
 
 Phase 5 is complete after 10 genuine tasks and the evidence review above. Do not manufacture further observation tasks. Record new observations only when a real event satisfies `OBSERVATION_TEMPLATE.md`; any architecture change still requires independent evidence and authorization.
