@@ -279,6 +279,17 @@ Status: **READY EXCEPT LICENSE / NOT PUBLISHED** on 2026-09-20.
 - The first release is intentionally blocked on explicit maintainer license selection; public visibility alone is not treated as permission to grant reuse rights.
 - No tag, GitHub Release, LICENSE, runtime behavior, Skill body, invocation mode, or Tool/MCP permission was changed.
 
+## v0.5.0 license and release candidate
+
+Status: **LICENSE SELECTED / RELEASE CANDIDATE PREPARED** on 2026-09-20.
+
+- Maintainer explicitly selected Apache-2.0 on 2026-09-20.
+- Added the unmodified Apache License 2.0 standard text as `LICENSE`; source: Apache Software Foundation canonical license text.
+- Finalized `CHANGELOG.md` for `v0.5.0 — 2026-09-20` and updated README/release-process license metadata.
+- No `NOTICE` file was added because this repository has no pre-existing NOTICE content that needs preservation and Apache-2.0 does not require every work to create one.
+- The release candidate changes no Skill body, invocation mode, Constitution behavior, Tool/MCP permission, runtime service, router, DB/RAG layer, or daemon.
+- Tag and GitHub Release creation occur only after this exact candidate is merged to `main` and exact-head CI passes.
+
 ## Phase 5 rule
 
 Phase 5 is complete after 10 genuine tasks and the evidence review above. Do not manufacture further observation tasks. Record new observations only when a real event satisfies `OBSERVATION_TEMPLATE.md`; any architecture change still requires independent evidence and authorization.
