@@ -1,0 +1,20 @@
+{
+  "alert_fingerprint": null,
+  "notification": {
+    "last_sent_at": null,
+    "last_sent_fingerprint": null
+  },
+  "result": {
+    "active_findings": 0,
+    "layer_counts": {},
+    "observations_with_metadata": 0,
+    "qualified_behavior_violations": 0,
+    "reasons": [
+      "no active promotion-marked findings"
+    ],
+    "recommendations": [],
+    "repeated_patterns": [],
+    "status": "GREEN"
+  },
+  "schema_version": 1
+}

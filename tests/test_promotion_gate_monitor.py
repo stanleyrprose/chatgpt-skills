@@ -2,6 +2,7 @@ import importlib.util
 import json
 import sys
 import tempfile
+from dataclasses import dataclass
 import unittest
 from pathlib import Path
 
@@ -27,13 +28,22 @@ sender = load_module(
 )
 
 
+@dataclass
 class DummyResult:
-    def __init__(self, status):
-        self.status = status
-        self.observations_with_metadata = 1 if status != "GREEN" else 0
-        self.active_findings = 1 if status != "GREEN" else 0
-        self.qualified_behavior_violations = 1 if status in {"CANDIDATE", "PROMOTE"} else 0
-        self.layer_counts = {"behavior": 1} if status != "GREEN" else {}
+    status: str
+    observations_with_metadata: int = 0
+    active_findings: int = 0
+    qualified_behavior_violations: int = 0
+    layer_counts: dict | None = None
+    repeated_patterns: list | None = None
+    reasons: list | None = None
+    recommendations: list | None = None
+
+    def __post_init__(self):
+        self.observations_with_metadata = 1 if self.status != "GREEN" else 0
+        self.active_findings = 1 if self.status != "GREEN" else 0
+        self.qualified_behavior_violations = 1 if self.status in {"CANDIDATE", "PROMOTE"} else 0
+        self.layer_counts = {"behavior": 1} if self.status != "GREEN" else {}
         self.repeated_patterns = (
             [
                 {
@@ -47,10 +57,10 @@ class DummyResult:
                     "has_reproducible_fixture_ready": True,
                 }
             ]
-            if status in {"CANDIDATE", "PROMOTE"}
+            if self.status in {"CANDIDATE", "PROMOTE"}
             else []
         )
-        self.reasons = [f"status is {status}"]
+        self.reasons = [f"status is {self.status}"]
         self.recommendations = ["review evidence"]
 
 
@@ -72,6 +82,11 @@ class FakeEvaluator:
 
 
 class PromotionGateMonitorTest(unittest.TestCase):
+    def test_real_evaluator_dynamic_import_loads(self):
+        evaluator = monitor._load_evaluator()
+        self.assertTrue(hasattr(evaluator, "GateResult"))
+        self.assertTrue(callable(evaluator.evaluate))
+
     def test_pending_candidate_remains_notify_required_until_receipt(self):
         with tempfile.TemporaryDirectory() as td:
             state_dir = Path(td)

@@ -6,6 +6,7 @@ import hashlib
 import importlib.util
 import json
 import os
+import sys
 from dataclasses import asdict
 from datetime import datetime, timezone
 from pathlib import Path
@@ -22,6 +23,7 @@ def _load_evaluator():
     if spec is None or spec.loader is None:
         raise RuntimeError(f"cannot load evaluator: {EVALUATOR}")
     module = importlib.util.module_from_spec(spec)
+    sys.modules[spec.name] = module
     spec.loader.exec_module(module)
     return module
 
