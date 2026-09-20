@@ -316,14 +316,18 @@ Status: **IMPLEMENTED AS DETERMINISTIC SENSOR** on 2026-09-20.
 
 ## Promotion Gate scheduled monitoring + Telegram
 
-Status: **IMPLEMENTED / TELEGRAM SECRETS PENDING** on 2026-09-20.
+Status: **CLOSED / VERIFIED END-TO-END** on 2026-09-20.
 
 - Added `.github/workflows/monitor-promotion-gate.yml` with a six-hour schedule plus manual dispatch.
 - Added `scripts/promotion-gate-monitor.py` to persist only semantic Gate changes under `state/promotion-gate/latest.json` and append transition history to `history.jsonl`; unchanged scheduled runs do not create repository commits.
 - Added `scripts/send-promotion-alert.py` to notify only new `CANDIDATE/PROMOTE` alert fingerprints and to persist a successful `last_sent_fingerprint` receipt so duplicate alerts are suppressed.
 - A missing Telegram configuration does not lose Gate state: the alert remains pending and later runs retry until a send receipt is persisted.
 - Telegram Bot API errors are sanitized so the request URL/token is not echoed; checkout credentials are not persisted and the GitHub token is exposed only to narrow push steps through a temporary authorization header.
-- Telegram delivery requires repository secrets `TELEGRAM_BOT_TOKEN` (for `@github_stan_bot`) and numeric `TELEGRAM_CHAT_ID`; no secrets are currently configured in this repository.
+- Repository secrets `TELEGRAM_BOT_TOKEN` (for `@github_stan_bot`) and numeric `TELEGRAM_CHAT_ID` were configured by the maintainer on 2026-09-20.
+- Added a manual `workflow_dispatch(test_telegram=true)` smoke-test path that sends an explicit TEST message without modifying Promotion Gate status, observations, or alert fingerprints.
+- Main validation run `35503983352` PASSed and the real Telegram smoke workflow run `35503992845` PASSed with log evidence `Telegram smoke test sent.`
+- User independently confirmed receipt of the TEST message in Telegram, closing the GitHub Actions → GitHub Secrets → Telegram Bot API → user chat delivery loop.
+- Current Promotion Gate remained `GREEN` during the smoke test, so no false `CANDIDATE/PROMOTE` alert or state mutation occurred.
 - No LLM call, sixth Skill, router service, DB/RAG layer, daemon, new MCP, or permission expansion outside the dedicated workflow's `contents: write` state-persistence need was added.
 
 ## Phase 5 rule
