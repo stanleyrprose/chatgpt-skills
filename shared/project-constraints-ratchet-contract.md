@@ -63,11 +63,12 @@ constraint_id: "stable-id"
 property: "what is being protected"
 measurement: "how it is measured"
 scope: "bounded population / path / environment"
+direction: "higher_is_better|lower_is_better|exact|set_inclusion|custom"
 baseline:
   value: null
   observed_at: "ISO-8601"
   evidence_ref: "test/run/report/commit/runtime evidence"
-floor: "must not regress from proven baseline"
+guardrail: "must-not-regress boundary derived from proven baseline"
 target: null
 ```
 
@@ -89,29 +90,39 @@ floor = must not fall below 62%
 next deliberate target = 65%
 ```
 
-The floor protects current proven quality. The target guides improvement. They are not the same thing.
+The guardrail protects current proven quality. The target guides improvement. They are not the same thing.
+
+"Must not regress" depends on metric direction:
+
+- `higher_is_better`: guardrail is normally a minimum;
+- `lower_is_better`: guardrail is normally a maximum;
+- `exact`: guardrail is equality or an allowed discrete state;
+- `set_inclusion`: guardrail protects required members/capabilities rather than a scalar;
+- `custom`: define the comparison explicitly.
+
+Do not force a scalar percentage onto a property that is naturally boolean, categorical, set-based, or distributional.
 
 ## 3. Ratchet semantics
 
 A ratchet moves only after a new level has been achieved and verified.
 
 ```text
-baseline N
+proven baseline
    ↓
 change
    ↓
-verified result N+1
+verified improvement
    ↓
-new floor = N+1
+new guardrail = improved proven boundary
 ```
 
 Rules:
 
-- do not raise the floor based on a plan, aspiration, or one-off flaky result;
+- do not tighten the guardrail based on a plan, aspiration, or one-off flaky result;
 - raise it only from reproducible or otherwise trustworthy evidence;
-- do not lower the floor merely to make CI green;
+- do not weaken the guardrail merely to make CI green;
 - if the measurement itself changes materially, establish a new comparable baseline instead of pretending the old and new values are equivalent;
-- if external conditions make a previous floor temporarily invalid, record an explicit bounded exception rather than silently weakening the constraint.
+- if external conditions make a previous guardrail temporarily invalid, record an explicit bounded exception rather than silently weakening the constraint.
 
 ## 4. Constraint classes
 
@@ -233,7 +244,7 @@ exception:
   owner: "person/team/project role"
   evidence_ref: "why this is necessary"
   expires_or_review_at: "date, release, or concrete condition"
-  recovery_plan: "how the normal floor is restored"
+  recovery_plan: "how the normal guardrail is restored"
 ```
 
 Rules:
@@ -288,8 +299,11 @@ Measurement:
 Baseline:
 <value + date + evidence>
 
-Floor:
-<must-not-regress condition>
+Direction:
+<higher_is_better | lower_is_better | exact | set_inclusion | custom>
+
+Guardrail:
+<must-not-regress boundary>
 
 Next target:
 <optional; improvement target, not current floor>
@@ -301,7 +315,7 @@ Exception policy:
 <when and how a bounded exception is allowed>
 
 Ratchet rule:
-<what evidence is required to raise the floor>
+<what evidence is required to tighten the guardrail>
 ```
 
 Do not add this file to projects that do not need durable constraints.
@@ -314,7 +328,8 @@ Illustrative only; actual values must come from current project evidence.
 Property: known high-value source coverage
 Scope: explicitly enumerated government/SOE sources
 Baseline: current audited coverage
-Floor: known covered sources must not disappear without explicit decision
+Direction: set_inclusion
+Guardrail: known covered sources must not disappear without explicit decision
 Target: expand coverage only after proving acquisition/qualification quality
 ```
 
@@ -322,7 +337,8 @@ Target: expand coverage only after proving acquisition/qualification quality
 Property: duplicate delivery
 Scope: same semantic signal + destination
 Baseline: zero accepted duplicates in the audited period
-Floor: duplicate delivery remains zero
+Direction: lower_is_better
+Guardrail: duplicate delivery remains zero
 Evidence: delivery receipt reconciliation
 ```
 
@@ -362,7 +378,7 @@ The target project's own authority remains canonical.
 This pattern is working when:
 
 - current quality is protected without arbitrary aspirational gates;
-- improvements become new floors only after evidence;
+- improvements become tighter guardrails only after evidence;
 - regressions are visible early;
 - exceptions are explicit rather than hidden;
 - Agents cannot make a red result disappear by quietly weakening the measurement;
