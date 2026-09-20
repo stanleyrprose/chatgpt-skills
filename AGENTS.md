@@ -14,6 +14,7 @@ This file governs maintenance of this repository only. It is not a global policy
 - `CONSTITUTION.md` owns Global Constitution runtime rules.
 - Each `SKILL.md` owns that Skill's frontmatter metadata and workflow body.
 - `.agents/invocation.md` owns cross-Skill invocation mechanics.
+- `docs/skill-anatomy.md` owns the cross-Skill authoring contract; validators enforce its machine-checkable subset.
 - `REGISTRY.md` is generated from `SKILL.md`; never edit it manually.
 - Bucket README files are human navigation only.
 - `shared/` contains plain references only, not Skills.

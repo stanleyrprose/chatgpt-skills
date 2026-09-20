@@ -31,6 +31,16 @@ Routing is prompt-based and inherently non-deterministic. False positives, false
 - `GOAL.md` — current implementation checkpoint.
 - Project-specific rules/state stay in each project repository.
 
+## Skill authoring and contribution
+
+- `docs/skill-anatomy.md` documents the cross-Skill authoring contract and evaluation model.
+- `CONTRIBUTING.md` defines the minimal change workflow for this repository.
+- `SECURITY.md` defines security-reporting and validation boundaries.
+
+### License status
+
+This repository is public, but no explicit reuse license has been selected yet. Public visibility alone should not be treated as permission to reuse, redistribute, or relicence the contents.
+
 ## Shared reference contracts
 
 `shared/` contains plain references only; they are not Skills and do not grant Tool/MCP capability or authorization.
