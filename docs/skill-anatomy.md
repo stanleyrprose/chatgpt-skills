@@ -258,6 +258,8 @@ Actual agent/LLM execution against fixtures.
 
 Tier 3 is intentionally deferred until real evidence shows that routing succeeds but agents still violate the Skill contract often enough to justify token cost, nondeterminism, and maintenance overhead.
 
+`docs/promotion-gate.md` defines the deterministic evidence sensor used to distinguish routing/contract/tool problems from repeated qualified behavior failures. A `PROMOTE` report means the evidence threshold is met for explicit review; it is not implementation authorization.
+
 Do not add LLM-in-CI merely because it is technically possible.
 
 ## 10. Change checklist
