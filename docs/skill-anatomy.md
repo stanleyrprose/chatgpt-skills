@@ -163,38 +163,24 @@ Common sections include:
 
 Do not add empty boilerplate sections merely for symmetry.
 
-## 5. Invocation design
+## 5. Invocation metadata authoring
 
-### User-invoked Skills
+Cross-Skill invocation mechanics are canonical in `.agents/invocation.md`. Do not restate or redefine those runtime rules in a Skill or in this document.
 
-Use when explicit user intent is required before the workflow starts.
+When authoring metadata:
 
-They may be Primary but must not be selected from semantic similarity alone.
+- choose `invocation: user` when explicit user intent is part of the workflow's activation boundary;
+- choose `invocation: model` only when automatic selection from task intent is appropriate within the existing permission boundary;
+- keep the `description` aligned with the chosen mode and actual Skill scope;
+- treat changes to invocation mode or cross-Skill composition semantics as architecture changes, not ordinary copy edits.
 
-A user-invoked Skill must not auto-invoke another user-invoked Skill.
+For Primary/Secondary rules, state anchors, engineering-domain gating, and release/reroute behavior, follow `.agents/invocation.md`.
 
-### Model-invoked Skills
+## 6. Composition authoring
 
-Use when the model can safely select the workflow from the full task intent.
+A Skill body may document which existing model-invoked specialist workflows are useful to it, but the cross-Skill composition mechanics remain canonical in `.agents/invocation.md`.
 
-A single keyword is never sufficient evidence for automatic routing.
-
-Automatic Secondary Skills must be model-invoked and must preserve the current top-level goal, scope, and completion definition.
-
-## 6. Composition rule
-
-At most one Primary Skill is active.
-
-A Secondary Skill is a temporary specialist branch, not a second orchestrator.
-
-Composition is valid only when the Secondary:
-
-- serves the same top-level goal;
-- does not redefine completion;
-- does not expand authorized scope;
-- returns its findings to the Primary.
-
-An unrelated new goal requires release and fresh routing.
+Do not copy the global composition state machine into individual Skills. Record only Skill-specific composition choices that cannot be derived from the canonical mechanics.
 
 ## 7. Verification hierarchy
 

@@ -14,7 +14,7 @@ Read, in order:
 4. the affected `SKILL.md`
 5. `.agents/invocation.md` if routing/composition semantics are involved
 
-The frozen v0.5 architecture remains the baseline. Do not add a new Skill, router service, daemon, database, RAG layer, repo-local Skill system, or new MCP unless current project evidence and explicit authorization justify that scope.
+The frozen v0.5 architecture remains the baseline. Repository scope constraints are canonical in `AGENTS.md`; do not restate or bypass them here.
 
 ## Canonical-source rule
 
