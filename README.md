@@ -47,6 +47,7 @@ This repository is public, but no explicit reuse license has been selected yet. 
 
 - `shared/research-routing-evidence-contract.md` — smallest-adequate research routing, claim-level evidence promotion, fallback, time semantics, and capability/authorization/persistence separation.
 - `shared/agent-execution-integrity-contract.md` — task identity, reconciled checkpoints, duplicate-safe side effects, baseline-bound execution, evidence-bound review, bounded repair, and recovery semantics for long or cross-Agent work.
+- `shared/project-constraints-ratchet-contract.md` — baseline-first quality constraints, must-not-regress floors, evidence-based ratchets, bounded exceptions, and anti-weakening review rules.
 
 ## Validation
 
