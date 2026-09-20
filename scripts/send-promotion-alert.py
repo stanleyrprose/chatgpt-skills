@@ -121,11 +121,50 @@ def send(
     return True
 
 
+
+
+def send_test(
+    *,
+    token: str | None = None,
+    chat_id: str | None = None,
+    repository: str | None = None,
+    run_url: str | None = None,
+    transport=_telegram_post,
+) -> bool:
+    token = token or os.environ.get("TELEGRAM_BOT_TOKEN")
+    chat_id = chat_id or os.environ.get("TELEGRAM_CHAT_ID")
+    if not token or not chat_id:
+        print(
+            "Telegram smoke test failed: TELEGRAM_BOT_TOKEN and/or "
+            "TELEGRAM_CHAT_ID is not configured."
+        )
+        return False
+
+    lines = [
+        "✅ TEST — ChatGPT Skills Telegram alert path is working.",
+        "",
+        "This is a manual smoke test only.",
+        "No Promotion Gate status, observation, or alert fingerprint was changed.",
+    ]
+    if repository:
+        lines.append(f"Repository: {repository}")
+    if run_url:
+        lines.append(f"GitHub Actions: {run_url}")
+    transport(token, chat_id, "\n".join(lines))
+    print("Telegram smoke test sent.")
+    return True
+
+
 def main() -> int:
     parser = argparse.ArgumentParser(
         description="Send a Promotion Gate CANDIDATE/PROMOTE alert through Telegram."
     )
     parser.add_argument("--state", type=Path, default=DEFAULT_STATE)
+    parser.add_argument(
+        "--test",
+        action="store_true",
+        help="send a manual smoke-test message without changing Promotion Gate state",
+    )
     args = parser.parse_args()
     repository = os.environ.get("GITHUB_REPOSITORY")
     server = os.environ.get("GITHUB_SERVER_URL")
@@ -136,7 +175,11 @@ def main() -> int:
         else None
     )
     try:
-        send(args.state, repository=repository, run_url=run_url)
+        if args.test:
+            if not send_test(repository=repository, run_url=run_url):
+                return 1
+        else:
+            send(args.state, repository=repository, run_url=run_url)
     except (OSError, ValueError, json.JSONDecodeError, RuntimeError) as exc:
         print(f"Telegram alert failed: {exc}")
         return 1

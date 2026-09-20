@@ -197,6 +197,26 @@ class PromotionGateMonitorTest(unittest.TestCase):
             payload = json.loads(path.read_text(encoding="utf-8"))
             self.assertIsNone(payload["notification"]["last_sent_fingerprint"])
 
+    def test_smoke_test_message_does_not_require_gate_state(self):
+        calls = []
+
+        def transport(token, chat_id, text):
+            calls.append((token, chat_id, text))
+            return {"ok": True}
+
+        self.assertTrue(
+            sender.send_test(
+                token="token",
+                chat_id="123",
+                repository="stanleyrprose/chatgpt-skills",
+                run_url="https://example.invalid/run",
+                transport=transport,
+            )
+        )
+        self.assertEqual(1, len(calls))
+        self.assertIn("TEST", calls[0][2])
+        self.assertIn("No Promotion Gate status", calls[0][2])
+
     def test_message_contains_gate_status_and_reason(self):
         payload = {
             "result": {
