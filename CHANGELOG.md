@@ -4,7 +4,9 @@ This repository keeps repository releases separate from Constitution and individ
 
 ## Unreleased
 
-No changes yet.
+### Added
+
+- Scheduled Promotion Gate monitoring with Git-backed latest/history state and deduplicated Telegram alerts for new `CANDIDATE/PROMOTE` fingerprints.
 
 ## v0.5.0 — 2026-09-20
 
