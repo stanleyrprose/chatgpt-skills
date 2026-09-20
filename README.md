@@ -59,6 +59,18 @@ CI is intentionally dependency-light and validates the authored Skill sources be
 
 The model-routing eval is a CI sanity check over model-facing descriptions, not a deterministic runtime router. A clean static security scan is necessary but not sufficient; human review still owns ambiguous or novel patterns.
 
+## Versioning and releases
+
+Repository releases, the Constitution, and individual Skills use independent version surfaces.
+
+- Repository release candidate: `v0.5.0`
+- Current Constitution: `v1.5.2`
+- Active Skills: `0.1.1`
+
+See `CHANGELOG.md` and `docs/release-process.md`.
+
+No repository tag or GitHub Release has been published yet. The first release remains blocked on explicit license selection.
+
 ## Frozen baseline
 
 v0.5 was frozen and implementation-authorized on 2026-09-08.
