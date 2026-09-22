@@ -1,6 +1,6 @@
-# Agent Runtime Contract v1
+# Agent Runtime Contract v1.1
 
-Status: **reference-only / frozen v1**. This is not a Skill, workflow engine, scheduler, queue, daemon, database, sandbox, MCP server, permission grant, or deployment requirement.
+Status: **reference-only**. This is not a Skill, workflow engine, scheduler, queue, daemon, database, sandbox, MCP server, permission grant, or deployment requirement.
 
 ## Purpose
 
@@ -33,7 +33,7 @@ A managed runtime SHOULD expose a stable identity projection:
 runtime_id: "stable-provider-or-runtime-id"
 runtime_type: "browser|agent|ocr|executor|other"
 runtime_version: "implementation/version/ref"
-contract_version: "agent-runtime-v1"
+contract_version: "agent-runtime-v1.1"
 invocation_modes: []
 ```
 
@@ -43,6 +43,43 @@ Rules:
 - Runtime identity is not authorization.
 - A caller-specific provider may expose a narrower view than the local runtime.
 - Version/ref SHOULD be sufficient to correlate behavior with deployed code or configuration when practical.
+
+
+## 2A. Desired spec and observed status
+
+For a managed runtime/resource, keep desired configuration separate from observed state.
+
+```text
+spec
+= what should be true
+
+status
+= what is currently observed
+```
+
+A manifest/configuration proves intent, not successful execution.
+
+When stale status would be dangerous, status SHOULD identify the spec/revision it observed using a project-native revision, hash, generation, or state version.
+
+This contract does not require a new controller. Reconciliation semantics are defined separately in `shared/agent-reconciliation-contract.md`.
+
+## 2B. Conditions
+
+A runtime MAY expose a summary operational state, but important prerequisites SHOULD remain individually observable through conditions.
+
+Recommended condition shape:
+
+```yaml
+type: "Ready"
+status: "True|False|Unknown"
+reason: "stable_reason_code"
+message: "bounded detail"
+last_transition_time: "ISO-8601"
+```
+
+Examples include `WorkspaceReady`, `PermissionReady`, `ProviderReady`, and `DependenciesReady`.
+
+A required permission/security condition failing must prevent a fully-ready state. Optional-component failure may produce degraded state when remaining advertised work is still safe.
 
 ## 3. Liveness and readiness are different
 
@@ -223,6 +260,32 @@ For non-idempotent or externally visible side effects:
 - reconcile actual target state first;
 - use the execution-integrity contract's operation-receipt rules.
 
+
+## 8A. Event/watch semantics
+
+A managed runtime MAY provide watch/event-driven status updates. Events are notifications, not authoritative state.
+
+On an event, a caller/controller should re-read the current resource/runtime state instead of assuming the event still represents the latest truth.
+
+When an event queue uses ACKs, ACK should correspond to a durable disposition: reconciled success, already-aligned state, a persisted terminal/blocked failure, or supersession by a newer desired state.
+
+Do not introduce a queue/streaming service merely for this contract.
+
+## 8B. Two-phase termination
+
+For runtime resources with child/external state, prefer:
+
+```text
+termination requested
+-> Terminating
+-> stop new work
+-> cleanup owned resources
+-> verify cleanup
+-> remove record
+```
+
+If cleanup fails, preserve visible identity/status so reconciliation can safely retry. Do not erase the authoritative record first.
+
 ## 9. Checkpoint and resume are optional capabilities
 
 Checkpoint/resume MUST NOT be treated as a universal agent-runtime requirement.
@@ -245,6 +308,15 @@ resume:
 A runtime that restores files into a new process MUST NOT imply that the original process memory or model context was resumed.
 
 For bounded, cheap, replay-safe jobs, no checkpoint/resume capability may be the correct design.
+
+
+## 9A. Workspace binding
+
+When execution depends on repositories, tools/MCPs, Skills, bootstrap state, or durable files, the runtime SHOULD expose or reference the realized workspace identity rather than forcing callers to reconstruct it from prose.
+
+Workspace preparation, fingerprints, prepare-once semantics, durability, and invalidation are defined in `shared/agent-workspace-contract.md`.
+
+A runtime that reports `ready` while a required workspace is unresolved or unprepared is reporting a false-ready state.
 
 ## 10. Permission boundary
 
@@ -290,6 +362,18 @@ The transport is intentionally unspecified. Valid implementations include:
 - existing project-owned API projections.
 
 Do not add a network listener solely to satisfy this contract.
+
+
+## 12A. Command/process outcome
+
+If the runtime's notion of job success depends on a child command or Agent process, the runtime SHOULD observe and persist that outcome.
+
+```text
+runner alive
+!= child command succeeded
+```
+
+If exit/outcome cannot be observed, do not synthesize `succeeded`; expose a non-terminal or `unknown` result appropriate to the implementation.
 
 ## 13. Recommended normalized read model
 
@@ -390,7 +474,25 @@ This contract does not define:
 
 Use existing project/runtime mechanisms for those concerns.
 
-## 17. Adoption gate
+## 17. Related contracts
+
+```text
+Agent Workspace Contract
+  -> what execution environment is realized
+
+Agent Reconciliation Contract
+  -> how desired and observed managed state converge
+
+Agent Runtime Contract
+  -> how runtime/job/readiness/evidence are exposed
+
+Agent Execution Integrity Contract
+  -> how long/cross-Agent work stays duplicate-safe and reviewable
+```
+
+These are plain references, not four mandatory services.
+
+## 18. Adoption gate
 
 Before changing an existing runtime for this contract, ask:
 
@@ -401,3 +503,10 @@ Before changing an existing runtime for this contract, ask:
 If the answers do not justify code, keep the contract reference-only.
 
 The default is **map existing truth first; implement new runtime machinery only when evidence demands it**.
+
+
+## 19. Provenance
+
+This contract was independently written and refined after studying general Agent runtime patterns and Google's Apache-2.0 licensed `google/ax` project, especially runner/readiness, workspace binding, status/conditions, lifecycle, event/watch, and termination semantics.
+
+No AX source code, schema, or substantial text is copied. The design is adapted to this repository's Minimal Sufficient Architecture, fail-closed permission boundaries, and existing execution-integrity contract.

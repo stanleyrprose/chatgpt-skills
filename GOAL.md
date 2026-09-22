@@ -348,3 +348,18 @@ Status: **IMPLEMENTED AS REFERENCE-ONLY CONTRACT** on 2026-09-22.
 - Explicitly rejected Kubernetes, Redis Streams, Agent Substrate, a new scheduler, queue, daemon, database, network listener, or second worker as YAGNI for the current Mac/VPS scale.
 - Default adoption rule is `map existing truth first; add runtime machinery only when a real caller ambiguity/failure demonstrates need`.
 - No Skill body, invocation mode, Constitution behavior, Tool/MCP permission, production runtime, deployment, or security boundary was changed.
+
+
+## AX design absorption — Workspace + Reconciliation contracts
+
+Status: **IMPLEMENTED AS REFERENCE-ONLY CONTRACTS** on 2026-09-22.
+
+- Re-audited Google `google/ax` beyond its top-level primitives, including Task spec/status, Conditions, runner/workspace preparation, controller reconciliation, event worker semantics, watch streams, runtime-template fingerprinting, and two-phase deletion.
+- Added `shared/agent-workspace-contract.md` as canonical reference for source/tool/Skill/bootstrap/durability composition, spec-vs-realized status, prepare-once semantics, workspace fingerprints, mutable-worktree vs immutable baseline, multi-workspace composition, reuse/invalidation, and two-phase cleanup.
+- Added `shared/agent-reconciliation-contract.md` as canonical reference for desired-vs-observed state, conditions, drift classification, ownership, level-based ensure semantics, event/watch handling, durable ACK disposition, bounded retry/backoff, child-process truth, two-phase termination, and permission-ready fail-closed behavior.
+- Updated `shared/agent-runtime-contract.md` to v1.1 so runtime semantics explicitly include desired spec vs observed status, Conditions, event/watch semantics, two-phase termination, workspace binding, and child-command outcome.
+- Deliberately improved on several current AX behaviors rather than copying them: required policy/permission failure blocks Ready; task success cannot be inferred from runner liveness when command outcome matters; ACK requires a durable disposition; required workspace bindings must not silently disappear; deterministic bootstrap is preferred over Agent-assisted setup.
+- Kept `shared/agent-execution-integrity-contract.md` as canonical owner of task identity/checkpoints/operation receipts/review binding; the new contracts do not duplicate those responsibilities.
+- No Skill, router, scheduler, queue, daemon, DB/RAG layer, MCP, Kubernetes, Redis Streams, Agent Substrate, production runtime, deployment, or Tool permission was added.
+- Default rule remains: absorb the design broadly; implement runtime machinery only after a real operational failure/drift demonstrates the need.
+- First concrete low-risk realization completed in `stanleyrprose/codexpro`: PR #2 added read-only `resolved_revision`, `git_branch`, `dirty_state`, `workspace_fingerprint`, and fingerprint-basis fields to the existing workspace self-description. Ubuntu + Windows CI PASS; squash-merged into `fix/handoff-execution-integrity` as `750b5d6cb689d52ded9ddf8bad079b17baec0b09`. Fingerprint excludes mutable working-tree content and secrets; no local production install was performed.
