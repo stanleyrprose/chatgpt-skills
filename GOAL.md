@@ -333,3 +333,18 @@ Status: **CLOSED / VERIFIED END-TO-END** on 2026-09-20.
 ## Phase 5 rule
 
 Phase 5 is complete after 10 genuine tasks and the evidence review above. Do not manufacture further observation tasks. Record new observations only when a real event satisfies `OBSERVATION_TEMPLATE.md`; any architecture change still requires independent evidence and authorization.
+
+
+## Agent Runtime Contract v1
+
+Status: **IMPLEMENTED AS REFERENCE-ONLY CONTRACT** on 2026-09-22.
+
+- Studied Google `google/ax` and separated transferable runtime semantics from its cluster-scale deployment architecture.
+- Added `shared/agent-runtime-contract.md` as the canonical cross-runtime reference for runtime identity, liveness/readiness, capability truth, caller authorization, job lifecycle, verification, evidence/artifacts, cancellation/retry semantics, optional checkpoint/resume, and permission/debug boundaries.
+- Kept `shared/agent-execution-integrity-contract.md` as the separate canonical owner of task identity, checkpoints, operation receipts, stale-baseline reconciliation, evidence-bound review, and duplicate-safe side-effect handling; the new runtime contract does not duplicate those responsibilities.
+- Verified Mac Browser Plane already satisfies most of the contract through `browser_doctor`, `capabilities.json`, `JobState`/JobStore, status/result/cancel surfaces, evidence artifacts, and the separate SignalForge Provider Invocation Contract; no Browser Plane runtime redesign is justified.
+- Verified AWR already exposes complementary product-specific runtime semantics through backend-owned operational health, durable Runtime/Run state, SQLite events, and Executor contracts; no refactor into Browser Plane abstractions is justified.
+- Checkpoint/resume remains optional rather than universal. Bounded C0-C3/OCR jobs do not gain new persistence machinery merely to mimic AX suspend/resume.
+- Explicitly rejected Kubernetes, Redis Streams, Agent Substrate, a new scheduler, queue, daemon, database, network listener, or second worker as YAGNI for the current Mac/VPS scale.
+- Default adoption rule is `map existing truth first; add runtime machinery only when a real caller ambiguity/failure demonstrates need`.
+- No Skill body, invocation mode, Constitution behavior, Tool/MCP permission, production runtime, deployment, or security boundary was changed.
