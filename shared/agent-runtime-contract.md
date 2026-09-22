@@ -33,7 +33,7 @@ A managed runtime SHOULD expose a stable identity projection:
 runtime_id: "stable-provider-or-runtime-id"
 runtime_type: "browser|agent|ocr|executor|other"
 runtime_version: "implementation/version/ref"
-contract_version: "agent-runtime-v1"
+contract_version: "agent-runtime-v1.1"
 invocation_modes: []
 ```
 
@@ -503,3 +503,10 @@ Before changing an existing runtime for this contract, ask:
 If the answers do not justify code, keep the contract reference-only.
 
 The default is **map existing truth first; implement new runtime machinery only when evidence demands it**.
+
+
+## 19. Provenance
+
+This contract was independently written and refined after studying general Agent runtime patterns and Google's Apache-2.0 licensed `google/ax` project, especially runner/readiness, workspace binding, status/conditions, lifecycle, event/watch, and termination semantics.
+
+No AX source code, schema, or substantial text is copied. The design is adapted to this repository's Minimal Sufficient Architecture, fail-closed permission boundaries, and existing execution-integrity contract.

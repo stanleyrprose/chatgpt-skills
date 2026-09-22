@@ -39,7 +39,7 @@ Prefer mapping existing project/runtime truth before adding a new manifest, serv
 
 ## 2. Workspace as execution environment
 
-A workspace may describe five independent surfaces:
+A workspace may describe six independent surfaces:
 
 ```yaml
 workspace:
