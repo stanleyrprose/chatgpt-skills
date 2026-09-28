@@ -1,0 +1,50 @@
+name: Temporary encrypted audio bridge
+
+on:
+  push:
+    branches:
+      - temp/audio-bridge-20260928
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  bridge:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Download private temporary outputs
+        env:
+          MP3_URL: ${{ secrets.TEMP_AUDIO_BRIDGE_MP3_URL_20260928 }}
+          FLAC_URL: ${{ secrets.TEMP_AUDIO_BRIDGE_FLAC_URL_20260928 }}
+        run: |
+          set -euo pipefail
+          test -n "$MP3_URL"
+          test -n "$FLAC_URL"
+          curl --fail --location --retry 3 "$MP3_URL" -o accompaniment.mp3
+          curl --fail --location --retry 3 "$FLAC_URL" -o accompaniment.flac
+          test -s accompaniment.mp3
+          test -s accompaniment.flac
+          sha256sum accompaniment.mp3 accompaniment.flac > SHA256SUMS.txt
+
+      - name: Pack and encrypt
+        env:
+          BRIDGE_KEY: ${{ secrets.TEMP_AUDIO_BRIDGE_KEY_20260928 }}
+        run: |
+          set -euo pipefail
+          test -n "$BRIDGE_KEY"
+          tar -czf audio_bundle.tar.gz accompaniment.mp3 accompaniment.flac SHA256SUMS.txt
+          openssl enc -aes-256-cbc -pbkdf2 -iter 200000 -salt \
+            -in audio_bundle.tar.gz \
+            -out audio_bundle.tar.gz.enc \
+            -pass env:BRIDGE_KEY
+          rm -f accompaniment.mp3 accompaniment.flac audio_bundle.tar.gz SHA256SUMS.txt
+
+      - name: Upload encrypted artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: temp-audio-bridge-20260928
+          path: audio_bundle.tar.gz.enc
+          if-no-files-found: error
+          retention-days: 1
