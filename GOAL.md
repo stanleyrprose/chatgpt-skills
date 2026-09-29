@@ -18,7 +18,7 @@ Phase 2: COMPLETE — five initial Skills + derived index validated.
 Phase 3: COMPLETE — v1.5.2 lossless migration deployed by user; activation/state-anchor/Project Discovery smoke PASS.
 Phase 4: COMPLETE — real-repo E2E on `stanleyrprose/mac-browser-plane` PASS WITH ENVIRONMENT LIMITATION.
 Phase 5: COMPLETE — 10/10 genuine tasks observed; final review on 2026-09-13 found no evidence requiring a v0.5 Skill-architecture expansion.
-Amendment A2: AUTHORIZED / IMPLEMENTING — on 2026-09-29 the maintainer explicitly authorized one post-baseline architecture change: add user-invoked `research-triad@0.1.0`.
+Amendment A2: COMPLETE — research-triad@0.1.0 merged through PR #30; exact-head and post-merge CI both PASS.
 
 ## Frozen invariants
 
@@ -371,7 +371,7 @@ Status: **IMPLEMENTED AS REFERENCE-ONLY CONTRACTS** on 2026-09-22.
 
 ## Amendment A2 — Research Triad Skill
 
-Status: **AUTHORIZED / IMPLEMENTING** on 2026-09-29.
+Status: **COMPLETE / MERGED / CI PASS** on 2026-09-29.
 
 - The maintainer explicitly authorized one post-v0.5 architecture expansion: add the sixth active Skill, user-invoked `research-triad@0.1.0`.
 - The Skill frames one Research Brief, then independently runs a GitHub lane, a public Web lane, and a Mac-local Antigravity/Hermes planning lane before central evidence reconciliation and synthesis.
@@ -381,3 +381,5 @@ Status: **AUTHORIZED / IMPLEMENTING** on 2026-09-29.
 - The Skill is explicit user invocation only; ordinary research does not semantic-auto-route into the higher-cost triad workflow.
 - A2 does not authorize a deterministic router, RAG/DB, queue, daemon, scheduler, new MCP, Tool permission expansion, or default persistence.
 - Canonical amendment record: `docs/implementation-amendment-a2-2026-09-29.md`.
+
+- A2 closure evidence: PR #30; branch head 81ae41e598cdb5dfef4d4b174bd03715a450fe00; merge 80756aedd27196f683e6562e06ebf584de38b2e3; branch CI 36529490025 PASS; post-merge main CI 36529604796 PASS.
