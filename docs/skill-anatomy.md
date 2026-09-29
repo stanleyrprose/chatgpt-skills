@@ -218,7 +218,7 @@ Avoid:
 - descriptions engineered only to win lexical routing tests;
 - large bodies that preload unrelated domain knowledge.
 
-A new Skill should require repeated, cross-project workflow evidence.
+Normally, a new Skill should require repeated, cross-project workflow evidence. An explicit architecture amendment may override this gate, but must record the rationale and bounded scope.
 
 ## 9. Testing model
 
@@ -282,7 +282,7 @@ Before merging a Skill change:
 
 This authoring contract does not authorize:
 
-- a sixth Skill;
+- additional active Skills beyond the currently authorized set;
 - repo-local Skill layers;
 - a deterministic router service;
 - semantic retrieval infrastructure;

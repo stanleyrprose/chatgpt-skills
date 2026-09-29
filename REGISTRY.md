@@ -49,4 +49,13 @@ skills:
       - "handoff"
       - "生成交接文档"
       - "交接"
+  - name: "research-triad"
+    version: "0.1.0"
+    status: "active"
+    invocation: "user"
+    path: "skills/research/research-triad/SKILL.md"
+    description: "Use when the user explicitly requests three-lane decision research across GitHub, public web evidence, and independent local Antigravity/Hermes planning before synthesis."
+    aliases:
+      - "三路研究"
+      - "research-triad"
 ```

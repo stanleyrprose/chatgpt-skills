@@ -51,12 +51,15 @@ Global phrases such as “直接做 / 修改 / 执行 / 按你的建议” do no
 
 Map them to `implement` only when the current task is software/repository engineering implementation and needs the reusable implementation workflow. Non-engineering execution remains no-skill.
 
-## Current v0.5 initial mapping
+## Current mapping
+
+The frozen v0.5 baseline remains historical. Amendment A2 (2026-09-29) adds one explicitly user-invoked Skill.
 
 User-invoked:
 - implement
 - to-spec
 - handoff
+- research-triad
 
 Model-invoked:
 - diagnose

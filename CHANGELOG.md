@@ -6,6 +6,7 @@ This repository keeps repository releases separate from Constitution and individ
 
 ### Added
 
+- Authorized and added user-invoked `research-triad@0.1.0`, which triangulates GitHub implementations, public Web evidence, and independent Mac-local Antigravity/Hermes planning before evidence-led synthesis; see Amendment A2.
 - Scheduled Promotion Gate monitoring with Git-backed latest/history state and deduplicated Telegram alerts for new `CANDIDATE/PROMOTE` fingerprints.
 
 ## v0.5.0 — 2026-09-20

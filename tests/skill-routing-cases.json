@@ -34,6 +34,11 @@
       "id": "negative-single-keyword",
       "prompt": "Investigate this error.",
       "expected": null
+    },
+    {
+      "id": "negative-research-triad-user-workflow",
+      "prompt": "Research this by comparing GitHub repositories, public web evidence, and independent local agent advice, then synthesize the result.",
+      "expected": null
     }
   ]
 }

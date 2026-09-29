@@ -161,6 +161,44 @@
           "never auto-invokes it"
         ]
       }
+    ],
+    "research-triad": [
+      {
+        "id": "shared-evidence-contract",
+        "any_of": [
+          "Use `shared/research-routing-evidence-contract.md`"
+        ]
+      },
+      {
+        "id": "github-three-repo-attempt",
+        "any_of": [
+          "Attempt to discover at least three materially relevant repositories"
+        ]
+      },
+      {
+        "id": "independent-first-pass",
+        "any_of": [
+          "must not receive GitHub findings, Web findings, or each other's answers"
+        ]
+      },
+      {
+        "id": "agent-advice-not-evidence",
+        "any_of": [
+          "Local-agent outputs are advisory analysis, not factual evidence"
+        ]
+      },
+      {
+        "id": "failed-lane-semantics",
+        "any_of": [
+          "A failed lane is not a zero-result finding"
+        ]
+      },
+      {
+        "id": "bounded-stop",
+        "any_of": [
+          "additional searching mostly repeats already-known evidence"
+        ]
+      }
     ]
   }
 }
