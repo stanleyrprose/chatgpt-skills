@@ -4,8 +4,9 @@ This file governs maintenance of this repository only. It is not a global policy
 
 ## Scope
 
-- Implement the frozen v0.5 architecture.
+- Preserve the frozen v0.5 baseline and implement only explicitly authorized architecture amendments.
 - Prefer minimal, dependency-light, reversible changes.
+- Amendment A2 (2026-09-29) authorizes the sixth active Skill, `research-triad`; it does not authorize other architecture expansion.
 - Do not add repo-local Skills, RAG, a router service, a daemon, a database, or unrelated framework layers.
 - Future Work remains non-implementation unless explicitly authorized.
 

@@ -1,14 +1,14 @@
-# GOAL — Implement ChatGPT Context Constitution + Git-Backed Skills v0.5
+# GOAL — Maintain ChatGPT Context Constitution + Git-Backed Skills
 
 **Status:** IN PROGRESS
 **Branch:** `main`
 **Frozen PRD:** `PRD-ChatGPT-Context-Constitution-and-Git-Backed-Skill-Architecture-v0.5-frozen.md`
 **Frozen PRD SHA-256:** `923ab0ab856d9cbbe81899c2bf895c4df7d12287d70254060f082f8fbdde864a`
-**Authorization:** User explicitly froze v0.5 and authorized implementation on 2026-09-08.
+**Authorization:** User explicitly froze v0.5 and authorized implementation on 2026-09-08. User explicitly authorized Amendment A2 adding `research-triad` on 2026-09-29.
 
 ## Goal
 
-Implement the frozen v0.5 architecture without expanding scope.
+Preserve the frozen v0.5 baseline while implementing only explicitly authorized amendments. Amendment A2 adds `research-triad` and no broader framework expansion.
 
 ## Current checkpoint
 
@@ -18,13 +18,14 @@ Phase 2: COMPLETE — five initial Skills + derived index validated.
 Phase 3: COMPLETE — v1.5.2 lossless migration deployed by user; activation/state-anchor/Project Discovery smoke PASS.
 Phase 4: COMPLETE — real-repo E2E on `stanleyrprose/mac-browser-plane` PASS WITH ENVIRONMENT LIMITATION.
 Phase 5: COMPLETE — 10/10 genuine tasks observed; final review on 2026-09-13 found no evidence requiring a v0.5 Skill-architecture expansion.
+Amendment A2: AUTHORIZED / IMPLEMENTING — on 2026-09-29 the maintainer explicitly authorized one post-baseline architecture change: add user-invoked `research-triad@0.1.0`.
 
 ## Frozen invariants
 
 - `SKILL.md` frontmatter + body is the canonical Skill source.
 - `REGISTRY.md` is generated/derived; never hand-maintained as a second truth source.
 - Global Skills only; no repo-local Skill layer.
-- User-invoked: `implement`, `to-spec`, `handoff`.
+- User-invoked current set: `implement`, `to-spec`, `handoff`, plus A2 `research-triad`.
 - Model-invoked: `diagnose`, `code-review`.
 - At most one Primary; automatic Secondary must be model-invoked.
 - Global Execution semantics do not imply `implement` outside software/repo engineering context.
@@ -366,3 +367,17 @@ Status: **IMPLEMENTED AS REFERENCE-ONLY CONTRACTS** on 2026-09-22.
 - Second concrete realization completed in `stanleyrprose/codexpro`: PR #3 binds generated handoffs to `plan_hash + baseline_revision + workspace_fingerprint + worktree_fingerprint` through `.ai-bridge/handoff-baseline.json`. The local executor re-observes the baseline immediately before launch and records terminal `stale_baseline` with `reconcile_required=true` instead of starting the Agent when plan/revision/environment/worktree drift is detected. Legacy plans without a receipt keep existing behavior; bounded `loop-handoff` validates the external baseline only on the first iteration. Local Mac build + generic smoke + execute/watch/loop smoke PASS; GitHub Ubuntu + Windows CI PASS; squash-merged into `fix/handoff-execution-integrity` as `bca481ddab4b2c05cf9fe9c5ab434354cf541755`.
 - Third concrete realization completed in `stanleyrprose/mac-browser-plane`: PR #55 adds a backward-compatible `runtime_projection` read model across existing Browser/OCR surfaces with separate `runtime_state / job_state / verification_state / artifacts`. `browser_doctor` remains the authoritative live readiness probe; ordinary jobs and immediate OCR calls do not infer READY and report runtime readiness as `unknown` unless re-observed. Successful browser/OCR execution does not imply business verification; OCR remains `SOURCE_CROSS_CHECK_REQUIRED`, while C1's non-empty-body gate is only an acquisition-quality check. Provider Result v1 manifest stays unchanged; C0 remains raw artifact; C1/C2/C3 and DOCUMENT_OCR JSON evidence can carry portable projection data with private Mac refs stripped. Provider failures are now separated into `PROVIDER_CONTRACT_MISMATCH`, `PROVIDER_NOT_READY`, `PROVIDER_EXECUTION_FAILED`, and `PROVIDER_RESULT_INVALID`. Clean detached-worktree validation PASS: focused 30/30, full pytest 109/109, compileall PASS, and GitHub PR checks PASS. Squash-merged into `feat/document-ocr-v1` as `4a9719513b7e640242ad22a96ba5bbbfcbd7ab92`. No new MCP tool, worker, daemon, DB schema, listener, Provider manifest version, or production deployment was added.
 - Fourth concrete realization completed in `stanleyrprose/signalforge`: PR #244 consumes optional Provider `runtime_projection` as evidence metadata without granting it business authority. Legacy JSON evidence without the projection remains compatible; a present projection is fail-closed if its contract/state is malformed, contradicts an accepted provider success, or leaks `private_ref`. DOCUMENT_OCR normalization now surfaces provider runtime/job/verification states and hard-sets `business_verification_required=true`; the External Official Review Packet displays those states while preserving `HUMAN_REVIEW_REQUIRED`, `verified_external=false`, and the existing separate promotion contract. No DB migration, Provider permission, scheduler/controller, or automatic business promotion was added. Clean Python 3.13 validation PASS: compileall, focused 19/19, full unittest 496/496, and GitHub verify PASS. Squash-merged to SignalForge `main` as `0ea9133214552f4c2dba8a009b56d299a2a9b54d`. Browser Plane production deployment remains intentionally separate.
+
+
+## Amendment A2 — Research Triad Skill
+
+Status: **AUTHORIZED / IMPLEMENTING** on 2026-09-29.
+
+- The maintainer explicitly authorized one post-v0.5 architecture expansion: add the sixth active Skill, user-invoked `research-triad@0.1.0`.
+- The Skill frames one Research Brief, then independently runs a GitHub lane, a public Web lane, and a Mac-local Antigravity/Hermes planning lane before central evidence reconciliation and synthesis.
+- GitHub discovery attempts at least three materially relevant repositories, but bounded insufficiency is preferred to padding weak matches.
+- Antigravity/Hermes first-pass inputs remain independent of GitHub/Web findings and of each other; their output is advisory analysis rather than factual evidence.
+- `shared/research-routing-evidence-contract.md` remains canonical for research mode, source roles, claim qualification, fallback, time semantics, authorization, and completion states.
+- The Skill is explicit user invocation only; ordinary research does not semantic-auto-route into the higher-cost triad workflow.
+- A2 does not authorize a deterministic router, RAG/DB, queue, daemon, scheduler, new MCP, Tool permission expansion, or default persistence.
+- Canonical amendment record: `docs/implementation-amendment-a2-2026-09-29.md`.

@@ -67,7 +67,7 @@ Repository releases, the Constitution, and individual Skills use independent ver
 
 - Current repository release: `v0.5.0`
 - Current Constitution: `v1.5.2`
-- Active Skills: `0.1.1`
+- Active Skills: 6 total — five baseline Skills at `0.1.1`, plus `research-triad@0.1.0` under Amendment A2
 
 See `CHANGELOG.md` and `docs/release-process.md`.
 
@@ -75,7 +75,7 @@ Release `v0.5.0` is the first public repository snapshot of the frozen v0.5 arch
 
 ## Frozen baseline
 
-v0.5 was frozen and implementation-authorized on 2026-09-08.
+v0.5 was frozen and implementation-authorized on 2026-09-08. It remains the historical baseline; Amendment A2 (2026-09-29) explicitly authorizes the additional user-invoked `research-triad` Skill without reopening the other frozen architecture decisions.
 
 Current Constitution release: **v1.5.2 lossless migration target**.
 
@@ -90,3 +90,5 @@ Frozen PRD SHA-256:
 ## Implementation amendment
 
 A1 (2026-09-08) explicitly retains decision-quality and PKS-capture behavior in `CONSTITUTION.md`, and makes the Router/bootstrap 800-character sub-budget non-blocking while retaining the 3500-character Constitution budget. See `docs/implementation-amendment-a1-2026-09-08.md`.
+
+A2 (2026-09-29) explicitly authorizes `research-triad@0.1.0` as the sixth active, user-invoked Skill while retaining the existing research evidence contract and avoiding new orchestration infrastructure. See `docs/implementation-amendment-a2-2026-09-29.md`.

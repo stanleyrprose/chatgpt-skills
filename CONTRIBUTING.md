@@ -2,7 +2,7 @@
 
 Thanks for your interest in improving `chatgpt-skills`.
 
-This repository is intentionally small. Contributions should improve the existing five-Skill v0.5 architecture without adding unnecessary framework layers.
+This repository is intentionally small. Contributions should preserve the frozen v0.5 baseline plus explicitly authorized amendments without adding unnecessary framework layers.
 
 ## Before changing anything
 
@@ -14,7 +14,7 @@ Read, in order:
 4. the affected `SKILL.md`
 5. `.agents/invocation.md` if routing/composition semantics are involved
 
-The frozen v0.5 architecture remains the baseline. Repository scope constraints are canonical in `AGENTS.md`; do not restate or bypass them here.
+The frozen v0.5 architecture remains the historical baseline. Explicit post-baseline amendments may extend it only when separately authorized and recorded. Repository scope constraints are canonical in `AGENTS.md`; do not restate or bypass them here.
 
 ## Canonical-source rule
 
