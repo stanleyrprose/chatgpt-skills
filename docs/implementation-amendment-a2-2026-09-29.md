@@ -1,7 +1,7 @@
 # Implementation Amendment A2 — Research Triad Skill
 
 Date: 2026-09-29  
-Status: **AUTHORIZED / IMPLEMENTING**
+Status: **IMPLEMENTED / MERGED / CI PASS**
 
 ## Decision
 
@@ -58,3 +58,11 @@ The change must preserve:
 - focused regression tests.
 
 No repository release is implied by this amendment; release/versioning remains a separate operation.
+
+## Closure evidence
+
+- Implementation commit: 81ae41e598cdb5dfef4d4b174bd03715a450fe00.
+- PR: #30, squash-merged on 2026-09-29.
+- Main merge commit: 80756aedd27196f683e6562e06ebf584de38b2e3.
+- Exact-head branch validation: run 36529490025 PASS.
+- Post-merge main validation: run 36529604796 PASS.
