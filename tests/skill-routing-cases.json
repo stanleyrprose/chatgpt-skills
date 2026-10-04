@@ -1,65 +1,64 @@
- 1 | {
- 2 |   "model_semantic": [
- 3 |     {
- 4 |       "id": "diagnose-regression-root-cause",
- 5 |       "prompt": "Investigate the technical regression, narrow the evidence, and identify the root cause before proposing a fix.",
- 6 |       "expected": "diagnose"
- 7 |     },
- 8 |     {
- 9 |       "id": "diagnose-performance-anomaly",
-10 |       "prompt": "An unexplained performance anomaly is causing failures; find the technical defect and root cause.",
-11 |       "expected": "diagnose"
-12 |     },
-13 |     {
-14 |       "id": "code-review-spec-fidelity",
-15 |       "prompt": "Review the implementation against the specification and engineering standards; assess fidelity separately.",
-16 |       "expected": "code-review"
-17 |     },
-18 |     {
-19 |       "id": "code-review-engineering-standards",
-20 |       "prompt": "Do a code review of this implementation for specification fidelity and engineering standards.",
-21 |       "expected": "code-review"
-22 |     },
-23 |     {
-24 |       "id": "negative-implementation-workflow",
-25 |       "prompt": "Execute the authorized repository change through Git and CI, then verify closure.",
-26 |       "expected": null
-27 |     },
-28 |     {
-29 |       "id": "negative-handoff-workflow",
-30 |       "prompt": "Create a concise project handoff with unresolved items and the exact next action.",
-31 |       "expected": null
-32 |     },
-33 |     {
-34 |       "id": "negative-single-keyword",
-35 |       "prompt": "Investigate this error.",
-36 |       "expected": null
-37 |     },
-38 |     {
-39 |       "id": "negative-research-triad-user-workflow",
-40 |       "prompt": "Research this by comparing GitHub repositories, public web evidence, and independent local agent advice, then synthesize the result.",
-41 |       "expected": null
-42 |     },
-43 |     {
-44 |       "id": "douyin-tiktok-publish-full-workflow",
-45 |       "prompt": "Take this Douyin share URL through the established Mac Burmese localization and rendering, Y700 transfer, TikTok PUBLIC commit, and publication verification workflow.",
-46 |       "expected": "douyin-tiktok-publish"
-47 |     },
-48 |     {
-49 |       "id": "douyin-tiktok-publish-one-url",
-50 |       "prompt": "Run the established Douyin share URL workflow with Mac ingest, Burmese localization, Y700 transfer, and one TikTok PUBLIC publication commit.",
-51 |       "expected": "douyin-tiktok-publish"
-52 |     },
-53 |     {
-54 |       "id": "negative-douyin-download-only",
-55 |       "prompt": "Please only download this Douyin link.",
-56 |       "expected": null
-57 |     },
-58 |     {
-59 |       "id": "negative-tiktok-discussion-only",
-60 |       "prompt": "What is TikTok?",
-61 |       "expected": null
-62 |     }
-63 |   ]
-64 | }
-65 | 
+{
+  "model_semantic": [
+    {
+      "id": "diagnose-regression-root-cause",
+      "prompt": "Investigate the technical regression, narrow the evidence, and identify the root cause before proposing a fix.",
+      "expected": "diagnose"
+    },
+    {
+      "id": "diagnose-performance-anomaly",
+      "prompt": "An unexplained performance anomaly is causing failures; find the technical defect and root cause.",
+      "expected": "diagnose"
+    },
+    {
+      "id": "code-review-spec-fidelity",
+      "prompt": "Review the implementation against the specification and engineering standards; assess fidelity separately.",
+      "expected": "code-review"
+    },
+    {
+      "id": "code-review-engineering-standards",
+      "prompt": "Do a code review of this implementation for specification fidelity and engineering standards.",
+      "expected": "code-review"
+    },
+    {
+      "id": "negative-implementation-workflow",
+      "prompt": "Execute the authorized repository change through Git and CI, then verify closure.",
+      "expected": null
+    },
+    {
+      "id": "negative-handoff-workflow",
+      "prompt": "Create a concise project handoff with unresolved items and the exact next action.",
+      "expected": null
+    },
+    {
+      "id": "negative-single-keyword",
+      "prompt": "Investigate this error.",
+      "expected": null
+    },
+    {
+      "id": "negative-research-triad-user-workflow",
+      "prompt": "Research this by comparing GitHub repositories, public web evidence, and independent local agent advice, then synthesize the result.",
+      "expected": null
+    },
+    {
+      "id": "douyin-tiktok-publish-full-workflow",
+      "prompt": "Take this Douyin share URL through the established Mac Burmese localization and rendering, Y700 transfer, TikTok PUBLIC commit, and publication verification workflow.",
+      "expected": "douyin-tiktok-publish"
+    },
+    {
+      "id": "douyin-tiktok-publish-one-url",
+      "prompt": "Run the established Douyin share URL workflow with Mac ingest, Burmese localization, Y700 transfer, and one TikTok PUBLIC publication commit.",
+      "expected": "douyin-tiktok-publish"
+    },
+    {
+      "id": "negative-douyin-download-only",
+      "prompt": "Please only download this Douyin link.",
+      "expected": null
+    },
+    {
+      "id": "negative-tiktok-discussion-only",
+      "prompt": "What is TikTok?",
+      "expected": null
+    }
+  ]
+}
