@@ -199,6 +199,50 @@
           "additional searching mostly repeats already-known evidence"
         ]
       }
+    ],
+    "douyin-tiktok-publish": [
+      {
+        "id": "standing-one-url-authorization",
+        "any_of": [
+          "including exactly one TikTok `PUBLIC` COMMIT attempt"
+        ]
+      },
+      {
+        "id": "current-project-authority",
+        "any_of": [
+          "Project implementation details, commands, runtime paths, selectors, credentials, and current capabilities remain authoritative"
+        ]
+      },
+      {
+        "id": "checksum-gate",
+        "any_of": [
+          "Require the expected SHA-256 to match before the artifact becomes device-ready"
+        ]
+      },
+      {
+        "id": "dry-run-mandatory",
+        "any_of": [
+          "The DRY_RUN gate is mandatory"
+        ]
+      },
+      {
+        "id": "one-shot-commit",
+        "any_of": [
+          "perform exactly one explicit COMMIT for this job"
+        ]
+      },
+      {
+        "id": "ambiguous-no-replay",
+        "any_of": [
+          "Never blindly replay COMMIT"
+        ]
+      },
+      {
+        "id": "verification-strength",
+        "any_of": [
+          "distinguishes strong verification from limited PUBLIC verification"
+        ]
+      }
     ]
   }
 }

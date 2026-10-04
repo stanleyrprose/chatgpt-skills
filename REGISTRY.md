@@ -39,6 +39,13 @@ skills:
     description: "Turn the current discussion and authoritative project context into a review-first engineering PRD/spec without granting implementation authorization."
     aliases:
       - "输出PRD"
+  - name: "douyin-tiktok-publish"
+    version: "0.1.0"
+    status: "active"
+    invocation: "model"
+    path: "skills/productivity/douyin-tiktok-publish/SKILL.md"
+    description: "Use when the user provides a Douyin share URL for the established Douyin-to-TikTok publishing workflow: Mac ingest and Burmese localization/rendering, Y700 transfer, one TikTok PUBLIC commit, and publication verification."
+    aliases: []
   - name: "handoff"
     version: "0.1.1"
     status: "active"

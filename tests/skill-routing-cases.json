@@ -39,6 +39,26 @@
       "id": "negative-research-triad-user-workflow",
       "prompt": "Research this by comparing GitHub repositories, public web evidence, and independent local agent advice, then synthesize the result.",
       "expected": null
+    },
+    {
+      "id": "douyin-tiktok-publish-full-workflow",
+      "prompt": "Take this Douyin share URL through the established Mac Burmese localization and rendering, Y700 transfer, TikTok PUBLIC commit, and publication verification workflow.",
+      "expected": "douyin-tiktok-publish"
+    },
+    {
+      "id": "douyin-tiktok-publish-one-url",
+      "prompt": "Run the established Douyin share URL workflow with Mac ingest, Burmese localization, Y700 transfer, and one TikTok PUBLIC publication commit.",
+      "expected": "douyin-tiktok-publish"
+    },
+    {
+      "id": "negative-douyin-download-only",
+      "prompt": "Please only download this Douyin link.",
+      "expected": null
+    },
+    {
+      "id": "negative-tiktok-discussion-only",
+      "prompt": "What is TikTok?",
+      "expected": null
     }
   ]
 }

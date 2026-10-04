@@ -8,4 +8,4 @@
 
 ## Model-invoked
 
-_None._
+- `douyin-tiktok-publish` — Use when the user provides a Douyin share URL for the established Douyin-to-TikTok publishing workflow: Mac ingest and Burmese localization/rendering, Y700 transfer, one TikTok PUBLIC commit, and publication verification.
