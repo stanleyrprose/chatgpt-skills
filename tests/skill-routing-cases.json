@@ -67,7 +67,7 @@
     },
     {
       "id": "negative-telegram-arbitrary-device-command",
-      "prompt": "Use Telegram to run an arbitrary shell command on my device.",
+      "prompt": "Please execute an arbitrary device shell command through the bot.",
       "expected": null
     }
   ]
