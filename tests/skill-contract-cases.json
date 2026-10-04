@@ -1,204 +1,249 @@
-{
-  "skill_contracts": {
-    "implement": [
-      {
-        "id": "authority-and-state",
-        "any_of": [
-          "current project state using Lazy Discovery"
-        ]
-      },
-      {
-        "id": "smallest-reversible-change",
-        "any_of": [
-          "smallest reversible implementation"
-        ]
-      },
-      {
-        "id": "authorized-scope",
-        "any_of": [
-          "Implement only the authorized scope"
-        ]
-      },
-      {
-        "id": "minimal-validation",
-        "any_of": [
-          "Run the smallest relevant validation"
-        ]
-      },
-      {
-        "id": "git-ci-closure",
-        "any_of": [
-          "Commit atomically, push, verify CI/runtime evidence"
-        ]
-      }
-    ],
-    "diagnose": [
-      {
-        "id": "observed-failure",
-        "any_of": [
-          "State the observed failure precisely"
-        ]
-      },
-      {
-        "id": "evidence-before-change",
-        "any_of": [
-          "Reproduce or identify the strongest available evidence"
-        ]
-      },
-      {
-        "id": "falsifiable-hypotheses",
-        "any_of": [
-          "falsifiable hypotheses"
-        ]
-      },
-      {
-        "id": "root-cause-not-symptom",
-        "any_of": [
-          "distinguish root cause from symptoms",
-          "root cause explains the observed behavior"
-        ]
-      },
-      {
-        "id": "regression-proof",
-        "any_of": [
-          "minimal regression proof/test",
-          "minimal regression proof"
-        ]
-      }
-    ],
-    "code-review": [
-      {
-        "id": "spec-fidelity-axis",
-        "any_of": [
-          "Spec Fidelity"
-        ]
-      },
-      {
-        "id": "engineering-standards-axis",
-        "any_of": [
-          "Engineering Standards"
-        ]
-      },
-      {
-        "id": "axes-remain-separate",
-        "any_of": [
-          "Keep the two conclusions separate",
-          "evaluated separately"
-        ]
-      },
-      {
-        "id": "material-findings",
-        "any_of": [
-          "Report only material findings"
-        ]
-      },
-      {
-        "id": "evidence-and-remediation",
-        "any_of": [
-          "evidence/location"
-        ],
-        "all_of": [
-          "severity",
-          "minimal remediation"
-        ]
-      }
-    ],
-    "to-spec": [
-      {
-        "id": "authoritative-project-facts",
-        "any_of": [
-          "authoritative Git sources"
-        ]
-      },
-      {
-        "id": "unresolved-choices",
-        "any_of": [
-          "Decision / TBD / Unknown"
-        ]
-      },
-      {
-        "id": "review-first-artifact",
-        "any_of": [
-          "review-first downloadable"
-        ]
-      },
-      {
-        "id": "authorization-boundary",
-        "any_of": [
-          "PRD/spec generation is not implementation authorization"
-        ]
-      }
-    ],
-    "handoff": [
-      {
-        "id": "canonical-reference",
-        "any_of": [
-          "Reference canonical artifacts"
-        ]
-      },
-      {
-        "id": "verification-state",
-        "any_of": [
-          "tests / CI / verification"
-        ]
-      },
-      {
-        "id": "exact-next-action",
-        "any_of": [
-          "exact next action"
-        ]
-      },
-      {
-        "id": "explicit-na",
-        "any_of": [
-          "N/A + reason"
-        ]
-      },
-      {
-        "id": "no-auto-invoke",
-        "any_of": [
-          "suggestion only, never auto-invoke",
-          "never auto-invokes it"
-        ]
-      }
-    ],
-    "research-triad": [
-      {
-        "id": "shared-evidence-contract",
-        "any_of": [
-          "Use `shared/research-routing-evidence-contract.md`"
-        ]
-      },
-      {
-        "id": "github-three-repo-attempt",
-        "any_of": [
-          "Attempt to discover at least three materially relevant repositories"
-        ]
-      },
-      {
-        "id": "independent-first-pass",
-        "any_of": [
-          "must not receive GitHub findings, Web findings, or each other's answers"
-        ]
-      },
-      {
-        "id": "agent-advice-not-evidence",
-        "any_of": [
-          "Local-agent outputs are advisory analysis, not factual evidence"
-        ]
-      },
-      {
-        "id": "failed-lane-semantics",
-        "any_of": [
-          "A failed lane is not a zero-result finding"
-        ]
-      },
-      {
-        "id": "bounded-stop",
-        "any_of": [
-          "additional searching mostly repeats already-known evidence"
-        ]
-      }
-    ]
-  }
-}
+  1 | {
+  2 |   "skill_contracts": {
+  3 |     "implement": [
+  4 |       {
+  5 |         "id": "authority-and-state",
+  6 |         "any_of": [
+  7 |           "current project state using Lazy Discovery"
+  8 |         ]
+  9 |       },
+ 10 |       {
+ 11 |         "id": "smallest-reversible-change",
+ 12 |         "any_of": [
+ 13 |           "smallest reversible implementation"
+ 14 |         ]
+ 15 |       },
+ 16 |       {
+ 17 |         "id": "authorized-scope",
+ 18 |         "any_of": [
+ 19 |           "Implement only the authorized scope"
+ 20 |         ]
+ 21 |       },
+ 22 |       {
+ 23 |         "id": "minimal-validation",
+ 24 |         "any_of": [
+ 25 |           "Run the smallest relevant validation"
+ 26 |         ]
+ 27 |       },
+ 28 |       {
+ 29 |         "id": "git-ci-closure",
+ 30 |         "any_of": [
+ 31 |           "Commit atomically, push, verify CI/runtime evidence"
+ 32 |         ]
+ 33 |       }
+ 34 |     ],
+ 35 |     "diagnose": [
+ 36 |       {
+ 37 |         "id": "observed-failure",
+ 38 |         "any_of": [
+ 39 |           "State the observed failure precisely"
+ 40 |         ]
+ 41 |       },
+ 42 |       {
+ 43 |         "id": "evidence-before-change",
+ 44 |         "any_of": [
+ 45 |           "Reproduce or identify the strongest available evidence"
+ 46 |         ]
+ 47 |       },
+ 48 |       {
+ 49 |         "id": "falsifiable-hypotheses",
+ 50 |         "any_of": [
+ 51 |           "falsifiable hypotheses"
+ 52 |         ]
+ 53 |       },
+ 54 |       {
+ 55 |         "id": "root-cause-not-symptom",
+ 56 |         "any_of": [
+ 57 |           "distinguish root cause from symptoms",
+ 58 |           "root cause explains the observed behavior"
+ 59 |         ]
+ 60 |       },
+ 61 |       {
+ 62 |         "id": "regression-proof",
+ 63 |         "any_of": [
+ 64 |           "minimal regression proof/test",
+ 65 |           "minimal regression proof"
+ 66 |         ]
+ 67 |       }
+ 68 |     ],
+ 69 |     "code-review": [
+ 70 |       {
+ 71 |         "id": "spec-fidelity-axis",
+ 72 |         "any_of": [
+ 73 |           "Spec Fidelity"
+ 74 |         ]
+ 75 |       },
+ 76 |       {
+ 77 |         "id": "engineering-standards-axis",
+ 78 |         "any_of": [
+ 79 |           "Engineering Standards"
+ 80 |         ]
+ 81 |       },
+ 82 |       {
+ 83 |         "id": "axes-remain-separate",
+ 84 |         "any_of": [
+ 85 |           "Keep the two conclusions separate",
+ 86 |           "evaluated separately"
+ 87 |         ]
+ 88 |       },
+ 89 |       {
+ 90 |         "id": "material-findings",
+ 91 |         "any_of": [
+ 92 |           "Report only material findings"
+ 93 |         ]
+ 94 |       },
+ 95 |       {
+ 96 |         "id": "evidence-and-remediation",
+ 97 |         "any_of": [
+ 98 |           "evidence/location"
+ 99 |         ],
+100 |         "all_of": [
+101 |           "severity",
+102 |           "minimal remediation"
+103 |         ]
+104 |       }
+105 |     ],
+106 |     "to-spec": [
+107 |       {
+108 |         "id": "authoritative-project-facts",
+109 |         "any_of": [
+110 |           "authoritative Git sources"
+111 |         ]
+112 |       },
+113 |       {
+114 |         "id": "unresolved-choices",
+115 |         "any_of": [
+116 |           "Decision / TBD / Unknown"
+117 |         ]
+118 |       },
+119 |       {
+120 |         "id": "review-first-artifact",
+121 |         "any_of": [
+122 |           "review-first downloadable"
+123 |         ]
+124 |       },
+125 |       {
+126 |         "id": "authorization-boundary",
+127 |         "any_of": [
+128 |           "PRD/spec generation is not implementation authorization"
+129 |         ]
+130 |       }
+131 |     ],
+132 |     "handoff": [
+133 |       {
+134 |         "id": "canonical-reference",
+135 |         "any_of": [
+136 |           "Reference canonical artifacts"
+137 |         ]
+138 |       },
+139 |       {
+140 |         "id": "verification-state",
+141 |         "any_of": [
+142 |           "tests / CI / verification"
+143 |         ]
+144 |       },
+145 |       {
+146 |         "id": "exact-next-action",
+147 |         "any_of": [
+148 |           "exact next action"
+149 |         ]
+150 |       },
+151 |       {
+152 |         "id": "explicit-na",
+153 |         "any_of": [
+154 |           "N/A + reason"
+155 |         ]
+156 |       },
+157 |       {
+158 |         "id": "no-auto-invoke",
+159 |         "any_of": [
+160 |           "suggestion only, never auto-invoke",
+161 |           "never auto-invokes it"
+162 |         ]
+163 |       }
+164 |     ],
+165 |     "research-triad": [
+166 |       {
+167 |         "id": "shared-evidence-contract",
+168 |         "any_of": [
+169 |           "Use `shared/research-routing-evidence-contract.md`"
+170 |         ]
+171 |       },
+172 |       {
+173 |         "id": "github-three-repo-attempt",
+174 |         "any_of": [
+175 |           "Attempt to discover at least three materially relevant repositories"
+176 |         ]
+177 |       },
+178 |       {
+179 |         "id": "independent-first-pass",
+180 |         "any_of": [
+181 |           "must not receive GitHub findings, Web findings, or each other's answers"
+182 |         ]
+183 |       },
+184 |       {
+185 |         "id": "agent-advice-not-evidence",
+186 |         "any_of": [
+187 |           "Local-agent outputs are advisory analysis, not factual evidence"
+188 |         ]
+189 |       },
+190 |       {
+191 |         "id": "failed-lane-semantics",
+192 |         "any_of": [
+193 |           "A failed lane is not a zero-result finding"
+194 |         ]
+195 |       },
+196 |       {
+197 |         "id": "bounded-stop",
+198 |         "any_of": [
+199 |           "additional searching mostly repeats already-known evidence"
+200 |         ]
+201 |       }
+202 |     ],
+203 |     "douyin-tiktok-publish": [
+204 |       {
+205 |         "id": "standing-one-url-authorization",
+206 |         "any_of": [
+207 |           "including exactly one TikTok `PUBLIC` COMMIT attempt"
+208 |         ]
+209 |       },
+210 |       {
+211 |         "id": "current-project-authority",
+212 |         "any_of": [
+213 |           "Project implementation details, commands, runtime paths, selectors, credentials, and current capabilities remain authoritative"
+214 |         ]
+215 |       },
+216 |       {
+217 |         "id": "checksum-gate",
+218 |         "any_of": [
+219 |           "Require the expected SHA-256 to match before the artifact becomes device-ready"
+220 |         ]
+221 |       },
+222 |       {
+223 |         "id": "dry-run-mandatory",
+224 |         "any_of": [
+225 |           "The DRY_RUN gate is mandatory"
+226 |         ]
+227 |       },
+228 |       {
+229 |         "id": "one-shot-commit",
+230 |         "any_of": [
+231 |           "perform exactly one explicit COMMIT for this job"
+232 |         ]
+233 |       },
+234 |       {
+235 |         "id": "ambiguous-no-replay",
+236 |         "any_of": [
+237 |           "Never blindly replay COMMIT"
+238 |         ]
+239 |       },
+240 |       {
+241 |         "id": "verification-strength",
+242 |         "any_of": [
+243 |           "distinguishes strong verification from limited PUBLIC verification"
+244 |         ]
+245 |       }
+246 |     ]
+247 |   }
+248 | }
+249 | 
