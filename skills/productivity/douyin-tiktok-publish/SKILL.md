@@ -1,9 +1,9 @@
 ---
 name: douyin-tiktok-publish
-version: 0.1.0
+version: 0.1.1
 status: active
 invocation: model
-description: "Use when the user provides a Douyin share URL for the established Douyin-to-TikTok publishing workflow: Mac ingest and Burmese localization/rendering, Y700 transfer, one TikTok PUBLIC commit, and publication verification."
+description: "Use when a valid Douyin share URL enters the established ChatGPT or dedicated Telegram Douyin-to-TikTok workflow: Mac ingest and Burmese localization/rendering, Y700 transfer, one TikTok PUBLIC commit, and publication verification."
 aliases: []
 ---
 
@@ -15,9 +15,9 @@ This Skill owns only orchestration and completion semantics. Project implementat
 
 ## Use when
 
-Use this Skill when the user supplies a valid Douyin share URL and the current request does not narrow the task to download-only, analysis-only, localization-only, DRY_RUN-only, or otherwise forbid publication.
+Use this Skill when the user supplies a valid Douyin share URL through ChatGPT or the dedicated Y700 Automation Telegram control plane and the current request does not narrow the task to download-only, analysis-only, localization-only, DRY_RUN-only, or otherwise forbid publication.
 
-A bare Douyin share URL in this workflow is sufficient task intent. Do not require the user to repeat the workflow name.
+A bare Douyin share URL in either authorized ingress is sufficient task intent. Do not require the user to repeat the workflow name.
 
 Do not activate merely because Douyin or TikTok is mentioned in discussion, because a URL is quoted as an example, or because the user asks a question about a video rather than asking the established workflow to run.
 
@@ -47,6 +47,26 @@ Before execution, recover current state from the strongest available sources rat
 Use GitHub as the SOT for code/config/docs and the live runtime as the SOT for job/device state. Never reconstruct a running job from memory.
 
 Reuse the existing Mac production pipeline, capability-based handoff, filesystem-first Y700 bridge, and TikTok publisher. Do not add a queue, database, message broker, scheduler, daemon, object-storage dependency, or new MCP merely to run this workflow.
+
+
+## Telegram Control Plane
+
+Telegram is a bounded ingress and notification surface, not a general-purpose command channel.
+
+When this workflow originates from the dedicated Y700 Automation Telegram bot:
+
+- require the dedicated bot runtime to enforce an allowlisted user/chat identity before accepting automation intent;
+- treat a bare valid Douyin share URL exactly like the same URL supplied through ChatGPT for this Skill's one-URL authorization;
+- keep additional control intents bounded to `/status [job_id]`, `/cancel <job_id>`, and `/help`;
+- allow `/cancel` only while cancellation is retry-safe before the final COMMIT side effect; if the job is COMMITTING, published, or ambiguous, reconcile instead of claiming cancellation;
+- emit public-safe status transitions at meaningful workflow boundaries using the current project notifier;
+- keep the bot token, allowed user/chat identifiers, home channel/thread, Telegram sessions, and message history outside Git;
+- never translate arbitrary Telegram text into shell, ADB, root, package-management, account/profile mutation, messaging, follow/delete, or critical-partition actions.
+
+For Telegram-originated work, the useful status vocabulary is `RECEIVED`, `PRODUCING`, `TRANSFERRING`, `READY_TO_PUBLISH`, `DRY_RUN_PASS`, `COMMITTING`, `PUBLISHED_VERIFIED`, `PUBLISHED_WITH_LIMITED_VERIFICATION`, `RECONCILE_REQUIRED`, `FAILED_SAFE`, and `DUPLICATE`.
+
+Notification delivery failure must not mutate publication truth, trigger a COMMIT, or authorize a retry. Treat notification delivery as an observational side channel; durable Mac/Y700 state remains authoritative.
+
 
 ## Workflow
 
@@ -133,6 +153,8 @@ For `RECONCILE_REQUIRED`, inspect durable state and profile/app evidence before 
 
 Finalize the Mac production job only after the Y700 publication state has been reconciled.
 
+If Telegram was the ingress, attempt a terminal public-safe Telegram receipt after terminal state classification. A failed Telegram send does not downgrade, upgrade, retry, or otherwise mutate the publication result.
+
 Return a concise receipt containing the durable identifiers and non-secret evidence that matter to the user, such as:
 
 - source/job identity;
@@ -160,6 +182,7 @@ When current Git SOT and live runtime disagree, stop mutation at the unsafe boun
 - "PUBLIC was configured earlier, so it is still PUBLIC." Visibility must be observed at the POST_CONFIG gate for the current job.
 - "TikTok accepted the submit, so public profile verification is proven." Submission confirmation and strong post-publication verification are different evidence levels.
 - "The Mac can control Android too, so using it for runtime automation is simpler." Preserve the production/runtime boundary; Y700 owns routine Android/TikTok execution.
+- "Telegram delivery failed, so the publishing workflow failed and should be replayed." Telegram notification is observational; reconcile durable workflow state and never infer a need to repeat COMMIT from a notification failure.
 
 ## Red Flags
 
@@ -171,6 +194,7 @@ When current Git SOT and live runtime disagree, stop mutation at the unsafe boun
 - Publisher state remains `COMMITTING`, unknown, timed out, or otherwise ambiguous after the final action.
 - The TikTok account/session differs from the intended existing authenticated session.
 - A capability URL, credential, token, cookie, authentication database, runtime media, or other secret/private artifact is about to enter public Git or the user-facing receipt.
+- A Telegram request comes from a non-allowlisted identity, asks for arbitrary system/device actions outside the bounded control intents, or attempts to make Telegram notification state authoritative over durable job state.
 
 ## Verification
 
@@ -183,4 +207,5 @@ When current Git SOT and live runtime disagree, stop mutation at the unsafe boun
 - [ ] Any ambiguous final side effect was reconciled instead of blindly retried.
 - [ ] The terminal result distinguishes strong verification from limited PUBLIC verification.
 - [ ] The Mac job was finalized only after the Y700 publication outcome was reconciled.
-- [ ] No secret, auth material, runtime media, or capability URL was committed to Git or exposed as completion evidence.
+- [ ] For Telegram ingress, the dedicated allowlist boundary was enforced, bounded control semantics were preserved, and public-safe status receipts were attempted without making notification delivery authoritative.
+- [ ] No secret, auth material, runtime media, Telegram credential/allowlist value, or capability URL was committed to Git or exposed as completion evidence.

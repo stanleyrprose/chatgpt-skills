@@ -4,11 +4,11 @@
 **Branch:** `main`
 **Frozen PRD:** `PRD-ChatGPT-Context-Constitution-and-Git-Backed-Skill-Architecture-v0.5-frozen.md`
 **Frozen PRD SHA-256:** `923ab0ab856d9cbbe81899c2bf895c4df7d12287d70254060f082f8fbdde864a`
-**Authorization:** User explicitly froze v0.5 and authorized implementation on 2026-09-08. User explicitly authorized Amendment A2 adding `research-triad` on 2026-09-29 and Amendment A3 adding `douyin-tiktok-publish` on 2026-10-04.
+**Authorization:** User explicitly froze v0.5 and authorized implementation on 2026-09-08. User explicitly authorized Amendment A2 adding `research-triad` on 2026-09-29, Amendment A3 adding `douyin-tiktok-publish` on 2026-10-04, and Amendment A4 extending that Skill to the dedicated Telegram Y700 Automation control/notification plane on 2026-10-04.
 
 ## Goal
 
-Preserve the frozen v0.5 baseline while implementing only explicitly authorized amendments. Amendment A2 adds `research-triad`; Amendment A3 adds the bounded `douyin-tiktok-publish` personal workflow. Neither amendment authorizes broader framework expansion.
+Preserve the frozen v0.5 baseline while implementing only explicitly authorized amendments. Amendment A2 adds `research-triad`; Amendment A3 adds the bounded `douyin-tiktok-publish` personal workflow; Amendment A4 extends that same Skill to a dedicated Telegram ingress/notification plane without adding a new Skill or orchestration service. None authorizes broader framework expansion.
 
 ## Current checkpoint
 
@@ -20,6 +20,7 @@ Phase 4: COMPLETE — real-repo E2E on `stanleyrprose/mac-browser-plane` PASS WI
 Phase 5: COMPLETE — 10/10 genuine tasks observed; final review on 2026-09-13 found no evidence requiring a v0.5 Skill-architecture expansion.
 Amendment A2: COMPLETE — research-triad@0.1.0 merged through PR #30; exact-head and post-merge CI both PASS.
 Amendment A3: COMPLETE — douyin-tiktok-publish@0.1.0 merged through PR #32; exact-head and post-merge CI both PASS.
+Amendment A4: IMPLEMENTED / LIVE TELEGRAM E2E PENDING — douyin-tiktok-publish@0.1.1; AndroidAgent Telegram control-plane PR #4 merged as `0e539c45ebfb15976f194c49a6234e306e63eb28` with post-merge CI run `37208793841` PASS; dedicated bot secret/allowlist live gate remains pending.
 
 ## Frozen invariants
 
@@ -27,7 +28,7 @@ Amendment A3: COMPLETE — douyin-tiktok-publish@0.1.0 merged through PR #32; ex
 - `REGISTRY.md` is generated/derived; never hand-maintained as a second truth source.
 - Global Skills only; no repo-local Skill layer.
 - User-invoked current set: `implement`, `to-spec`, `handoff`, plus A2 `research-triad`.
-- Model-invoked: `diagnose`, `code-review`, plus A3 `douyin-tiktok-publish`.
+- Model-invoked: `diagnose`, `code-review`, plus A3/A4 `douyin-tiktok-publish`.
 - At most one Primary; automatic Secondary must be model-invoked.
 - Global Execution semantics do not imply `implement` outside software/repo engineering context.
 - No DB, RAG, deterministic router service, daemon, or new MCP.
@@ -399,3 +400,18 @@ Status: **COMPLETE / MERGED / CI PASS** on 2026-10-04.
 - Canonical amendment record: `docs/implementation-amendment-a3-2026-10-04.md`.
 
 - A3 closure evidence: PR #32; final branch head `1decd8387dca52502da6d87a2a6461eb46cde6d1`; squash merge `ab454c638a90fec65f53fd8d13ad4d05b478773b`; exact-head CI PASS; post-merge main workflow run `37199346327` PASS.
+
+
+## Amendment A4 — Telegram ingress for Douyin to TikTok Skill
+
+Status: **IMPLEMENTED / LIVE TELEGRAM E2E PENDING** on 2026-10-04.
+
+- The maintainer explicitly authorized the existing `douyin-tiktok-publish` Skill to accept the established workflow through a dedicated Y700 Automation Telegram bot as well as ChatGPT; this is a version bump to `0.1.1`, not an eighth Skill.
+- Telegram is a bounded ingress/notification plane. The allowed control intents are one valid Douyin URL plus `/status`, retry-safe pre-COMMIT `/cancel`, and `/help`; it is not a general shell/root/ADB interface.
+- One supplied Douyin URL retains the A3 standing authorization: one durable job and exactly one PUBLIC COMMIT attempt after mandatory DRY_RUN, unless the current message narrows or revokes publication.
+- Telegram status delivery is observational only. Delivery failure cannot mutate publication truth, authorize a COMMIT, or trigger replay.
+- Dedicated bot credentials, allowlist identifiers, Telegram sessions and private runtime state remain outside Git.
+- The runtime implementation is canonical in `stanleyrprose/AndroidAgent_DouyinOpAuto`: PR #4 merged as `0e539c45ebfb15976f194c49a6234e306e63eb28`; post-merge validation run `37208793841` PASS.
+- The isolated Mac Hermes profile `y700automation` and clean Git-driven runtime have passed local preparation/smoke tests without a bot secret.
+- A4 closure remains pending only on the dedicated Telegram bot token/allowlist injection and one real Telegram-originated end-to-end acceptance.
+- Canonical amendment record: `docs/implementation-amendment-a4-2026-10-04.md`.

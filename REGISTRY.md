@@ -40,11 +40,11 @@ skills:
     aliases:
       - "输出PRD"
   - name: "douyin-tiktok-publish"
-    version: "0.1.0"
+    version: "0.1.1"
     status: "active"
     invocation: "model"
     path: "skills/productivity/douyin-tiktok-publish/SKILL.md"
-    description: "Use when the user provides a Douyin share URL for the established Douyin-to-TikTok publishing workflow: Mac ingest and Burmese localization/rendering, Y700 transfer, one TikTok PUBLIC commit, and publication verification."
+    description: "Use when a valid Douyin share URL enters the established ChatGPT or dedicated Telegram Douyin-to-TikTok workflow: Mac ingest and Burmese localization/rendering, Y700 transfer, one TikTok PUBLIC commit, and publication verification."
     aliases: []
   - name: "handoff"
     version: "0.1.1"

@@ -242,6 +242,26 @@
         "any_of": [
           "distinguishes strong verification from limited PUBLIC verification"
         ]
+      },
+      {
+        "id": "telegram-bounded-ingress",
+        "any_of": [
+          "Telegram is a bounded ingress and notification surface, not a general-purpose command channel"
+        ]
+      },
+      {
+        "id": "telegram-notification-non-authority",
+        "any_of": [
+          "Notification delivery failure must not mutate publication truth, trigger a COMMIT, or authorize a retry"
+        ]
+      },
+      {
+        "id": "telegram-bounded-controls",
+        "all_of": [
+          "/status [job_id]",
+          "/cancel <job_id>",
+          "/help"
+        ]
       }
     ]
   }
