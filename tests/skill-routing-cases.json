@@ -59,6 +59,16 @@
       "id": "negative-tiktok-discussion-only",
       "prompt": "What is TikTok?",
       "expected": null
+    },
+    {
+      "id": "douyin-tiktok-publish-telegram-ingress",
+      "prompt": "A valid Douyin share URL arrived through the dedicated Y700 Telegram bot; run the established Burmese localization, Y700 transfer, one TikTok PUBLIC commit, and publication verification workflow.",
+      "expected": "douyin-tiktok-publish"
+    },
+    {
+      "id": "negative-telegram-arbitrary-device-command",
+      "prompt": "Please execute an arbitrary device shell command through the bot.",
+      "expected": null
     }
   ]
 }
