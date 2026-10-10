@@ -22,7 +22,7 @@ Amendment A2: COMPLETE — research-triad@0.1.0 merged through PR #30; exact-hea
 Amendment A3: COMPLETE — douyin-tiktok-publish@0.1.0 merged through PR #32; exact-head and post-merge CI both PASS.
 Amendment A4: IMPLEMENTED / LIVE TELEGRAM E2E PENDING — douyin-tiktok-publish@0.1.1; AndroidAgent Telegram control-plane PR #4 merged as `0e539c45ebfb15976f194c49a6234e306e63eb28` with post-merge CI run `37208793841` PASS; dedicated bot secret/allowlist live gate remains pending.
 
-Policy alignment (2026-10-10): **PHASE D / IMPLEMENTED_UNTESTED** on `docs/karpathy-goal-diff-20261010`. Source alignment only: goal/evidence criteria, surgical diff, Phase D/V/R sequencing, and existing `implement` contract. No tests/PR/CI/Merge or production/UI deployment in this phase. Phase V and Phase R remain pending their gates; historical `dist/custom-instructions-v1.5.2.txt` is unchanged and is not evidence of an updated ChatGPT UI policy.
+Policy alignment (2026-10-10): **PHASE V / VERIFIED; PHASE R PENDING** on `docs/karpathy-goal-diff-20261010`. Changes: goal/evidence criteria, surgical diff, Phase D/V/R sequencing, and existing `implement@0.1.2` contract, without adding a Skill. Phase V evidence on isolated Mac worktree: `python3 scripts/build-registry.py --check` PASS; `python3 scripts/skill_quality_gate.py` PASS (7 active Skills, 7 contracts); `python3 -m unittest discover -s tests -p test_*.py` 33/33 PASS. Partner `stanleyrprose/engineering-repo-template` worktree: 4/4 tests PASS and compileall PASS. `dist/custom-instructions-v1.5.3.txt` is a distributable snapshot matching this branch's `CONSTITUTION.md`; historical v1.5.2 remains unchanged. PR/CI/Merge and the separate ChatGPT Personalization UI install are not yet evidenced or claimed.
 
 ## Frozen invariants
 
