@@ -198,6 +198,31 @@
         "any_of": [
           "additional searching mostly repeats already-known evidence"
         ]
+      },
+      {
+        "id": "claim-linked-material-evidence",
+        "all_of": [
+          "For each decision-changing material claim",
+          "qualified, inspected evidence",
+          "supporting and contradicting evidence"
+        ]
+      },
+      {
+        "id": "decision-changing-alternative",
+        "all_of": [
+          "plausible decision-changing alternative",
+          "First use evidence already collected",
+          "only targeted verification"
+        ]
+      },
+      {
+        "id": "blocking-unknown-decision-gate",
+        "all_of": [
+          "classify remaining unknowns",
+          "blocking the present decision",
+          "ready_with_limits",
+          "Finish with limits when remaining uncertainty cannot materially change the present decision"
+        ]
       }
     ],
     "douyin-tiktok-publish": [
