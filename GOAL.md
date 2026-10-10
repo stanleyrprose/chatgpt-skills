@@ -4,7 +4,7 @@
 **Branch:** `main`
 **Frozen PRD:** `PRD-ChatGPT-Context-Constitution-and-Git-Backed-Skill-Architecture-v0.5-frozen.md`
 **Frozen PRD SHA-256:** `923ab0ab856d9cbbe81899c2bf895c4df7d12287d70254060f082f8fbdde864a`
-**Authorization:** User explicitly froze v0.5 and authorized implementation on 2026-09-08. User explicitly authorized Amendment A2 adding `research-triad` on 2026-09-29, Amendment A3 adding `douyin-tiktok-publish` on 2026-10-04, and Amendment A4 extending that Skill to the dedicated Telegram Y700 Automation control/notification plane on 2026-10-04.
+**Authorization:** User explicitly froze v0.5 and authorized implementation on 2026-09-08. User explicitly authorized Amendment A2 adding `research-triad` on 2026-09-29, Amendment A3 adding `douyin-tiktok-publish` on 2026-10-04, and Amendment A4 extending that Skill to the dedicated Telegram Y700 Automation control/notification plane on 2026-10-04. On 2026-10-10 the user separately authorized bounded engineering policy/Skill wording alignment inspired by Karpathy guidelines without an additional Skill or runtime architecture expansion.
 
 ## Goal
 
@@ -21,6 +21,8 @@ Phase 5: COMPLETE — 10/10 genuine tasks observed; final review on 2026-09-13 f
 Amendment A2: COMPLETE — research-triad@0.1.0 merged through PR #30; exact-head and post-merge CI both PASS.
 Amendment A3: COMPLETE — douyin-tiktok-publish@0.1.0 merged through PR #32; exact-head and post-merge CI both PASS.
 Amendment A4: IMPLEMENTED / LIVE TELEGRAM E2E PENDING — douyin-tiktok-publish@0.1.1; AndroidAgent Telegram control-plane PR #4 merged as `0e539c45ebfb15976f194c49a6234e306e63eb28` with post-merge CI run `37208793841` PASS; dedicated bot secret/allowlist live gate remains pending.
+
+Policy alignment (2026-10-10): **PHASE D / IMPLEMENTED_UNTESTED** on `docs/karpathy-goal-diff-20261010`. Source alignment only: goal/evidence criteria, surgical diff, Phase D/V/R sequencing, and existing `implement` contract. No tests/PR/CI/Merge or production/UI deployment in this phase. Phase V and Phase R remain pending their gates; historical `dist/custom-instructions-v1.5.2.txt` is unchanged and is not evidence of an updated ChatGPT UI policy.
 
 ## Frozen invariants
 

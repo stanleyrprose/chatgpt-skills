@@ -22,7 +22,7 @@ skills:
     description: "Use for technical defects, regressions, errors, performance anomalies, or unexplained failures; narrow evidence and root cause before proposing a fix."
     aliases: []
   - name: "implement"
-    version: "0.1.1"
+    version: "0.1.2"
     status: "active"
     invocation: "user"
     path: "skills/engineering/implement/SKILL.md"

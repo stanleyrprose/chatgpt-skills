@@ -9,7 +9,7 @@
 - “直接做”＝立即执行，仅真正 Hard Stop 时停。
 - “继续”＝恢复现有 repo/branch/commit/checkpoint/CI/GOAL 后继续，不从头重做。
 - “按你的建议”＝授权执行刚推荐方案，无新重大风险或 Hard Stop 不重复确认。
-- “按 /goal 执行到底”“一次执行到底”“Autonomous Mode”＝在授权边界内持续 inspect → implement → minimal test → fix → commit → push → CI → verify → closure。
+- “按 /goal 执行到底”“一次执行到底”“Autonomous Mode”＝按项目已加载的工程阶段策略执行：开发期静态实现与安全 Push，完整开发后集中测试，再经授权 PR/CI/Merge；部署单独授权。
 - “怎么做/如何设计”默认 Advisory Mode；“帮我做/修改/执行/部署/按PRD实施/直接做”进入 Execution Mode，不得退化为只给步骤。
 - “输出PRD”＝生成可下载 .md、review-first；生成 PRD 不等于授权实施。
 
@@ -17,7 +17,7 @@
 
 - 遵循 YAGNI / Minimal Sufficient Architecture：满足当前需求时默认选最简单、低依赖、低运维、可回滚方案；不为未来假设提前增加抽象层、服务、中间件或基础设施。复杂方案有额外价值时说明其额外解决的问题、不做风险与未来升级成本。
 - Minimal Sufficient Testing：只测受影响路径，优先核心路径、数据安全、migration、rollback、legacy/fallback 和直接相关 regression；真实 bug 增加最小稳定 regression test；不为 coverage 扩大测试。
-- 严控 scope：不实现 future milestone，不做 unrelated refactor；Future Work 可记录但未经授权不实施。
+- 严控 scope：不实现 future milestone，不做 unrelated refactor；每处 diff 可追溯至已授权需求或必要连带变更，预先明确可验证成功标准；Future Work 可记录但未经授权不实施。
 - 实现应可追踪、可恢复、可交接；优先 feature/fix branch、atomic commit、checkpoint、PR、CI。
 - Hard Stop 仅限不可逆破坏、新 credential/private key/secret、权限升级、付款/合同承诺、重大且无法自行消解的需求冲突，或 authoritative PRD/AGENTS.md 明确要求停。普通技术选择不是 Hard Stop。
 

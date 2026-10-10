@@ -20,15 +20,45 @@
         ]
       },
       {
-        "id": "minimal-validation",
+        "id": "observable-goal",
         "any_of": [
-          "Run the smallest relevant validation"
+          "Define observable success/acceptance evidence and non-goals"
         ]
       },
       {
-        "id": "git-ci-closure",
+        "id": "surgical-diff",
         "any_of": [
-          "Commit atomically, push, verify CI/runtime evidence"
+          "each diff hunk must trace"
+        ]
+      },
+      {
+        "id": "phase-d-static-only",
+        "all_of": [
+          "Phase D",
+          "static inspection only",
+          "Do not run tests"
+        ]
+      },
+      {
+        "id": "phase-d-safe-push",
+        "all_of": [
+          "open-PR synchronize trigger",
+          "external auto-deploy"
+        ]
+      },
+      {
+        "id": "phase-v-gated-validation",
+        "all_of": [
+          "Phase V",
+          "run the smallest relevant validation"
+        ]
+      },
+      {
+        "id": "phase-r-gated-release",
+        "all_of": [
+          "Phase R",
+          "create PR",
+          "run/check CI"
         ]
       }
     ],
