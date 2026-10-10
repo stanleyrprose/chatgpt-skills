@@ -1,6 +1,6 @@
 ---
 name: research-triad
-version: 0.1.0
+version: 0.1.1
 status: active
 invocation: user
 description: "Use when the user explicitly requests three-lane decision research across GitHub, public web evidence, and independent local Antigravity/Hermes planning before synthesis."
@@ -114,6 +114,18 @@ Agreement among agents is not proof. Strong claim-linked evidence outranks model
 
 Investigate a contradiction further only when resolving it could materially change the final conclusion.
 
+### Material Claim Evidence Check
+
+For each decision-changing material claim, link the claim to qualified, inspected evidence under the shared research evidence contract. Keep a compact claim-to-evidence map in working context; use the shared transient claim ledger only when complexity warrants it. Show supporting and contradicting evidence, precise source locators, and any material coverage limits. Distinguish observation, derived fact, inference, judgment, and unknown; do not upgrade a local agent's agreement into factual corroboration.
+
+### Decision-Changing Alternative Challenge
+
+Before recommending an approach, examine at least one plausible decision-changing alternative **when one exists**. First use evidence already collected to test whether it explains the facts or reverses the recommendation. If it remains material and is cheaply verifiable, perform only targeted verification; do not restart all three lanes or invent a mandatory fourth pass. When evidence cannot distinguish alternatives, give a conditional recommendation and name the missing observation.
+
+### Evidence-Based Decision Gate
+
+Before completion, classify remaining unknowns by whether they are blocking the present decision. Apply the existing shared-contract states: `ready`, `ready_with_limits`, `blocked`, or `failed`. A blocking unknown that can be resolved within scope justifies the smallest useful verification; an unavailable decision-critical source yields `blocked`, not an invented fact. Finish with limits when remaining uncertainty cannot materially change the present decision. Do not add persistent storage, new providers, or services.
+
 ## Degradation
 
 A failed lane is not a zero-result finding.
@@ -173,6 +185,8 @@ Do not majority-vote across lanes.
 - Agent-generated factual claims enter the final answer without external verification.
 - A failed tool call is reported as "nothing exists."
 - Research continues after evidence is already decision-sufficient.
+- A decision-changing claim has no linked qualified source or contradicting evidence is hidden.
+- A material alternative is ignored, or a non-blocking unknown triggers another full three-lane pass.
 - The workflow starts adding persistent state, RAG, databases, daemons, or a custom orchestration runtime.
 
 ## Verification
@@ -184,3 +198,6 @@ Do not majority-vote across lanes.
 - [ ] Agent opinion is not presented as factual evidence without verification.
 - [ ] Material contradictions and important unknowns are visible in the final synthesis.
 - [ ] The final conclusion states the conditions or evidence that would materially change it.
+- [ ] Decision-changing claims cite qualified evidence and disclose material contradictory evidence or coverage gaps.
+- [ ] A plausible material alternative was challenged when available; unresolved alternatives lead to conditional advice.
+- [ ] Blocking unknowns and the shared-contract completion state are explicit; non-blocking unknowns did not force extra research.

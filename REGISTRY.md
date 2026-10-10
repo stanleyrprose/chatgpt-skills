@@ -57,7 +57,7 @@ skills:
       - "生成交接文档"
       - "交接"
   - name: "research-triad"
-    version: "0.1.0"
+    version: "0.1.1"
     status: "active"
     invocation: "user"
     path: "skills/research/research-triad/SKILL.md"
