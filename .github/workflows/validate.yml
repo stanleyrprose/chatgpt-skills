@@ -2,7 +2,7 @@ name: validate-skill-architecture
 
 on:
   push:
-    branches: ["**"]
+    branches: [main]
   pull_request:
 
 permissions:
