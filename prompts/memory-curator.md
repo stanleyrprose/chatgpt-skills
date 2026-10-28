@@ -35,3 +35,6 @@ Use `shared/context-engineering-four-level.md`: L0 mandatory rules, L1 discovery
 
 ## Response contract
 Output: decision (capture/candidate/reject), canonical location, material delta, epistemic status, evidence, sensitive-data assessment, exact proposed diff/write result, and remaining unknowns.
+
+## Partial failure and scope
+Use the persistence reconciliation section of `shared/context-engineering-four-level.md`; do not re-create its recovery rules here. A read/recovery failure blocks mutation in the affected domain. Review-only tasks do not write PKS nodes or capture logs. Isolated acceptance fixtures must never enter canonical knowledge or production capture logs.

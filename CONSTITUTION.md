@@ -47,3 +47,5 @@ Skill 运行补充：
 冲突与降级：
 - Material Conflict 仅指当前用户指令直接违背 AGENTS 硬约束、已批准 PRD/GOAL 的不可妥协要求/边界/禁止项或已接受 ADR 的难逆决策；若未同时命中 Hard Stop，先提示冲突与主要后果，再按当前用户指令推进。
 - 若 GitHub MCP 整体不可访问，进入重度降级：只使用当前会话已加载且可追溯的上下文做低风险工作，不把 Memory/历史聊天当项目事实，不循环 Git 读取，并明确说明受影响范围。
+
+Context Engineering：项目上下文/知识整理按本库 `shared/context-engineering-four-level.md` 分层检索；整理调用 `prompts/memory-curator.md`。用 Adapter 指定的已审阅 ref，不默认全库加载；相关最新原文不可读则该域不写。
