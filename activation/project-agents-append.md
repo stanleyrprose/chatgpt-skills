@@ -1,0 +1,5 @@
+## Context Engineering project recovery
+
+Retain this project's existing AGENTS rules, approved PRD and ADRs. Before dependent work, restore its current goal/checkpoint if present, actual branch and relevant source state; missing optional GOAL does not authorize inventing one. Historical memory is auxiliary.
+For shared retrieval semantics read `stanleyrprose/chatgpt-skills` at `6a1544826e6cf9ee34268db7be9dc937f6d5cc24`, path `shared/context-engineering-four-level.md`. Read the same revision's Constitution and Memory Curator only as applicable. Keep goals/state/architecture in this project's Git; route reusable non-sensitive knowledge to PKS under its latest v0.3 rules. No duplicate project taxonomy or new local Skill.
+If this project is accessed via CodexPro, the host must identify actual workspace/root and recover missing global guidance explicitly before mutation. Conflicting or unavailable necessary rules block only the affected dependent writes; preserve existing user/security constraints.

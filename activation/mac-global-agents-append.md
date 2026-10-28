@@ -1,0 +1,5 @@
+## Unified Context Engineering activation
+
+For project work or durable-knowledge candidates, read `CONSTITUTION.md` and `shared/context-engineering-four-level.md` from `stanleyrprose/chatgpt-skills` at commit `6a1544826e6cf9ee34268db7be9dc937f6d5cc24`. For curation, read `prompts/memory-curator.md` at the same commit. This is a bootstrap pointer, not a permission grant.
+Use an already authorized Git/MCP read adapter that can address this exact commit; do not silently fall back to main. Project rules and current goals come from the actual project; PKS maintenance first reads the latest target-branch GOAL/MAINTENANCE/AUTO_CAPTURE in `stanleyrprose/personal-knowledge`.
+CLI: retain the applicable global/project AGENTS discovery chain and overrides. CodexPro host: explicitly recover both applicable global and project instructions; a workspace-open response alone does not prove user-global guidance loaded. Missing current sources block dependent writes in that domain. Follow current user instructions and development-phase gates.

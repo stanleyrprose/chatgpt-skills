@@ -1,10 +1,28 @@
 # GOAL — Maintain ChatGPT Context Constitution + Git-Backed Skills
 
 **Status:** IN PROGRESS
-**Branch:** `main`
+**Branch:** `feat/ai-memory-context-20261028`
 **Frozen PRD:** `PRD-ChatGPT-Context-Constitution-and-Git-Backed-Skill-Architecture-v0.5-frozen.md`
 **Frozen PRD SHA-256:** `923ab0ab856d9cbbe81899c2bf895c4df7d12287d70254060f082f8fbdde864a`
 **Authorization:** User explicitly froze v0.5 and authorized implementation on 2026-09-08. User explicitly authorized Amendment A2 adding `research-triad` on 2026-09-29, Amendment A3 adding `douyin-tiktok-publish` on 2026-10-04, and Amendment A4 extending that Skill to the dedicated Telegram Y700 Automation control/notification plane on 2026-10-04.
+
+## A5 — Unified Context Engineering (2026-10-28)
+
+**Status:** DEVELOPMENT PACKAGE PREPARED / NOT ACTIVATED / ACCEPTANCE NOT RUN.
+**Authorization:** user explicitly requested implementation of PRD v1.1 after review.
+**Core source commit:** `6a1544826e6cf9ee34268db7be9dc937f6d5cc24` (local immutable candidate, not accepted production release).
+**Authoritative scope:** [PRD v1.1](docs/context-engineering-prd-v1.1.md), [A5](docs/implementation-amendment-a5-2026-10-28.md).
+
+- Extended the existing four-level reference and Prompt with version, domain-failure and persistence reconciliation requirements.
+- Added only a pointer to Constitution; static source count 3487 Unicode characters (not validator/test evidence).
+- Prepared Adapter A account append block and Adapter B global/project AGENTS append blocks, explicit CodexPro recovery, static inventory and trial/restore runbook in `activation/`.
+- Prepared isolated synthetic fixtures and A01–A13 evidence checklist in `acceptance/`; NOT RUN.
+- No new Skill/runtime/service; REGISTRY, Skill metadata, PKS protocol/nodes/log and workflows unchanged.
+- Compatibility inventory remains open: current account settings, Mac/Windows target Chat mode/version/inheritance and actual Mac user-global rules need reliable evidence. Generic candidates are reviewable; affected entrance installation remains blocked.
+- CodexPro workspace selection did not persist across tool calls; development used bounded paths under its actual default project root. Global install not attempted.
+- Tests, validators, lint/build, smoke, E2E, self-test, PR, CI, merge and deployment were not run. Git commit invocation scoped hooks off for this operation to avoid running development-time validators; persistent Git configuration and CI gates were not changed.
+- Push held: workflow triggers exclude development pushes; hooks/deployments empty and Pages disabled, but external GitHub App event effects could not be completely inspected. Local commits only.
+- Next gate: resolve static compatibility/readback gaps and push safety; collect required human review. Only then request explicit Phase V including account-wide trial effects, isolated writes and restore scope. Phase R is separate.
 
 ## Goal
 
