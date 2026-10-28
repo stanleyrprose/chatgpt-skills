@@ -21,7 +21,7 @@ Controlled connector stale-SHA rejection and orchestration response-loss/log-rep
 ## Still pending
 Mac ChatGPT Desktop actual mode/version and independent entrance receipt. Windows manual receipt is labeled as user evidence; do not substitute it for Mac evidence.
 Cloud account activation was observed; Text MCP returned empty objects in that Chat environment and fallback original-file reads required per-file product approval. This is not unattended activation.
-The final fresh CLI evidence-expansion/correction-reload run was interrupted by usage quota; no completed receipt, not pass.
+Host/connector original-source expansion and committed correction readback were completed with content hashes in the acceptance matrix. A supplementary fresh CLI replay was interrupted by usage quota; that particular run has no completed receipt and is not counted as a CLI pass.
 No Phase R authorization or final PR/CI/merge/release.
 
 ## Boundaries

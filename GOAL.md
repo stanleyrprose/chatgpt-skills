@@ -22,7 +22,8 @@
 - Controlled stale-SHA, response-loss and log-repair exercises were confined to local fixtures. Account/global rollback was verified and trial configuration reapplied for remaining entrance checks.
 - Mac ChatGPT Desktop remains unverified. A final fresh CLI evidence-expansion/correction-reload run hit an account usage limit before completion; do not count it as pass.
 - No PR, CI, merge or formal release. Development branch push had no recorded workflow runs. Private UI/global snapshots and raw execution logs remain outside public Git.
-- Next: finish the remaining independent entrance/evidence cases, consolidate human review, then seek Phase R only after full acceptance. Do not silently reduce the four-entrance scope.
+- Host/connector A05/A11 evidence expansion and correction readback subsequently completed with content hashes; the supplementary fresh CLI run remains uncompleted, not a CLI pass.
+- Next: finish Mac Desktop entrance verification and consolidate human review, then seek Phase R only after full acceptance. Do not silently reduce the four-entrance scope.
 
 ## Goal
 
