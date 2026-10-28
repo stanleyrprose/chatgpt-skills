@@ -1,6 +1,6 @@
 # CodexPro recovery procedure — Adapter B
 
-Candidate source: `stanleyrprose/chatgpt-skills@6a1544826e6cf9ee34268db7be9dc937f6d5cc24`. NOT a new service or Skill. NOT installed.
+Candidate source: `stanleyrprose/chatgpt-skills@6a1544826e6cf9ee34268db7be9dc937f6d5cc24`. NOT a new service or Skill. Global pointer applied only as an explicitly approved Phase V trial; not a formal release.
 
 1. The host ChatGPT's supported account instruction or an explicit user task selects CodexPro for Mac work.
 2. Call the available workspace-open capability, identify returned root and applicable AGENTS sources. Do not use stale handoff files from an unrelated task.
@@ -12,4 +12,4 @@ Candidate source: `stanleyrprose/chatgpt-skills@6a1544826e6cf9ee34268db7be9dc937
 8. Inspect current branch and all relevant CI/PR-sync/deployment triggers before development mutation/push. Restore PKS separately only when relevant.
 9. Execute only current authorized scope. Evidence states: instruction present / canonical read / actionable / blocked, rather than a blanket “activated”.
 
-Observed development environment: opening another workspace returned an id, but a subsequent call with that id returned Unknown workspace_id. Calls without an id returned the default project root. Project-relative access under that root was usable. Therefore this package uses bounded project-relative paths for development and leaves live user-global installation blocked until the connector selection issue is resolved or a reliable supported adapter is available. No runtime adapter was patched.
+Observed environment: earlier custom workspace calls intermittently returned Unknown workspace_id, while default-root project-relative access worked. Later, explicit global workspace selection/read succeeded and returned the intended user-global root; source-checked trial write and readback then succeeded. Treat selection as a per-operation fact, not a permanent guarantee. Keep the root/SHA checks above; no connector runtime or permission was changed.

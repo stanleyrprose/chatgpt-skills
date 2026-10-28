@@ -1,7 +1,7 @@
 # Amendment A5 — Unified Git-backed Context Engineering
 
 Authority: user explicitly requested implementation of PRD v1.1 on 2026-10-28 after reviewing v1.0 and authorizing its revision. Authoritative scope: [PRD v1.1](context-engineering-prd-v1.1.md).
-Status: Phase D / development, not activated, not accepted, not released.
+Status: Phase V explicitly authorized; controlled account/global trial applied, full acceptance pending, not released. See [results](../acceptance/results-2026-10-28.md).
 
 ## Narrow amendment to frozen v0.5
 - Preserve the existing Constitution, seven active Skills, invocation mechanics and generated REGISTRY.

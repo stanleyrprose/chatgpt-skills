@@ -8,21 +8,21 @@
 
 ## A5 — Unified Context Engineering (2026-10-28)
 
-**Status:** DEVELOPMENT PACKAGE PREPARED / NOT ACTIVATED / ACCEPTANCE NOT RUN.
-**Authorization:** user explicitly requested implementation of PRD v1.1 after review.
-**Core source commit:** `6a1544826e6cf9ee34268db7be9dc937f6d5cc24` (local immutable candidate, not accepted production release).
-**Authoritative scope:** [PRD v1.1](docs/context-engineering-prd-v1.1.md), [A5](docs/implementation-amendment-a5-2026-10-28.md).
+**Status:** PHASE V / CONTROLLED TRIAL APPLIED / FULL ACCEPTANCE PENDING.
+**Authority:** user approved implementation after PRD review, then explicitly approved Phase V controlled account/global configuration and isolated acceptance. Phase R is not authorized.
+**Core source revision:** `6a1544826e6cf9ee34268db7be9dc937f6d5cc24`; development branch was pushed through `3f70d30`.
+**Scope:** [PRD v1.1](docs/context-engineering-prd-v1.1.md), [A5](docs/implementation-amendment-a5-2026-10-28.md).
+**Current evidence:** [Phase V results](acceptance/results-2026-10-28.md).
 
-- Extended the existing four-level reference and Prompt with version, domain-failure and persistence reconciliation requirements.
-- Added only a pointer to Constitution; static source count 3487 Unicode characters (not validator/test evidence).
-- Prepared Adapter A account append block and Adapter B global/project AGENTS append blocks, explicit CodexPro recovery, static inventory and trial/restore runbook in `activation/`.
-- Prepared isolated synthetic fixtures and A01–A13 evidence checklist in `acceptance/`; NOT RUN.
-- No new Skill/runtime/service; REGISTRY, Skill metadata, PKS protocol/nodes/log and workflows unchanged.
-- Compatibility inventory remains open: current account settings, Mac/Windows target Chat mode/version/inheritance and actual Mac user-global rules need reliable evidence. Generic candidates are reviewable; affected entrance installation remains blocked.
-- CodexPro workspace selection did not persist across tool calls; development used bounded paths under its actual default project root. Global install not attempted.
-- Tests, validators, lint/build, smoke, E2E, self-test, PR, CI, merge and deployment were not run. Git commit invocation scoped hooks off for this operation to avoid running development-time validators; persistent Git configuration and CI gates were not changed.
-- Push held: workflow triggers exclude development pushes; hooks/deployments empty and Pages disabled, but external GitHub App event effects could not be completely inspected. Local commits only.
-- Next gate: resolve static compatibility/readback gaps and push safety; collect required human review. Only then request explicit Phase V including account-wide trial effects, isolated writes and restore scope. Phase R is separate.
+- Account-level ChatGPT pointer and Mac user-global AGENTS pointer were applied as approved trials; exact readback and restore/reapply checks succeeded. Existing settings/rules were preserved.
+- Constitution/Registry validator and Skill Quality Gate passed; existing unit suite 33/33 passed after Phase V approval.
+- Mac CLI 0.162.1 restored global/project guidance, current synthetic goal v2 and pinned original sources. Explicit CodexPro source recovery succeeded.
+- User confirmed Windows ChatGPT Desktop 26.1023.6123.0, Chat mode, and provided a successful rule-recovery/REJECT receipt.
+- Synthetic PKS classification, delta, safety and correction files were inspected. CLI sandbox could not commit; the authorized host writer subsequently persisted the three reviewed fixture files atomically. No real PKS mutation.
+- Controlled stale-SHA, response-loss and log-repair exercises were confined to local fixtures. Account/global rollback was verified and trial configuration reapplied for remaining entrance checks.
+- Mac ChatGPT Desktop remains unverified. A final fresh CLI evidence-expansion/correction-reload run hit an account usage limit before completion; do not count it as pass.
+- No PR, CI, merge or formal release. Development branch push had no recorded workflow runs. Private UI/global snapshots and raw execution logs remain outside public Git.
+- Next: finish the remaining independent entrance/evidence cases, consolidate human review, then seek Phase R only after full acceptance. Do not silently reduce the four-entrance scope.
 
 ## Goal
 
